@@ -1,3 +1,4 @@
+
 @extends('layouts.layout01')
 
 @section('content')
@@ -10,204 +11,147 @@
         </div>
 
         <div class="card-body">
-            <form class="mb-2" action="{{route('periodo-escolar.store')}}" method="post">
+            <form class="mb-2" action="{{route('periodo-avaliacoes.store')}}" method="post">
                 @csrf
 
                 <div class="row">
                     <div class="col-4">
-                        <label class="form-label" for="basic-icon-default-estate">Ano Escolar</label>
-                        <select class="form-select" name="ano_periodo_escolar">
-
-                            @foreach ($periodoEscolar as $ano)
-                                <option id="{{$ano['ano_periodo_escolar']}}" value="{{$ano['ano_periodo_escolar']}}">{{$ano['ano_periodo_escolar']}}</option>
-                            @endforeach
-
-                        </select>
+                        <label class="form-label" for="basic-icon-default-fullname">Ínicio Período Avaliações</label>
+                        <div class="input-group input-group-merge">
+                            <input type="date" class="form-control" name="inicio_periodo_avaliacoes" id="inicio_periodo_escolar">
+                        </div>
                         <span class="text-danger">
-                            <strong id="ano_periodo_escolar-error"></strong>
+                            <strong id="inicio_periodo_avaliacoes-error"></strong>
                         </span>
                     </div>
                     <div class="col-4">
-                        <label class="form-label" for="basic-icon-default-estate">Curso</label>
-                        <select class="form-select" name="curso_id">
-
-                            @foreach ($cursos as $curso)
-                                <option id="{{$curso->id}}" value="{{$curso->id}}">{{$curso->curso}}</option>
-                            @endforeach
-
-                        </select>
+                        <label class="form-label" for="basic-icon-default-fullname">Término Período Avaliações</label>
+                        <div class="input-group input-group-merge">
+                            <input type="date" class="form-control" name="termino_periodo_avaliacoes" id="termino_periodo_escolar">
+                        </div>
                         <span class="text-danger">
-                            <strong id="curso_id-error"></strong>
-                        </span>
-                    </div>
-                    <div class="col-4">
-                        <label class="form-label" for="basic-icon-default-estate">Disciplina</label>
-                        <select class="form-select" name="disciplina_id">
-                            <option selected disabled>Selecionar Disciplina</option>
-                        </select>
-                        <span class="text-danger">
-                            <strong id="disciplina_id-error"></strong>
+                            <strong id="termino_periodo_avaliacoes-error"></strong>
                         </span>
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-4">
-                        <label class="form-label" for="basic-icon-default-fullname">Ínicio Período Escolar</label>
-                        <div class="input-group input-group-merge">
-                            <input type="date" class="form-control" name="inicio_periodo_escolar"
-                                id="inicio_periodo_escolar">
-                        </div>
+                        <label class="form-label" for="curso_id">Campus</label>
+                        <select class="form-select" name="campus_id" id="campus_id">
+                            @foreach ($campus as $campus)
+                                <option id="campus_{{$campus->id}}" value="{{$campus->id}}">{{$campus->nome_campus}}</option>
+                            @endforeach
+                        </select>
                         <span class="text-danger">
-                            <strong id="inicio_periodo_escolar-error"></strong>
+                            <strong id="campus_id-error"></strong>
                         </span>
                     </div>
                     <div class="col-4">
-                        <label class="form-label" for="basic-icon-default-fullname">Término Período Escolar</label>
-                        <div class="input-group input-group-merge">
-                            <input type="date" class="form-control" name="termino_periodo_escolar"
-                                id="termino_periodo_escolar">
-                        </div>
+                        <label class="form-label" for="ano_letivo">Tipo de Prova</label>
+                        <select class="form-select" name="tipo_prova" id="tipo_prova">
+                            <option id="np1" value="1">NP1</option>   
+                            <option id="np2" value="2">NP2</option>   
+                            <option id="substutiva" value="3">Substutiva</option>   
+                            <option id="exame" value="4">Exame</option>   
+                        </select>
                         <span class="text-danger">
-                            <strong id="termino_periodo_escolar-error"></strong>
+                            <strong id="tipo_prova-error"></strong>
                         </span>
                     </div>
-                    <div class="col-1">
+                    <div class="col-4">
                         <label class="form-label" for="basic-icon-default-estate"></label>
-                        <button type="submit" class="btn btn-primary" style="margin-top: 7px;">
-                            +
+                        <button type="submit" class="btn btn-primary">
+                            Adicionar
                         </button>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
 </div>
 
-{{-- <div class="row mt-2">
+<div class="row mt-3">
     <div class="card">
         <div class="card-body">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="2">Período Avaliações</th>
+                        <th class="text-center">Campus</th>
+                        <th class="text-center">Prova</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($avaliacoes as $avaliacao)
+                        <tr class="fw-bold">
+                            <td class="text-center">{{Carbon\Carbon::parse($avaliacao->inicio_periodo_avaliacoes)->format('d m Y')}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($avaliacao->termino_periodo_avaliacoes)->format('d m Y')}}</td>
+                            <td class="text-center">{{$avaliacao->campus->nome_campus}}</td>
+                            <td class="text-center">
+                                @if($avaliacao->tipo_prova == 1)
+                                    <span class="badge bg-label-primary">NP1</span>
+                                @elseif($avaliacao->tipo_prova == 2)
+                                    <span class="badge bg-label-info">NP2</span>
+                                @elseif($avaliacao->tipo_prova == 3)
+                                    <span class="badge bg-label-danger">Substutiva</span>
+                                @elseif($avaliacao->tipo_prova == 4)
+                                    <span class="badge bg-label-warning">Exame</span>
+                                @endif
+                            </td>
 
-            <div class="card-body">
-                <p class="demo-inline-spacing">
-                    <div class="row">
-                        <div class="col-6 offset-2">
-                            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#calouros" aria-expanded="false" aria-controls="calouros">
-                                Calouros
-                            </button>
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#veteranos" aria-expanded="false" aria-controls="veteranos">
-                                Veteranos
-                            </button>
-                        </div>
-                    </div>
-                </p>
+                            <td class="text-center col-2">
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                        data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <!-- Adicionar Curso -->
+                                        <a href="{{route('avaliacoes-cursos.index', $avaliacao->id)}}" class="dropdown-item text-muted">
+                                            <i class="bx bx-border-right me-1"></i>
+                                            Curso/Semestre
+                                        </a>
 
-                <div class="row">
-                    <div class="col-6">
-                        <div class="collapse" id="calouros">
-                            <div class="d-grid d-sm-flex">
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
 
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Ínicio</th>
-                                            <th class="text-center">Término</th>
-                                            <th class="text-center">Ano</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($calouros as $calouros)
-                                            <tr class="text-center">
-                                                <td>{{Carbon\Carbon::parse($calouros->inicio_periodo_escolar)->format('d m Y')}}</td>
-                                                <td>{{Carbon\Carbon::parse($calouros->termino_periodo_escolar)->format('d m Y')}}</td>
-                                                <td>{{$calouros->ano_periodo_escolar}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        {{-- <!-- Visualizar -->
+                                        <a type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#visualizarDadosDisciplinas"
+                                            id="{{$campus->id}}" onclick="visualizarDisciplina(this.id)">
+                                            <i class="bx bx-show-alt me-1"></i>
+                                            Visualizar Disciplina
+                                        </a>
 
-                            </div>
-                        </div>
-                    </div>
+                                        <!-- Editar -->
+                                        <button type="button" class="dropdown-item editbtn" value="{{$campus->id}}">
+                                            <i class="bx bx-edit-alt me-1"></i>
+                                            Editar Disciplina
+                                        </button>
 
-                    <div class="col-6">
-                        <div class="collapse" id="veteranos">
-                            <div class="d-grid d-sm-flex">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Ínicio</th>
-                                            <th class="text-center">Término</th>
-                                            <th class="text-center">Ano</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($veteranos as $veteranos)
-                                            <tr class="text-center">
-                                                <td>{{Carbon\Carbon::parse($veteranos->inicio_periodo_escolar)->format('d m Y')}}</td>
-                                                <td>{{Carbon\Carbon::parse($veteranos->termino_periodo_escolar)->format('d m Y')}}</td>
-                                                <td>{{$veteranos->ano_periodo_escolar}}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        <!-- Excluir -->
+                                        <form id="{{'remove_'.$campus->id}}"
+                                            action="{{route('disciplinas.destroy', $campus->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <a type="button" id="{{'remove_'.$campus->id}}" class="dropdown-item"
+                                                onclick="document.getElementById('remove_{{$campus->id}}').submit()">
+                                                <i class="bx bx-trash me-1"></i>
+                                                Apagar Disciplina
+                                            </a>
+                                        </form> --}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-</div> --}}
-
-
-<!-- Include Modal Adicionar Campus -->
-{{-- @include('app.instituicao.campus.create') --}}
-
-<!-- Include Modal Editar Campus -->
-{{-- @include('app.instituicao.campus.edit') --}}
-
-<!-- Include Scripts -->
-{{-- @include('app.instituicao.campus.campus_scripts') --}}
+</div>
 
 @endsection
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
-
-
-{{-- Select Disciplinas --}}
-<script>
-    $(document).ready(function() {
-        $('select[name="curso_id"]').on('change', function() {
-            var curso_id = $(this).val()
-
-            if (curso_id) {
-                $.ajax({
-                    url: "{{ url('/calendario-academico/periodo-avaliacoes/ajax') }}/" + curso_id,
-                    type: "GET",
-                    dataType: "json",
-
-                    success: function(data) {
-
-                        
-
-                        var d = $('select[name="disciplina_id"]').empty()
-
-                        $.each(data, function(key, value) {
-                            // console.log(value.disciplina.disciplina)
-                            $('select[name="disciplina_id"]').append('<option value="' + value.id + '">' + value.disciplina.disciplina + '</option>')
-                        })
-                    },
-                })
-            } else {
-                alert('Error!')
-            }
-        })
-    })
-</script>

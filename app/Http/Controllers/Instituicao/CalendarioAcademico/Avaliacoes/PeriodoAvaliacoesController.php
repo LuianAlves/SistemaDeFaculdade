@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Instituicao\CalendarioAcademico;
+namespace App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\CalendarioAcademico\PeriodoEscolar;
+use App\Models\Campus;
+
 use App\Models\Cursos;
 use App\Models\GradeCurricular;
+use App\Models\CalendarioAcademico\PeriodoEscolar;
+use App\Models\CalendarioAcademico\PeriodoAvaliacoes;
+
+use Carbon\Carbon;
 
 class PeriodoAvaliacoesController extends Controller
 {
@@ -18,20 +23,12 @@ class PeriodoAvaliacoesController extends Controller
      */
     public function index()
     {
-        $periodoEscolar = json_decode(PeriodoEscolar::groupBy('ano_periodo_escolar')->select('ano_periodo_escolar')->orderBy('ano_periodo_escolar', 'ASC')->get(), true);
-        $cursos = Cursos::get();
+        // $cursos = Cursos::get();
+        // $anoLetivo = json_decode(PeriodoEscolar::groupBy('ano_periodo_escolar')->select('ano_periodo_escolar')->orderBy('ano_periodo_escolar', 'DESC')->get(), true);
+        $avaliacoes = PeriodoAvaliacoes::get();
+        $campus = Campus::get();
 
-        return view('app.instituicao.calendario_academico.periodo_avaliacoes.index', compact('periodoEscolar', 'cursos'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('app.instituicao.calendario_academico.periodo_avaliacoes.index', compact('avaliacoes', 'campus'));
     }
 
     /**
@@ -42,7 +39,15 @@ class PeriodoAvaliacoesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $avaliacao = PeriodoAvaliacoes::insert([
+            'campus_id' => $request->campus_id, 
+            'inicio_periodo_avaliacoes' => $request->inicio_periodo_avaliacoes,
+            'termino_periodo_avaliacoes' => $request->termino_periodo_avaliacoes,
+            'tipo_prova' => $request->tipo_prova,
+            'created_at' => Carbon::now()
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -90,10 +95,9 @@ class PeriodoAvaliacoesController extends Controller
         //
     }
 
-    // AJAX PARA SELECTS
-    public function getGradeCurricular($curso_id) {
-        $gradeCurricular = GradeCurricular::with('disciplina')->where('curso_id', $curso_id)->orderBy('semestre', 'ASC')->get();
+    public function getSemestre($curso_id) {
+        $curso = Cursos::where('id', $curso_id)->get(); 
 
-        return json_encode($gradeCurricular);
+        return json_encode($curso);
     }
 }

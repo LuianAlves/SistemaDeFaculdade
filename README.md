@@ -45,15 +45,18 @@
 * Paginação de Registros (5)
 * Ordenação Alfabética, Departamento e por Cadastro
 * Gerando senha default ao criar um usuário
-<br>
+
+
 * Criando Seeder para 5 Estados diferentes do Brasil
 * Cadastrando Campus com base nos Estados
-<br>
+
+
 * CRUD para Cursos 
 * Criando Seeder com a classificação de cursos: Exatas, Humanas e Biológicas
 * Cadastrando disciplinas com base na área de conhecimento
 * Criando grade curricular com disciplinas para cada semestre
-<br>
+
+
 * Cadastrando período de ínicio/término das aulas
 * Cadastrando período de avaliações de cada disciplina/semestre
 

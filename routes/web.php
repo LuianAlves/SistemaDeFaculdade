@@ -11,7 +11,8 @@ use App\Http\Controllers\Instituicao\Cursos\GradeCurricular\GradeCurricularContr
 
 // Calendario Academico
 use App\Http\Controllers\Instituicao\CalendarioAcademico\PeriodoEscolarController;
-use App\Http\Controllers\Instituicao\CalendarioAcademico\PeriodoAvaliacoesController;
+use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\PeriodoAvaliacoesController;
+use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\AvaliacoesCursosController;
 
 
 
@@ -52,10 +53,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Calendario Academico
     Route::prefix('/calendario-academico')->group(function(){
         Route::resource('/periodo-escolar', PeriodoEscolarController::class);
-
-
-        Route::get('/periodo-avaliacoes/ajax/{curso_id}', [PeriodoAvaliacoesController::class, 'getGradeCurricular']);
-        Route::resource('/periodo-avaliacoes', PeriodoAvaliacoesController::class);
+        Route::resource('/periodo-avaliacoes', PeriodoAvaliacoesController::class)->except('create');
+        
+        Route::get('/periodo-avaliacoes/avaliacoes-cursos/ajax/{curso_id}', [AvaliacoesCursosController::class, 'getGradeCurricular']);
+        Route::get('/periodo-avaliacoes/avaliacoes-cursos/{avaliacao_id}', [AvaliacoesCursosController::class, 'index'])->name('avaliacoes-cursos.index');
+        Route::resource('/periodo-avaliacoes/avaliacoes-cursos', AvaliacoesCursosController::class)->except('index');
     });
     
     // Usuários
