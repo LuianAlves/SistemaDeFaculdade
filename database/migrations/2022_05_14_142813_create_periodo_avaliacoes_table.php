@@ -15,14 +15,12 @@ return new class extends Migration
     {
         Schema::create('periodo_avaliacoes', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('campus_id')->usigned();
             $table->foreign('campus_id')->references('id')->on('campuses')->onDelete('cascade');
 
-            $table->string('inicio_periodo_avaliacoes');
-            $table->string('termino_periodo_avaliacoes');
-            $table->string('tipo_prova');
-            
+            $table->string('inicio_periodo_avaliacoes', 10);
+            $table->string('termino_periodo_avaliacoes', 10);
+            $table->string('tipo_prova', 30);
             $table->timestamps();
         });
     }

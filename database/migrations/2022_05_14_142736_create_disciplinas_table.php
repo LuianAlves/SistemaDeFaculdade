@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('disciplinas', function (Blueprint $table) {
             $table->id();
-            
             $table->unsignedBigInteger('area_conhecimento_id')->unsigned();
             $table->foreign('area_conhecimento_id')->references('id')->on('classificacao_cursos')->onDelete('cascade');
 
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->string('disciplina');
             $table->string('modalidade');
             $table->string('duracao_horas');
-
             $table->timestamps();
         });
     }

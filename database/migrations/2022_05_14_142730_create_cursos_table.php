@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('grau_instrucao_id')->unsigned();
             $table->foreign('grau_instrucao_id')->references('id')->on('grau_instrucaos')->onDelete('cascade');
 
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->text('descricao');
             $table->integer('quantidade_semestres');
             $table->integer('duracao_total_horas');
-
             $table->timestamps();
         });
     }

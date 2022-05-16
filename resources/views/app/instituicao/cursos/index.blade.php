@@ -44,6 +44,12 @@
                                         Grade Curricular
                                     </a>
 
+                                    <!-- Cadastrar nova Turma -->
+                                    <a href="{{route('turmas.store', $curso->id)}}" class="dropdown-item text-muted">
+                                        <i class="bx bx-border-right me-1"></i>
+                                        Gerar Nova Turma
+                                    </a>
+
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

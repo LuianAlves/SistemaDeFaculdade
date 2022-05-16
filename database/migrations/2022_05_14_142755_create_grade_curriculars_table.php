@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('grade_curriculars', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('curso_id')->unsiged();
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
             
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->foreign('disciplina_id')->references('id')->on('disciplinas')->onDelete('cascade');
 
             $table->string('semestre');
-
             $table->timestamps();
         });
     }

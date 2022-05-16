@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('departamento_id')->unsigned();
             $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
 
@@ -34,7 +33,6 @@ return new class extends Migration
             $table->string('numero_casa', 7);
 
             $table->string('foto_usuario')->nullable();
-
             $table->timestamps();
         });
     }

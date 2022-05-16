@@ -134,60 +134,42 @@ class UsuarioController extends Controller
             $senha_default = $senha;
         }
         $hash_senha = Hash::make($senha_default);
-        
-        if ($validator->passes()) {
+             
 
-            if($request->file('foto_usuario')) {
-                if (!File::exists('sistema/usuarios/foto')) {
-                    File::makeDirectory('sistema/usuarios/foto/', 0777, true, true);
-                } 
+        if ($validator->passes()) {
+            $usuario = Usuarios::insert([
+                'departamento_id' => $request->departamento_id,
+                'codigo_usuario' => $codigo,
     
-                $sobrenome_formatado = str_replace(' ', '_', $request->sobrenome);
-                $nome_formatado = strtolower($request->nome.'_'.$sobrenome_formatado);
+                'nome' => $request->nome,
+                'sobrenome' => $request->sobrenome,
+                'telefone' => $request->telefone,
+
+                'cep' => $request->cep,
+                'nome_rua' => $request->nome_rua,
+                'numero_casa' => $request->numero_casa,
     
-                $image = $request->file('foto_usuario');
-                $name_gen = $codigo . '_' . $nome_formatado . '.' . $image->getClientOriginalExtension();
-                Image::make($image)->resize(1920, 1080)->save('sistema/usuarios/foto/'.$name_gen);
-                $foto = 'sistema/usuarios/foto/'.$name_gen;
+                'email' => $request->email,
+                'senha' => $hash_senha,
     
-                Usuarios::insert([
-                    'departamento_id' => $request->departamento_id,
-                    'codigo_usuario' => $codigo,
-        
-                    'nome' => $request->nome,
-                    'sobrenome' => $request->sobrenome,
-                    'telefone' => $request->telefone,
-                    'foto_usuario' => $foto,
-    
-                    'cep' => $request->cep,
-                    'nome_rua' => $request->nome_rua,
-                    'numero_casa' => $request->numero_casa,
-        
-                    'email' => $request->email,
-                    'senha' => $hash_senha,
-        
-                    'created_at' => Carbon::now()        
-                ]);
-            } else {
-                Usuarios::insert([
-                    'departamento_id' => $request->departamento_id,
-                    'codigo_usuario' => $codigo,
-        
-                    'nome' => $request->nome,
-                    'sobrenome' => $request->sobrenome,
-                    'telefone' => $request->telefone,
-    
-                    'cep' => $request->cep,
-                    'nome_rua' => $request->nome_rua,
-                    'numero_casa' => $request->numero_casa,
-        
-                    'email' => $request->email,
-                    'senha' => $hash_senha,
-        
-                    'created_at' => Carbon::now()        
-                ]);
-            }
-            
+                'created_at' => Carbon::now()        
+            ]);
+
+            // if($request->departamento_id == 3) {
+            //     Alunos::insert([
+            //         'usuario_id' => $usuario->id,
+            //         'rg' => $request->rg,
+            //         'cpf' => $request->cpf,
+            //         'email_pessoal' => $request->email_pessoal,
+            //         'telefone_recado' => $request->telefone_recado,
+            //         'nome_mae' => $request->nome_mae,
+            //         'nome_pai' => $request->nome_pai,
+            //         'serie_turma' => $request->serie_turma,
+            //         'situacao' => $request->situacao,
+            //         'created_at' => Carbon::now()
+            //     ]);
+            // }
+
             return Response::json(['success' => '1']);
         }
             

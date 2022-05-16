@@ -111,6 +111,14 @@
             return telefone
         }
 
+        function mTelefoneRecado(telefone_recado){
+            telefone_recado=telefone_recado.replace(/\D/g,"")
+            telefone_recado=telefone_recado.replace(/^(\d{2})(\d)/g,"($1) $2");
+            telefone_recado=telefone_recado.replace(/(\d)(\d{4})$/,"$1-$2"); 
+
+            return telefone_recado
+        }
+
         function mCelular(celular){
             celular=celular.replace(/\D/g,"")
             celular=celular.replace(/^(\d{2})(\d)/g,"($1) $2");

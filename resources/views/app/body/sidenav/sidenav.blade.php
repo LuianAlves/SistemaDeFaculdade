@@ -65,19 +65,27 @@
             </a>
         </li>
 
-        <!-- Divisor -->
+        <!--------------------------- Divisor --------------------------->
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Funcionalidades de Cadastramento</span>
+            <span class="menu-header-text">Calendário Acadêmico</span>
         </li>
 
-        <!-- Novo Usuário -->
+        <!-- Cadastrar Período Escolar -->
         <li class="menu-item">
-            <a href="{{route('usuario.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                <div data-i18n="Basic">Cadastrar Usuário</div>
+            <a href="{{route('periodo-escolar.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-building-house"></i>
+                <div data-i18n="Basic">Período Escolar</div>
             </a>
         </li>
 
+        <!-- Cadastrar Período de Avaliações -->
+        <li class="menu-item">
+            <a href="{{route('periodo-avaliacoes.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar"></i>
+                <div data-i18n="Basic">Período de Avaliações</div>
+            </a>
+        </li>
+        
         <!--------------------------- Divisor --------------------------->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Cadastro da Instituição</span>
@@ -106,27 +114,25 @@
                 <div data-i18n="Basic">Cursos</div>
             </a>
         </li>
-       
-        <!--------------------------- Divisor --------------------------->
+
+        <!-- Divisor -->
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Calendário Acadêmico</span>
+            <span class="menu-header-text">Funcionalidades de Cadastramento</span>
         </li>
 
-        <!-- Cadastrar Período Escolar -->
+        
+        <!-- Novo Usuário -->
         <li class="menu-item">
-            <a href="{{route('periodo-escolar.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building-house"></i>
-                <div data-i18n="Basic">Período Escolar</div>
+            <a href="{{route('usuario.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                <div data-i18n="Basic">Cadastrar Usuário</div>
+            </a>
+            <a href="{{route('alunos.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                <div data-i18n="Basic">Alunos</div>
             </a>
         </li>
 
-        <!-- Cadastrar Período de Avaliações -->
-        <li class="menu-item">
-            <a href="{{route('periodo-avaliacoes.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                <div data-i18n="Basic">Período de Avaliações</div>
-            </a>
-        </li>
 
         <!--------------------------- Divisor --------------------------->
         <li class="menu-header small text-uppercase">

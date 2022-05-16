@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('periodo_escolars', function (Blueprint $table) {
             $table->id();
-            $table->string('inicio_periodo_escolar');
-            $table->string('termino_periodo_escolar');
-            $table->string('ano_periodo_escolar');
-            $table->string('estudantes');
+            $table->string('inicio_periodo_escolar', 10);
+            $table->string('termino_periodo_escolar', 10);
+            $table->string('ano_periodo_escolar', 4);
+            $table->string('estudantes', 25);
             $table->timestamps();
         });
     }

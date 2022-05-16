@@ -8,6 +8,7 @@ use App\Http\Controllers\Instituicao\CampusController;
 use App\Http\Controllers\Instituicao\Cursos\DisciplinasController;
 use App\Http\Controllers\Instituicao\Cursos\CursosController;
 use App\Http\Controllers\Instituicao\Cursos\GradeCurricular\GradeCurricularController;
+use App\Http\Controllers\Instituicao\Cursos\Turmas\TurmasController;
 
 // Calendario Academico
 use App\Http\Controllers\Instituicao\CalendarioAcademico\PeriodoEscolarController;
@@ -15,8 +16,9 @@ use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\PeriodoAvali
 use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\AvaliacoesCursosController;
 
 
-
+// Usuários  
 use App\Http\Controllers\Usuario\UsuarioController;
+use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 
 /* Home Page */
 Route::get('/', function () {
@@ -50,6 +52,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/grade-curricular/store/{curso_id}/{semestre}', [GradeCurricularController::class, 'store'])->name('grade-curricular.store');
     Route::get('/grade-curricular/destroy/{id}/{curso_id}/{disciplina_id}', [GradeCurricularController::class, 'destroy'])->name('grade-curricular.destroy');
 
+    // Turmas
+    Route::get('/cursos/{curso_id}/turma', [TurmasController::class, 'store'])->name('turmas.store');
+
     // Calendario Academico
     Route::prefix('/calendario-academico')->group(function(){
         Route::resource('/periodo-escolar', PeriodoEscolarController::class);
@@ -71,4 +76,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/usuario/update', [UsuarioController::class, 'update'])->name('usuario.update');
     Route::resource('/usuario', UsuarioController::class)->except('update');
 
+    // Alunos
+    Route::get('/alunos', [AlunosController::class,'index'])->name('alunos.index');
+    Route::get('/alunos/area_aluno/{aluno_id}', [AlunosController::class,'areaAluno'])->name('alunos.area-aluno');
+    Route::get('/alunos/area_aluno/ajax/{aluno_id}', [AlunosController::class,'getTurma']);
+    Route::post('/alunos/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
 
+    // Route::get('/alunos/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');

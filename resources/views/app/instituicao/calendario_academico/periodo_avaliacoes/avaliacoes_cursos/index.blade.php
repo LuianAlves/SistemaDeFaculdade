@@ -28,9 +28,8 @@
                         </span>
                     </div>
                     <div class="col-3">
-                        <label class="form-label" for="ano_letivo">Disciplina</label>
-                        <label class="form-label" for="basic-icon-default-estate">Disciplina</label>
-                        <select class="form-select" name="disciplina_id">
+                        <label class="form-label" for="disciplina_id">Disciplina</label>
+                        <select class="form-select" id="disciplina_id" name="disciplina_id">
                             <option selected disabled>Selecionar Disciplina</option>
                         </select>
                         <span class="text-danger">
