@@ -139,6 +139,13 @@
             <span class="menu-header-text">Acompanhamento Pedagógico</span>
         </li>
 
+        <li class="menu-item">
+            <a href="{{route('turmas.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                <div data-i18n="Basic">Turmas</div>
+            </a>
+        </li>
+
         <!--------------------------- Divisor --------------------------->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Acompanhamento Administrativo</span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Usuario;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\Usuarios;
 use App\Models\Departamentos;
 
@@ -87,9 +88,7 @@ class UsuarioController extends Controller
             'cep' => 'required',
             'nome_rua' => 'required',
             'numero_casa' => 'required',
-            
-            'email' => 'required',
-        ], [
+                    ], [
             'departamento_id.required' => 'Selecione o departamento desse usuário.',
             
             'nome.required' => 'Insira um nome para este usuário.',
@@ -98,23 +97,32 @@ class UsuarioController extends Controller
 
             'cep.required' => 'Insira um CEP.',
             'nome_rua.required' => 'Insira o nome da rua.',
-            'numero_casa.required' => 'Insira o número da casa.',
-            
-            'email.required' => 'Insira um email de login para o usuário.',
+            'numero_casa.required' => 'Insira o número da casa.',            
         ]);
 
-        // -- Gerando Código Usuário
+        $data = date('Y');
+
+        // -- Gerando Código Usuário + Email
+        $nome = strtok(strtolower($request->nome), " ");
+        $sobrenome = strtok(strtolower($request->sobrenome), " ");
+
         $codigo_usuario = rand(1000, 9999);
 
         switch ($request->departamento_id) {
             case 1:
                     $codigo = 'AD_'.$codigo_usuario;
+                    $email = $nome.'.'.$sobrenome.$data.'@administrativo.unitech.br';
+                    $nivel_acesso = 2;
                 break;
             case 2:
                     $codigo = 'PR_'.$codigo_usuario;
+                    $email = $nome.'.'.$sobrenome.$data.'@docente.unitech.br';
+                    $nivel_acesso = 3;
                 break;
             case 3:
                     $codigo = 'ES_'.$codigo_usuario;
+                    $email = $nome.'.'.$sobrenome.$data.'@aluno.unitech.br';
+                    $nivel_acesso = 4;
                 break;
             
             default:
@@ -149,11 +157,19 @@ class UsuarioController extends Controller
                 'nome_rua' => $request->nome_rua,
                 'numero_casa' => $request->numero_casa,
     
-                'email' => $request->email,
+                'email' => $email,
                 'senha' => $hash_senha,
     
                 'created_at' => Carbon::now()        
             ]);
+
+            // User::insert([
+            //     'usuario_id' => $usuario->id,
+            //     'name' => $request->nome,
+            //     'email' => $email,
+            //     'password' => $hash_senha,
+            //     'created_at' => Carbon::now()
+            // ]);
 
             // if($request->departamento_id == 3) {
             //     Alunos::insert([
@@ -279,7 +295,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         $usuario = Usuarios::findOrFail($id);
-        
+
         $foto = $usuario->foto_usuario;
 
         if($foto) {

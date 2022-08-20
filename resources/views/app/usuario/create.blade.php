@@ -175,8 +175,8 @@
                                     <label class="form-label" for="email">Email</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                        <input type="email" name="email" id="email" class="form-control"
-                                            placeholder="joao.alves@gmail.com" />
+                                        <input type="text" id="email" name="email" class="form-control" placeholder="joao.alves">
+                                        <span class="input-group-text" id="email_padrao" name="email_padrao">@faculdade.br</span>
                                     </div>
                                     <span class="text-danger">
                                         <strong id="email-error"></strong>

@@ -64,8 +64,8 @@
                 {{-- @if (App\Models\Contratos\DadosProfessorContrato::count() != 0) --}}
                 {{-- Treinos --}}
                 <div class="row">
-                    {{-- Montar Treino --}}
-                    <div class="col-4">
+                    <!-- Montar Treino -->
+                    {{-- <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Novo Treino</h6>
@@ -76,11 +76,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Treinos Montados --}}
                     {{-- @if (!empty($treinos)) --}}
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Treinos Montados</h6>
@@ -91,14 +91,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- @endif --}}
-                </div>
+                </div> 
 
                 {{-- Contratos --}}
                 <div class="row">
                     {{-- Montar Contratos --}}
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Novo Contrato</h6>
@@ -109,11 +109,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Contratos Montados --}}
                     {{-- @if (!empty($contratos)) --}}
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Contratos</h6>
@@ -124,14 +124,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- @endif --}}
-                </div>
+                </div> 
 
                 {{-- Avaliações Físicas --}}
                 <div class="row">
                     {{-- Montar Avaliação --}}
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Nova Avaliação Física</h6>
@@ -142,11 +142,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Treinos Montados --}}
                     {{-- @if (!empty($avaliacoes)) --}}
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Avaliações Realizadas</h6>
@@ -157,13 +157,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- @endif --}}
-                </div>
+                </div> 
                 {{-- @endif --}}
 
                 {{-- Excluir Aluno --}}
-                <div class="row mt-3">
+                {{-- <div class="row mt-3">
                     <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

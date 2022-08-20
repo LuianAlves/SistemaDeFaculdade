@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+
 /* Cadastro da Instituição */
 use App\Http\Controllers\Instituicao\InstituicaoController;
 use App\Http\Controllers\Instituicao\CampusController;
@@ -21,15 +23,11 @@ use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 
 /* Home Page */
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 /* Principal Dashboard */
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('app.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 });
 
 /* Sistema Principal */
@@ -54,6 +52,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Turmas
     Route::get('/cursos/{curso_id}/turma', [TurmasController::class, 'store'])->name('turmas.store');
+    Route::get('/turmas', [TurmasController::class, 'index'])->name('turmas.index');
 
     // Calendario Academico
     Route::prefix('/calendario-academico')->group(function(){
