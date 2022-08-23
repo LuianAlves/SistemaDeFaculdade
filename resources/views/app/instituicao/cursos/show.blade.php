@@ -26,14 +26,6 @@
                                 </h6>
                             </div>
 
-                            <div class="text-muted my-3">
-                                <p class="card-text fw-bold">
-                                    Duração total de Horas: 
-                                    <span class="text-info" name="duracao_total_horas"></span>
-                                    Horas
-                                </p>
-                            </div>
-
                             <div class="my-3">
                                 <span class="badge bg-label-dark" name="grau_instrucao"></span>
                             </div>

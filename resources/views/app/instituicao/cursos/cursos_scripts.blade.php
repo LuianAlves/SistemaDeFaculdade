@@ -12,7 +12,6 @@
     $( '#curso-error' ).html( "" );
     $( '#descricao-error' ).html( "" );
     $( '#quantidade_semestres-error' ).html( "" );
-    $( '#duracao_total_horas-error' ).html( "" );
 
         $.ajax({
             url:"{{ route('cursos.store') }}",
@@ -35,12 +34,7 @@
 
                     if(data.errors.quantidade_semestres){
                         $( '#quantidade_semestres-error' ).html( data.errors.quantidade_semestres[0] );
-                    }
-
-                    if(data.errors.duracao_total_horas){
-                        $( '#duracao_total_horas-error' ).html( data.errors.duracao_total_horas[0] );
-                    }
-                    
+                    }              
                 }
                 if(data.success) {
                     window.location.href="{{route('cursos.index')}}";
@@ -60,7 +54,6 @@
     $( '#curso-error-edit' ).html( "" );
     $( '#descricao-error-edit' ).html( "" );
     $( '#quantidade_semestres-error-edit' ).html( "" );
-    $( '#duracao_total_horas-error-edit' ).html( "" );
 
     $.ajax({
         url:"{{ route('cursos.update') }}",
@@ -82,10 +75,6 @@
 
                 if(data.errors.quantidade_semestres){
                     $( '#quantidade_semestres-error-edit' ).html( data.errors.quantidade_semestres[0] );
-                }
-
-                if(data.errors.duracao_total_horas){
-                    $( '#duracao_total_horas-error-edit' ).html( data.errors.duracao_total_horas[0] );
                 }                   
             }
 
@@ -116,9 +105,7 @@
                     $("span[name='curso_titulo']").text(response.curso.curso);
                     
                     $('#quantidade_semestres_edit').val(response.curso.quantidade_semestres);
-             
-                    $('#duracao_total_horas_edit').val(response.curso.duracao_total_horas);
-             
+                          
                     $('#descricao_edit').val(response.curso.descricao);
              
                     $("#grau_instrucao_id_edit option[data-value='" + response.grauInstrucao.grau_instrucao +"']").attr("selected","selected");
@@ -142,8 +129,6 @@
 
                 $("span[name='quantidade_semestres']").text(data.curso.quantidade_semestres)
                 
-                $("span[name='duracao_total_horas']").text(data.curso.duracao_total_horas)
-
                 $("span[name='grau_instrucao']").text(data.grauInstrucao.grau_instrucao)
 
                 $("span[name='descricao']").text(data.curso.descricao)

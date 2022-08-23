@@ -27,10 +27,8 @@ Route::get('/', function () {
 
 /* Principal Dashboard */
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('app.index');
-    })->name('dashboard');
-});
+    Route::get('/dashboard', function () { return view('app.index'); })->name('dashboard');
+
 
 /* Sistema Principal */
 
@@ -83,3 +81,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/alunos/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
 
     // Route::get('/alunos/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');
+});

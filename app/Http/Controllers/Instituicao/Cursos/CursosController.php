@@ -25,7 +25,7 @@ class CursosController extends Controller
     {
         $grau_instrucao = GrauInstrucao::get();
         $cursos = Cursos::orderBy('curso', 'ASC')->get();
-
+        
         return view('app.instituicao.cursos.index', compact('grau_instrucao', 'cursos'));
     }
 
@@ -42,13 +42,11 @@ class CursosController extends Controller
             'curso' => 'required',
             'descricao' => 'required',
             'quantidade_semestres' => 'required',
-            'duracao_total_horas' => 'required',
         ], [     
             'grau_instrucao_id.required' => 'Selecione o grau de instrução deste Curso.',
             'curso.required' => 'Digite um nome para esse Curso.',
             'descricao.required' => 'Descreva um pouco sobre o Curso.',
             'quantidade_semestres.required' => 'Especifique a quantidade de semestres desse Curso.',
-            'duracao_total_horas.required' => 'Especifique a quantidade total de horas do Curso.'  
         ]);
 
         if ($validator->passes()) {
@@ -58,7 +56,6 @@ class CursosController extends Controller
                 'curso' => $request->curso,
                 'descricao' => $request->descricao,
                 'quantidade_semestres' => $request->quantidade_semestres,
-                'duracao_total_horas' => $request->duracao_total_horas,
 
                 'created_at' => Carbon::now()        
             ]);
@@ -117,13 +114,11 @@ class CursosController extends Controller
             'curso' => 'required',
             'descricao' => 'required',
             'quantidade_semestres' => 'required',
-            'duracao_total_horas' => 'required',
         ], [     
             'grau_instrucao_id.required' => 'Selecione o grau de instrução deste Curso.',
             'curso.required' => 'Digite um nome para esse Curso.',
             'descricao.required' => 'Descreva um pouco sobre o Curso.',
             'quantidade_semestres.required' => 'Especifique a quantidade de semestres desse Curso.',
-            'duracao_total_horas.required' => 'Especifique a quantidade total de horas do Curso.'  
         ]);
 
         $id = $request->curso_id;
@@ -135,7 +130,6 @@ class CursosController extends Controller
                 'curso' => $request->curso,
                 'descricao' => $request->descricao,
                 'quantidade_semestres' => $request->quantidade_semestres,
-                'duracao_total_horas' => $request->duracao_total_horas,
 
                 'updated_at' => Carbon::now()        
             ]);
