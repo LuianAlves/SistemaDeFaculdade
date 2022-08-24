@@ -17,12 +17,12 @@
                     </ul>
                 </div>
             </div>
-            
+
             {{-- Content --}}
             <div class="modal-body">
                 <div class="row mb-3">
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-fullname">Nome</label>
+                        <label class="form-label" for="basic-icon-default-fullname">Nome do Campus</label>
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-building-house"></i></span>
                             <input type="text" class="form-control" name="nome_campus" id="nome_campus"

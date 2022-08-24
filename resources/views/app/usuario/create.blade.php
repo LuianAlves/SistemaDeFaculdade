@@ -30,16 +30,6 @@
                                 </span>
                             </button>
                         </li>
-                        <li class="nav-item">
-                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-justified-messages"
-                                aria-controls="navs-pills-justified-messages" aria-selected="false">
-                                <span class="d-flex justify-content-center align-items-center">
-                                    <i class="tf-icons bx bx-key"></i>
-                                    <b style="margin-left: 12px;">Login</b>
-                                </span>
-                            </button>
-                        </li>
                     </ul>
 
                     {{-- Informaçoes das Abas --}}
@@ -163,34 +153,6 @@
                                     </div>
                                     <span class="text-danger">
                                         <strong id="numero_casa-error"></strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Login --}}
-                        <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-                            <div class="row mb-3">
-                                <div class="col-6">
-                                    <label class="form-label" for="email">Email</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                        <input type="text" id="email" name="email" class="form-control" placeholder="joao.alves">
-                                        <span class="input-group-text" id="email_padrao" name="email_padrao">@faculdade.br</span>
-                                    </div>
-                                    <span class="text-danger">
-                                        <strong id="email-error"></strong>
-                                    </span>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" for="senha">Senha</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-key"></i></span>
-                                        <input type="password" name="senha" id="senha" class="form-control"
-                                            placeholder="teste1234" />
-                                    </div>
-                                    <span class="text-danger">
-                                        <strong id="senha-error"></strong>
                                     </span>
                                 </div>
                             </div>

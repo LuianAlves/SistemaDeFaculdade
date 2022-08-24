@@ -91,6 +91,18 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+    {{-- Bloqueando tecla ENTER --}}
+    <script>
+        $(document).ready(function() {
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                return false;
+                }
+            });
+        }); 
+    </script>
+    
     {{-- Formatando Inputs --}}
     <script>
         function fMasc(objeto,mascara) {
@@ -175,6 +187,7 @@
             xmlHttp.send()
         }
     </script>
+
     <!-- Resetar/Atualizar Imagem -->
     <script>
         document.addEventListener('DOMContentLoaded', function (e) {

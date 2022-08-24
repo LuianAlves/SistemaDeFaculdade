@@ -101,6 +101,7 @@
                     $('#curso_id').val(response.curso.id);
 
                     $('#curso_edit').val(response.curso.curso);
+                    $('span[name="curso"]').text(response.curso.curso);
 
                     $("span[name='curso_titulo']").text(response.curso.curso);
                     

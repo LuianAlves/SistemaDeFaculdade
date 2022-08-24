@@ -26,15 +26,14 @@
                 <span class="menu-header-text">Calendário Acadêmico</span>
             </li>
 
-            <!-- Cadastrar Período Escolar -->
-            <li class="menu-item">
-                <a href="{{ route('periodo-escolar.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-building-house"></i>
-                    <div data-i18n="Basic">Período Escolar</div>
-                </a>
-            </li>
-
             @if (App\Models\Cursos::count() != 0)
+                <!-- Cadastrar Período Escolar -->
+                <li class="menu-item">
+                    <a href="{{ route('periodo-escolar.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-building-house"></i>
+                        <div data-i18n="Basic">Período Escolar</div>
+                    </a>
+                </li>
                 <!-- Cadastrar Período de Avaliações -->
                 <li class="menu-item">
                     <a href="{{ route('periodo-avaliacoes.index') }}" class="menu-link">
@@ -58,15 +57,7 @@
         </li>
 
         @if(App\Models\Campus::count() != 0)
-            <!-- Nova Disciplinas -->
-            <li class="menu-item">
-                <a href="{{route('disciplinas.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-book-content"></i>
-                    <div data-i18n="Basic">Disciplinas</div>
-                </a>
-            </li>
-
-            <!-- Novo Curso -->
+            <!-- Cursos -->
             <li class="menu-item">
                 <a href="{{route('cursos.index')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-book-add"></i>
@@ -74,41 +65,53 @@
                 </a>
             </li>
 
-            <!-- Divisor -->
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Funcionalidades de Cadastramento</span>
-            </li>
+            @if(App\Models\Cursos::count() != 0)
+                <!-- Disciplinas -->
+                <li class="menu-item">
+                    <a href="{{route('disciplinas.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-book-reader"></i>
+                        <div data-i18n="Basic">Disciplinas</div>
+                    </a>
+                </li>
 
+                <!-- Turmas -->
+                @if(App\Models\Turmas::count() != 0)
+                    <li class="menu-item">
+                        <a href="{{route('turmas.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div data-i18n="Basic">Turmas</div>
+                        </a>
+                    </li> 
+                @endif
             
-            <!-- Novo Usuário -->
-            <li class="menu-item">
-                <a href="{{route('usuario.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                    <div data-i18n="Basic">Cadastrar Usuário</div>
-                </a>
-                <a href="{{route('alunos.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                    <div data-i18n="Basic">Alunos</div>
-                </a>
-            </li>
+                <!-- Divisor -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Funcionalidades de Cadastramento</span>
+                </li>
+                
+                <!-- Usuários -->
+                <li class="menu-item">
+                    <a href="{{route('usuario.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                        <div data-i18n="Basic">Novo usuário</div>
+                    </a>
+                    @if(App\Models\Alunos::count() != 0)
+                        <a href="{{route('alunos.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div data-i18n="Basic">Alunos</div>
+                        </a>
+                    @endif
+                </li> 
+            @endif
 
-
-            <!--------------------------- Divisor --------------------------->
+            {{-- <!--------------------------- Divisor --------------------------->
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Acompanhamento Pedagógico</span>
             </li>
-
-            <li class="menu-item">
-                <a href="{{route('turmas.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                    <div data-i18n="Basic">Turmas</div>
-                </a>
-            </li>
-
             <!--------------------------- Divisor --------------------------->
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Acompanhamento Administrativo</span>
-            </li>
+            </li> --}}
         @endif
     </ul>
 </aside>

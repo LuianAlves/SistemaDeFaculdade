@@ -103,6 +103,7 @@
                     $('#disciplina_id').val(response.disciplina.id);
 
                     $('#disciplina_edit').val(response.disciplina.disciplina);
+                    $('span[name="disciplina"]').text(response.disciplina.disciplina);
 
                     $('#duracao_horas_edit').val(response.disciplina.duracao_horas);
 

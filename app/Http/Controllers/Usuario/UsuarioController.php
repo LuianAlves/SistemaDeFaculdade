@@ -88,7 +88,7 @@ class UsuarioController extends Controller
             'cep' => 'required',
             'nome_rua' => 'required',
             'numero_casa' => 'required',
-                    ], [
+        ], [
             'departamento_id.required' => 'Selecione o departamento desse usuário.',
             
             'nome.required' => 'Insira um nome para este usuário.',
@@ -100,7 +100,7 @@ class UsuarioController extends Controller
             'numero_casa.required' => 'Insira o número da casa.',            
         ]);
 
-        $data = date('Y');
+        $data = date('y');
 
         // -- Gerando Código Usuário + Email
         $nome = strtok(strtolower($request->nome), " ");

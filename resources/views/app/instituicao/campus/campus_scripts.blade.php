@@ -78,11 +78,11 @@
                     $('#campus_id').val(response.campus.id);
 
                     $('#nome_campus_edit').val(response.campus.nome_campus);
+                    $("span[name='nome_campus']").text(response.campus.nome_campus)
              
                     $("#estado_id_edit option[data-value='" + response.estado.estado +"']").attr("selected","selected");
                 }
             });
         });
     });
-
 </script>

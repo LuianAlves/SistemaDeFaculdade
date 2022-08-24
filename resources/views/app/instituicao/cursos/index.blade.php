@@ -26,19 +26,6 @@
             </thead>
             <tbody>
                 @foreach ($cursos as $curso)
-                    {{-- @php
-                        $curso_id = $curso->id;
-
-                        $gradeHoras = App\Models\GradeCurricular::where('curso_id', $curso->id)->get();
-
-                        foreach($gradeHoras as $grade) {
-                            $horas = App\Models\Disciplinas::where('id', $grade->disciplina_id)->sum('duracao_horas');
-                            dd($horas);
-                        }
-                    @endphp --}}
-                    
-
-
                     <tr class="fw-bold">
                         <td>{{$curso->curso}}</td>
                         <td class="text-center">{{$curso->quantidade_semestres}} Semestres</td>
@@ -52,16 +39,20 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <!-- Adicionar Grade Curricular -->
-                                    <a href="{{route('grade-curricular.index', $curso->id)}}" class="dropdown-item text-muted">
-                                        <i class="bx bx-border-right me-1"></i>
-                                        Grade Curricular
-                                    </a>
+                                    @if(App\Models\Disciplinas::count() != 0)
+                                        <a href="{{route('grade-curricular.index', $curso->id)}}" class="dropdown-item text-muted">
+                                            <i class="bx bx-border-right me-1"></i>
+                                            Grade Curricular
+                                        </a>
+                                    @endif
 
                                     <!-- Cadastrar nova Turma -->
-                                    <a href="{{route('turmas.store', $curso->id)}}" class="dropdown-item text-muted">
-                                        <i class="bx bx-border-right me-1"></i>
-                                        Gerar Nova Turma
-                                    </a>
+                                    @if(App\Models\Alunos::count() != 0)
+                                        <a href="{{route('turmas.store', $curso->id)}}" class="dropdown-item text-muted">
+                                            <i class="bx bx-border-right me-1"></i>
+                                            Gerar Nova Turma
+                                        </a>
+                                    @endif
 
                                     <li>
                                         <hr class="dropdown-divider">
