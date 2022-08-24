@@ -8,9 +8,11 @@
             <div class="card-body">
 
                 <div class="row mb-5">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Área do Aluno {{ $aluno->nome }}</h4>
-                        <a href="{{ route('alunos.index') }}" class="btn btn-sm btn-primary text-white">Listagem de Alunos</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">{{ 'Área do aluno - ' . $aluno->Estudante->nome . ' ' . $aluno->Estudante->sobrenome }}</h4>
+                        <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
+                            <b>Listagem de Alunos</b>
+                        </a>
                     </div>
                 </div>
 
@@ -36,7 +38,7 @@
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-2">Visualizar Informações</h6>
                                 <div class="d-flex justify-content-center">
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#showAluno" id="{{ $aluno->id }}"
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#visualizarDadosAluno" id="{{ $aluno->id }}"
                                         onclick="visualizarAluno(this.id)">
                                         <i class="bx bx-minus-front"></i>
                                     </a>
@@ -185,11 +187,14 @@
 
 @endsection
 
-<!-- Include de modal create -->
+<!-- Include Scripts -->
 @include('app.instituicao.corpo_discente.alunos_scripts')
 
-<!-- Include de modal create -->
+<!-- Include de modal Create -->
 @include('app.instituicao.corpo_discente.create')
+
+<!-- Include de modal Show -->
+@include('app.instituicao.corpo_discente.show')
 
 <style>
     * {

@@ -81,7 +81,7 @@
                             <ul
                                 class="list-unstyled users-list m-0 avatar-group d-flex justify-content-center align-items-center">
                                 <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up" title="Lilian Fuller">
+                                    class="avatar avatar-xs pull-up" title="{{$usuario->nome}}">
                                     <img src="{{ $usuario->foto_usuario != '' ? asset($usuario->foto_usuario) : asset('sistema/assets/adicionar_foto.png') }}" alt="Avatar"
                                         class="rounded-circle" />
                                 </li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Alunos;
 use App\Models\Usuarios;
 use App\Models\Departamentos;
 
@@ -145,7 +146,7 @@ class UsuarioController extends Controller
              
 
         if ($validator->passes()) {
-            $usuario = Usuarios::insert([
+            $usuario = Usuarios::create([
                 'departamento_id' => $request->departamento_id,
                 'codigo_usuario' => $codigo,
     
@@ -163,28 +164,13 @@ class UsuarioController extends Controller
                 'created_at' => Carbon::now()        
             ]);
 
-            // User::insert([
-            //     'usuario_id' => $usuario->id,
-            //     'name' => $request->nome,
-            //     'email' => $email,
-            //     'password' => $hash_senha,
-            //     'created_at' => Carbon::now()
-            // ]);
 
-            // if($request->departamento_id == 3) {
-            //     Alunos::insert([
-            //         'usuario_id' => $usuario->id,
-            //         'rg' => $request->rg,
-            //         'cpf' => $request->cpf,
-            //         'email_pessoal' => $request->email_pessoal,
-            //         'telefone_recado' => $request->telefone_recado,
-            //         'nome_mae' => $request->nome_mae,
-            //         'nome_pai' => $request->nome_pai,
-            //         'serie_turma' => $request->serie_turma,
-            //         'situacao' => $request->situacao,
-            //         'created_at' => Carbon::now()
-            //     ]);
-            // }
+            // Divisões
+            if($request->departamento_id == 3) {
+                Alunos::insert([
+                    'usuario_id' => $usuario->id,
+                ]);
+            }
 
             return Response::json(['success' => '1']);
         }

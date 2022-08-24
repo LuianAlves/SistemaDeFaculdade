@@ -1,75 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
 
 <script type="text/javascript">
-    // STORE - Validation
-    // $('body').on('click', '#createForm', function(){
-
-    //     var informacaoAdicional = $("#informacaoAluno");
-    //     var formData = informacaoAdicional.serialize();
-
-    //     var aluno_id = $(this).val()
-
-    //     console.log(aluno_id)
-
-    //     $( '#nome_mae-error' ).html( "" );
-    //     $( '#nome_pai-error' ).html( "" );
-
-    //     $( '#rg-error' ).html( "" );
-    //     $( '#cpf-error' ).html( "" );
-    //     $( '#telefone_recado-error' ).html( "" );
-    //     $( '#email_pessoal-error' ).html( "" );
-
-    //     $( '#curso_id-error' ).html( "" );
-    //     $( '#serie_turma-error' ).html( "" );
-
-
-    //     $.ajax({
-    //         url:"{{ route('alunos.store') }}",
-    //         type:'POST',
-    //         data:formData,
-    //         success:function(data) {
-    //             console.log(data);
-    //             if(data.errors) {
-    //                 if(data.errors.nome_mae){
-    //                     $( '#nome_mae-error' ).html( data.errors.nome_mae[0] );
-    //                 }
-
-    //                 if(data.errors.nome_pai){
-    //                     $( '#nome_pai-error' ).html( data.errors.nome_pai[0] );
-    //                 }
-    //                 if(data.errors.rg){
-    //                     $( '#rg-error' ).html( data.errors.rg[0] );
-    //                 }
-    //                 if(data.errors.cpf){
-    //                     $( '#cpf-error' ).html( data.errors.cpf[0] );
-    //                 }
-
-    //                 if(data.errors.telefone_recado){
-    //                     $( '#telefone_recado-error' ).html( data.errors.telefone_recado[0] );
-    //                 }
-    //                 if(data.errors.email_pessoal){
-    //                     $( '#email_pessoal-error' ).html( data.errors.email_pessoal[0] );
-    //                 }
-    //                 if(data.errors.curso_id){
-    //                     $( '#curso_id-error' ).html( data.errors.curso_id[0] );
-    //                 }
-
-    //                 if(data.errors.serie_turma){
-    //                     $( '#serie_turma-error' ).html( data.errors.serie_turma[0] );
-    //                 }
-    //             }
-    //             if(data.success) {
-    //                 // setInterval(function(){ 
-    //                 //     $('#adicionarNovoUsuario').modal('hide');
-    //                 // }, 1000);
-    //                 var aluno_id = $(this).val()
-
-    //                 window.location.href="{{url('/alunos/area_aluno')}}/" + aluno_id;
-    //             }
-    //         },
-    //     });
-    // });
-
     // Select Turmas
     $(document).ready(function() {
         $('select[name="curso_id"]').on('change', function() {
@@ -80,10 +11,8 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        // console.log(data)
                         var d = $('select[name="serie_turma"]').empty()
                         $.each(data, function(key, value) {
-                            // console.log(value.codigo_turma)
                             $('select[name="serie_turma"]').append('<option value="' + value.id + '">' + value.codigo_turma + '</option>')
                         })
                     },
@@ -93,5 +22,62 @@
             }
         })
     })
+    
+    // Show Aluno
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+   
+    function visualizarAluno(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/alunos/area_aluno/show/'+id,
+            dataType: 'json',
 
+            success: function(data) {
+
+                //CADASTRO DO ALUNO
+                $('#codigo_usuario').text(data.aluno.codigo_usuario)
+
+                if(data.aluno.departamento_id == 1) {
+                    $('#administrativo').text('Administrativo')
+                } else if(data.aluno.departamento_id == 2){
+                    $('#professor').text('Professor')
+                } else if(data.aluno.departamento_id == 3){
+                    $('#estudante').text('Estudante')
+                }
+                
+                $("span[name='nome']").text(data.aluno.nome);
+                $("span[name='sobrenome']").text(data.aluno.sobrenome);
+                $("span[name='telefone']").text(data.aluno.telefone);
+
+                if(data.aluno.foto_usuario != null) {
+                    $('.modal-body img').attr('src', data.aluno.foto_usuario);
+                } else {
+                    $('.modal-body img').attr('src', 'sistema/assets/adicionar_foto.png');
+                }
+
+                $("span[name='cep']").text(data.aluno.cep);
+                $("span[name='nome_rua']").text(data.aluno.nome_rua + ", ");
+                $("small[name='numero_casa']").text(data.aluno.numero_casa);
+
+                $("small[name='email']").text(data.aluno.email);
+                $("small[name='senha']").text(data.aluno.senha);
+
+                console.log(data.alunoInfAdicional);
+
+                //INFORMAÇÕES ADICIONAIS
+                $('#cpf').text(data.alunoInfAdicional.cpf);
+                $('#rg').text(data.alunoInfAdicional.rg);
+                $('#email_pessoal').text(data.alunoInfAdicional.email_pessoal);
+                $('#telefone_recado').text(data.alunoInfAdicional.telefone_recado);
+                $('#nome_mae').text(data.alunoInfAdicional.nome_mae);
+                $('#nome_pai').text(data.alunoInfAdicional.nome_pai);
+                $('#serie_turma').text(data.alunoInfAdicional.serie_turma);
+                $('#situacao').text(data.alunoInfAdicional.situacao);
+            }
+        })
+    }
 </script>

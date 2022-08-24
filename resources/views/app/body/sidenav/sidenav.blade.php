@@ -93,7 +93,7 @@
                 <li class="menu-item">
                     <a href="{{route('usuario.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                        <div data-i18n="Basic">Novo usuário</div>
+                        <div data-i18n="Basic">Usuários</div>
                     </a>
                     @if(App\Models\Alunos::count() != 0)
                         <a href="{{route('alunos.index')}}" class="menu-link">

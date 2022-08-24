@@ -26,10 +26,10 @@
                     <tr>
                         <td>
                             <i class="fab fa-angular fa-lg text-danger"></i>
-                            <strong>{{$aluno->codigo_usuario}}</strong>
+                            <strong>{{$aluno->Estudante->codigo_usuario}}</strong>
                         </td>
-                        <td>{{$aluno->nome.' '.$aluno->sobrenome}}</td>
-                        <td>{{$aluno->telefone}}</td>
+                        <td>{{$aluno->Estudante->nome.' '.$aluno->Estudante->sobrenome}}</td>
+                        <td>{{$aluno->Estudante->telefone}}</td>
 
                         <td class="text-center">
                             <a href="{{route('alunos.area-aluno', $aluno->id)}}">
