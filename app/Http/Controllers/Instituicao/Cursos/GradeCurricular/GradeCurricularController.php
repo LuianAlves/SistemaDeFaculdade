@@ -22,9 +22,9 @@ class GradeCurricularController extends Controller
     public function index($curso_id)
     {
         $curso = Cursos::findOrFail($curso_id);
-        $gradeCurricular = GradeCurricular::with('disciplina')->where('curso_id', $curso_id)->get()->toArray();
+        $gradeCurricular = GradeCurricular::with('disciplina')->where('curso_id', $curso_id)->get();
         
-        dd($gradeCurricular->disciplina);
+        dd($gradeCurricular);
         die;
         return view('app.instituicao.cursos.grade_curricular.index', compact('curso', 'gradeCurricular'));
     }

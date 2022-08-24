@@ -9,6 +9,7 @@ use App\Models\Cursos;
 use App\Models\GrauInstrucao;
 
 use App\Models\GradeCurricular;
+use App\Models\Disciplinas;
 
 use Carbon\Carbon;
 use Validator;
@@ -25,6 +26,16 @@ class CursosController extends Controller
     {
         $grau_instrucao = GrauInstrucao::get();
         $cursos = Cursos::orderBy('curso', 'ASC')->get();
+
+        foreach($cursos as $curso) {
+            $gradeCurricular = GradeCurricular::where('curso_id', $curso->id)->get();
+
+            echo '<pre>';
+            print_r($gradeCurricular);
+            echo '</pre>';
+            die;
+        }
+
         
         return view('app.instituicao.cursos.index', compact('grau_instrucao', 'cursos'));
     }
