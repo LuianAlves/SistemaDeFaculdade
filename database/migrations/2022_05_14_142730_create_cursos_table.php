@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('curso');
             $table->text('descricao');
             $table->integer('quantidade_semestres');
-            $table->integer('duracao_total_horas');
             $table->timestamps();
         });
     }

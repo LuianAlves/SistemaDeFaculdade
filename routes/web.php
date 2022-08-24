@@ -22,16 +22,11 @@ use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\AvaliacoesCu
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 
-/* Home Page */
-Route::get('/', [HomeController::class, 'home'])->name('home');
-
 /* Principal Dashboard */
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-});
-
-/* Sistema Principal */
-
+    // Dashboard
+    Route::get('/dashboard', function () { return view('app.index'); })->name('dashboard');
+    
     // Campus
     Route::post('/campus/update', [CampusController::class, 'update'])->name('campus.update');
     Route::resource('/campus', CampusController::class)->except('create', 'show', 'update');
@@ -82,3 +77,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/alunos/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
 
     // Route::get('/alunos/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');
+});

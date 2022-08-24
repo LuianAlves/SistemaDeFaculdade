@@ -75,16 +75,6 @@
                                         <strong id="quantidade_semestres-error"></strong>
                                     </span>
                                 </div>
-                                <div class="col-6">
-                                    <label class="form-label" for="basic-icon-default-fullname">Duração Total em Horas</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-building-house"></i></span>
-                                        <input type="number" class="form-control" name="duracao_total_horas" id="duracao_total_horas" placeholder="Curso" />
-                                    </div>
-                                    <span class="text-danger">
-                                        <strong id="duracao_total_horas-error"></strong>
-                                    </span>
-                                </div>
                             </div>
                         </div>
                     </div>
