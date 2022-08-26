@@ -25,7 +25,8 @@ use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 /* Principal Dashboard */
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () { return view('app.index'); })->name('dashboard');
+    Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     
     // Campus
     Route::post('/campus/update', [CampusController::class, 'update'])->name('campus.update');

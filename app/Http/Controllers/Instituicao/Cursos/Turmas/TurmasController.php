@@ -14,60 +14,57 @@ use App\Models\Alunos;
 use App\Models\CalendarioAcademico\PeriodoEscolar;
 
 use Carbon\Carbon;
+use DB;
 
 class TurmasController extends Controller
 {
     // Gerando turmas através na view cursos
     public function store($curso_id) {
+        
+        // ------ **** ----- data
         $data = Carbon::now();
         $anoAtual = $data->year;
 
+        // ------ **** ----- Select Cursos
+        $curso = Cursos::where('id', $curso_id)->first();
+
+        // ------ **** ----- Gerando código da turma
         $codigoTurma = 'TR' . mt_rand(1000, 9999);
 
-        $curso = Cursos::findOrFail($curso_id);
-        $gradeCurricular = GradeCurricular::where('curso_id', $curso->id)->first();
+        // ------ **** ----- Select periodo escolar id
+        $periodoEscolar = PeriodoEscolar::where('ano_periodo_escolar', $anoAtual)->where('estudantes', 1)->first();
 
-        $periodoEscolar = PeriodoEscolar::where('ano_periodo_escolar', $anoAtual)->first();
+        // ------ **** ----- Select grade curricular id
+        $gradeCurricular = GradeCurricular::where('curso_id', $curso->id)->first(); 
 
-        $turma = Turmas::where('curso_id', $curso->id)->where('periodo_escolar_id', $periodoEscolar->id)->orderBy('created_at', 'DESC')->first();
-        $alunos = Alunos::where('serie_turma', $turma->id)->count();
-        
-        if($turma == '' || $turma == null) {
-            Turmas::insert([
-                'curso_id' => $curso->id,
-                'grade_curricular_id' => $gradeCurricular->id,
-                'periodo_escolar_id' => $periodoEscolar->id,
-                'codigo_turma' => $codigoTurma,
-                'created_at' => Carbon::now()
-            ]);
-    
+
+        // ------ **** ----- Select turma
+        $turma = Turmas::where('curso_id', $curso->id)->where('periodo_escolar_id', $periodoEscolar->id)->orderBy('id', 'DESC')->first();
+        // dd($turma->codigo_turma);
+        // die;
+
+        $countAlunos = Alunos::where('serie_turma', $turma->codigo_turma)->count();
+
+        if($countAlunos <= 5) {
             $noti = [
-                'message' => 'Nova turma gerada com sucesso!',
-                'alert-type' => 'success'
-            ];
-    
-            return redirect()->back()->with($noti);
-        } elseif($alunos > 2) {
-
-            Turmas::insert([
-                'curso_id' => $curso->id,
-                'grade_curricular_id' => $gradeCurricular->id,
-                'periodo_escolar_id' => $periodoEscolar->id,
-                'codigo_turma' => $codigoTurma,
-                'created_at' => Carbon::now()
-            ]);
-    
-            $noti = [
-                'message' => 'Nova turma gerada com sucesso!',
-                'alert-type' => 'success'
+                'message' => 'Error! Limite atual de alunos não atingido.',
+                'alert-type' => 'error'
             ];
     
             return redirect()->back()->with($noti);
         } else {
-            
+            // ------ **** ----- inserindo nova turma
+            $novaTurma = Turmas::insert([
+                'curso_id' => $curso->id,
+                'grade_curricular_id' => $gradeCurricular->id,
+                'periodo_escolar_id' => $periodoEscolar->id,
+                'codigo_turma' => $codigoTurma,
+                'created_at' => Carbon::now()
+            ]);
+
             $noti = [
-                'message' => 'Error! Limite atual de alunos não atingido.',
-                'alert-type' => 'error'
+                'message' => 'Nova turma gerada com sucesso!',
+                'alert-type' => 'success'
             ];
     
             return redirect()->back()->with($noti);

@@ -61,7 +61,9 @@
 * Cadastrando período de avaliações de cada disciplina/semestre
 
 
+## Falta ajustar:
 
+* Foto dos usuários;
 
 </p>
      

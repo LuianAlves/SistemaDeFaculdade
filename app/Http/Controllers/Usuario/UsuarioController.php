@@ -101,8 +101,6 @@ class UsuarioController extends Controller
             'numero_casa.required' => 'Insira o número da casa.',            
         ]);
 
-        $data = date('y');
-
         // -- Gerando Código Usuário + Email
         $nome = strtok(strtolower($request->nome), " ");
         $sobrenome = strtok(strtolower($request->sobrenome), " ");
@@ -112,17 +110,17 @@ class UsuarioController extends Controller
         switch ($request->departamento_id) {
             case 1:
                     $codigo = 'AD_'.$codigo_usuario;
-                    $email = $nome.'.'.$sobrenome.$data.'@administrativo.unitech.br';
+                    $email = $nome.'.'.$sobrenome.'@administrativo.unitech.br';
                     $nivel_acesso = 2;
                 break;
             case 2:
                     $codigo = 'PR_'.$codigo_usuario;
-                    $email = $nome.'.'.$sobrenome.$data.'@docente.unitech.br';
+                    $email = $nome.'.'.$sobrenome.'@docente.unitech.br';
                     $nivel_acesso = 3;
                 break;
             case 3:
                     $codigo = 'ES_'.$codigo_usuario;
-                    $email = $nome.'.'.$sobrenome.$data.'@aluno.unitech.br';
+                    $email = $nome.'.'.$sobrenome.'@aluno.unitech.br';
                     $nivel_acesso = 4;
                 break;
             
@@ -146,6 +144,8 @@ class UsuarioController extends Controller
              
 
         if ($validator->passes()) {
+
+            // Usuários
             $usuario = Usuarios::create([
                 'departamento_id' => $request->departamento_id,
                 'codigo_usuario' => $codigo,
@@ -164,7 +164,6 @@ class UsuarioController extends Controller
                 'created_at' => Carbon::now()        
             ]);
 
-
             // Divisões
             if($request->departamento_id == 3) {
                 Alunos::insert([
@@ -176,7 +175,8 @@ class UsuarioController extends Controller
             User::insert([
                 'name' => $request->nome,
                 'email' => $email,
-                'password' => $hash_senha
+                'password' => $hash_senha,
+                'nivel_acesso' => $nivel_acesso
             ]);
             
 
