@@ -172,6 +172,14 @@ class UsuarioController extends Controller
                 ]);
             }
 
+            // Cadastrando Login e Senha
+            User::insert([
+                'name' => $request->nome,
+                'email' => $email,
+                'password' => $hash_senha
+            ]);
+            
+
             return Response::json(['success' => '1']);
         }
             
