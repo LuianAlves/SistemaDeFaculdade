@@ -37,11 +37,8 @@ class TurmasController extends Controller
         // ------ **** ----- Select grade curricular id
         $gradeCurricular = GradeCurricular::where('curso_id', $curso->id)->first(); 
 
-
         // ------ **** ----- Select turma
         $turma = Turmas::where('curso_id', $curso->id)->where('periodo_escolar_id', $periodoEscolar->id)->orderBy('id', 'DESC')->first();
-        // dd($turma->codigo_turma);
-        // die;
 
         $countAlunos = Alunos::where('serie_turma', $turma->codigo_turma)->count();
 

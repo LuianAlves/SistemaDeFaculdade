@@ -24,55 +24,54 @@
                 <tbody>
                     @foreach ($turmas as $turma)
                         @php
-                            $qntdAlunos = App\Models\Alunos::where('serie_turma', $turma->id)->count();
-                            if($qntdAlunos > 2) {
-                                $status = 1;
-                            } else {
-                                $status = 2;
-                            }
+                            $turma = App\Models\Turmas::where('curso_id', $turma->curso_id)->where('periodo_escolar_id', $turma->periodo_escolar_id)->orderBy('id', 'DESC')->first();
+                            $countAlunos = App\Models\Alunos::where('serie_turma', $turma->codigo_turma)->count();
+
+                            $limiteAlunos = 5;
+
+                            $vagasTurma = $limiteAlunos - $countAlunos;
                         @endphp
-                    <tr class="text-center">
-                        <td>{{$turma->codigo_turma}}</td>
-                        <td>{{$turma->curso->curso}}</td>
-                        {{-- <td>{{$turma->gradeCurricular->}}</td> --}}
-                        <td>{{$turma->periodoEscolar->ano_periodo_escolar}}</td>
 
-                        <td>
-                            @if($status == 1)
-                                <span class="badge bg-label-danger">CHEIA</span>
-                            @else
-                                <span class="badge bg-label-success">DISPONÍVEL</span>
-                            @endif
-                        </td>
-                        
-                        <td class="text-center">
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                    data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <!-- Visualizar -->
-                                    <a type="button" class="dropdown-item">
-                                        <i class="bx bx-show-alt me-1"></i>
-                                        Administrar Grade Curricular
-                                    </a>
+                        <tr class="text-center">
+                            <td>{{$turma->codigo_turma}}</td>
+                            <td>{{$turma->curso->curso}}</td>
+                            <td>{{$turma->periodoEscolar->ano_periodo_escolar}}</td>
 
-                                    <!-- Visualizar -->
-                                    <a type="button" class="dropdown-item">
-                                        <i class="bx bx-show-alt me-1"></i>
-                                        Gerar Relatório da Turma
-                                    </a>
-
-                                    <!-- Editar -->
-                                    <button type="button" class="dropdown-item">
-                                        <i class="bx bx-edit-alt me-1"></i>
-                                        Alunos Matriculados
+                            <td>
+                                @if($countAlunos >= $limiteAlunos)
+                                    <span class="badge bg-label-danger fw-bold">CHEIA</span>
+                                @else
+                                    <span class="badge bg-label-success fw-bold">{{"[$vagasTurma]"}} vagas</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                        data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
+                                    <div class="dropdown-menu">
+                                        <!-- Visualizar -->
+                                        <a type="button" class="dropdown-item">
+                                            <i class="bx bx-show-alt me-1"></i>
+                                            Administrar Grade Curricular
+                                        </a>
+
+                                        <!-- Visualizar -->
+                                        <a type="button" class="dropdown-item">
+                                            <i class="bx bx-show-alt me-1"></i>
+                                            Gerar Relatório da Turma
+                                        </a>
+
+                                        <!-- Editar -->
+                                        <button type="button" class="dropdown-item">
+                                            <i class="bx bx-edit-alt me-1"></i>
+                                            Alunos Matriculados
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
