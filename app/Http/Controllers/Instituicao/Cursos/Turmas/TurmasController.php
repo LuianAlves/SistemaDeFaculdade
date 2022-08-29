@@ -37,20 +37,11 @@ class TurmasController extends Controller
         // ------ **** ----- Select grade curricular id
         $gradeCurricular = GradeCurricular::where('curso_id', $curso->id)->first(); 
 
+        
         // ------ **** ----- Select turma
         $turma = Turmas::where('curso_id', $curso->id)->where('periodo_escolar_id', $periodoEscolar->id)->orderBy('id', 'DESC')->first();
 
-        $countAlunos = Alunos::where('serie_turma', $turma->codigo_turma)->count();
-
-        if($countAlunos <= 5) {
-            $noti = [
-                'message' => 'Error! Limite atual de alunos não atingido.',
-                'alert-type' => 'error'
-            ];
-    
-            return redirect()->back()->with($noti);
-        } else {
-            // ------ **** ----- inserindo nova turma
+        if($turma == null || $turma == '') {
             $novaTurma = Turmas::insert([
                 'curso_id' => $curso->id,
                 'grade_curricular_id' => $gradeCurricular->id,
@@ -65,6 +56,33 @@ class TurmasController extends Controller
             ];
     
             return redirect()->back()->with($noti);
+        } else {
+            $countAlunos = Alunos::where('serie_turma', $turma->codigo_turma)->count();
+
+            if($countAlunos <= 5) {
+                $noti = [
+                    'message' => 'Error! Limite atual de alunos não atingido.',
+                    'alert-type' => 'error'
+                ];
+        
+                return redirect()->back()->with($noti);
+            } else {
+                // ------ **** ----- inserindo nova turma
+                $novaTurma = Turmas::insert([
+                    'curso_id' => $curso->id,
+                    'grade_curricular_id' => $gradeCurricular->id,
+                    'periodo_escolar_id' => $periodoEscolar->id,
+                    'codigo_turma' => $codigoTurma,
+                    'created_at' => Carbon::now()
+                ]);
+
+                $noti = [
+                    'message' => 'Nova turma gerada com sucesso!',
+                    'alert-type' => 'success'
+                ];
+        
+                return redirect()->back()->with($noti);
+            }
         }
     }
 

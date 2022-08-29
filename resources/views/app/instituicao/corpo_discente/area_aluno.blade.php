@@ -9,7 +9,7 @@
 
                 <div class="row mb-5">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">{{ 'Área do aluno - ' . $aluno->Estudante->nome . ' ' . $aluno->Estudante->sobrenome }}</h4>
+                        <h4 class="card-title">{{ 'Área do aluno - ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}</h4>
                         <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
                             <b>Listagem de Alunos</b>
                         </a>
@@ -22,11 +22,11 @@
                     <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
-                                <h6 class="text-center fw-bold m-2">Informação Adicional</h6>
+                                <h6 class="text-center fw-bold m-2">Informação do aluno</h6>
                                 <div class="d-flex justify-content-center">
-                                    <a type="button" data-bs-toggle="modal"data-bs-target="#informacaoAdicionalAluno" value="{{$aluno->id}}">
+                                    <button type="button" class="editbtn" style="background: transparent; border: none;" value="{{$aluno->id}}">
                                         <i class="bx bx-plus-circle"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -41,20 +41,6 @@
                                     <a href="" data-bs-toggle="modal" data-bs-target="#visualizarDadosAluno" id="{{ $aluno->id }}"
                                         onclick="visualizarAluno(this.id)">
                                         <i class="bx bx-minus-front"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Editar Informações --}}
-                    <div class="col-4">
-                        <div class="card mini-card">
-                            <div class="card-body">
-                                <h6 class="text-center fw-bold m-2">Editar Informações</h6>
-                                <div class="d-flex justify-content-center">
-                                    <a href="#">
-                                        <i class="bx bx-edit"></i>
                                     </a>
                                 </div>
                             </div>
@@ -191,7 +177,7 @@
 @include('app.instituicao.corpo_discente.alunos_scripts')
 
 <!-- Include de modal Create -->
-@include('app.instituicao.corpo_discente.create')
+@include('app.instituicao.corpo_discente.edit')
 
 <!-- Include de modal Show -->
 @include('app.instituicao.corpo_discente.show')

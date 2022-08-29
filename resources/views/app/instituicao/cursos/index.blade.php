@@ -47,7 +47,7 @@
                                     @endif
 
                                     <!-- Cadastrar nova Turma -->
-                                    @if(App\Models\Alunos::count() != 0 && App\Models\GradeCurricular::where('curso_id', $curso->id)->count() != 0)
+                                    @if(App\Models\Alunos::count() != 0 && App\Models\GradeCurricular::where('curso_id', $curso->id)->count() != 0 && App\Models\CalendarioAcademico\PeriodoEscolar::where('Estudantes', 1)->count() != 0)
                                         <a href="{{route('turmas.store', $curso->id)}}" class="dropdown-item text-muted">
                                             <i class="bx bx-border-right me-1"></i>
                                             Gerar Nova Turma

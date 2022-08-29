@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('telefone_recado', 15)->nullable();
             $table->string('nome_mae', 100)->nullable();
             $table->string('nome_pai', 100)->nullable();
+            $table->string('curso_id')->nullable();
             $table->string('serie_turma')->nullable();
             $table->string('situacao')->default(1);
             $table->timestamps();

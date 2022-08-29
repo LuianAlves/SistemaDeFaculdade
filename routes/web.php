@@ -77,6 +77,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/alunos/area_aluno/ajax/{aluno_id}', [AlunosController::class,'getTurma']);
     Route::post('/alunos/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
     Route::get('/alunos/area_aluno/show/{aluno_id}', [AlunosController::class,'show'])->name('alunos.show');
+    Route::get('/alunos/area_aluno/edit/{aluno_id}', [AlunosController::class,'edit'])->name('alunos.edit');
+    Route::post('/alunos/area_aluno/update', [AlunosController::class,'update'])->name('alunos.update');
 
     // Route::get('/alunos/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');
 });

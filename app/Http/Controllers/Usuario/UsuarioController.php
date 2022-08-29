@@ -238,8 +238,6 @@ class UsuarioController extends Controller
             'cep' => 'required',
             'nome_rua' => 'required',
             'numero_casa' => 'required',
-            
-            'email' => 'required',
         ], [
             'departamento_id.required' => 'Selecione o departamento desse usuário.',
             
@@ -250,8 +248,6 @@ class UsuarioController extends Controller
             'cep.required' => 'Insira um CEP.',
             'nome_rua.required' => 'Insira o nome da rua.',
             'numero_casa.required' => 'Insira o número da casa.',
-            
-            'email.required' => 'Insira um email de login para o usuário.',
         ]);
 
         $id = $request->usuario_id;
