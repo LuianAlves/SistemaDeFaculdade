@@ -1,6 +1,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
 
 <script type="text/javascript">
+
 // Select Turmas
 $(document).ready(function() {
     $('select[name="curso_id"]').on('change', function() {
@@ -82,8 +83,8 @@ function visualizarAluno(id) {
 }
 
 // EDIT - Validation
-$('body').on('click', '#updateFormAluno', function(){
-    console.log('teste')
+$('body').on('click', '#updateForm', function(){
+
     var editarAluno = $("#editarAluno");
     var formData = editarAluno.serialize();
 
@@ -99,8 +100,8 @@ $('body').on('click', '#updateFormAluno', function(){
     $( '#numero_casa-error' ).html( "" );
 
     $.ajax({
+        url: "{{route('alunos.update')}}",
         type:'POST',
-        url: "/alunos/area_aluno/update",
         data:formData,
         success:function(data) {
             if(data.errors) {
@@ -129,7 +130,7 @@ $('body').on('click', '#updateFormAluno', function(){
                 }
             }
             if(data.success) {
-                window.location.href="/alunos/area_aluno"+aluno_id;
+                window.location.href="/alunos/area_aluno/"+data.aluno_id;
             }
         },
     });
@@ -181,4 +182,5 @@ $(document).ready(function() {
         });
     });
 });
+
 </script>

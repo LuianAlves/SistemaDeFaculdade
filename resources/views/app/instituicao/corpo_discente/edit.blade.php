@@ -295,7 +295,7 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Fechar
                 </button>
-                <button type="submit" class="btn btn-primary fw-bold text-white" id="updateFormAluno">Salvar</button>
+                <button type="button" class="btn btn-primary" id="updateForm">Salvar</button>
             </div>
 
         </form>

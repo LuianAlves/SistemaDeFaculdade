@@ -151,20 +151,20 @@
                 {{-- @endif --}}
 
                 {{-- Excluir Aluno --}}
-                {{-- <div class="row mt-3">
+                <div class="row mt-3">
                     <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
-                                <h6 class="text-center text-danger fw-bold m-2">Excluir Aluno</h6>
+                                <h6 class="text-center text-danger fw-bold m-2">Desmatricular Aluno</h6>
                                 <div class="d-flex justify-content-center">
-                                    <a href="#" id="delete">
+                                    <a href="{{route('alunos.destroy', $aluno->id)}}" id="delete">
                                         <i class="bx bx-block text-danger"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
             </div>
         </div>
@@ -173,14 +173,15 @@
 
 @endsection
 
-<!-- Include Scripts -->
-@include('app.instituicao.corpo_discente.alunos_scripts')
 
 <!-- Include de modal Create -->
 @include('app.instituicao.corpo_discente.edit')
 
 <!-- Include de modal Show -->
 @include('app.instituicao.corpo_discente.show')
+
+<!-- Include Scripts -->
+@include('app.instituicao.corpo_discente.alunos_scripts')
 
 <style>
     * {

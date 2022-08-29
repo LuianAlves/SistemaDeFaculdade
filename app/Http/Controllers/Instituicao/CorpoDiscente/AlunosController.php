@@ -74,6 +74,7 @@ class AlunosController extends Controller
         $turma = Turmas::where('id', $aluno->serie_turma)->first();
 
         return response()->json([
+            'status' => 200,
             'usuario' => $usuario,
             'aluno' => $aluno,
             'curso' => $curso,
@@ -136,9 +137,24 @@ class AlunosController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            return Response::json(['success' => '1']);
+            return Response::json(['success' => '1', 'aluno_id' => $aluno_id]);
         }
             
         return Response::json(['errors' => $validator->errors()]);
+    }
+
+    public function destroy($aluno_id) {
+        $aluno = Alunos::findOrFail($aluno_id);
+        $usuario = Usuarios::where('id', $aluno->usuario_id);
+        
+        $usuario->delete();
+        $aluno->delete();
+
+        $noti = [
+            'message' => 'Alunos desmatriculado com sucesso!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('alunos.index');
     }
 }
