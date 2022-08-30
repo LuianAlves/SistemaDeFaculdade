@@ -25,9 +25,10 @@
                     @foreach ($turmas as $turma)
                         @php
                             $turma = App\Models\Turmas::where('curso_id', $turma->curso_id)->where('periodo_escolar_id', $turma->periodo_escolar_id)->orderBy('id', 'DESC')->first();
-                            $countAlunos = App\Models\Alunos::where('serie_turma', $turma->codigo_turma)->count();
+                            $countAlunos = App\Models\Alunos::where('serie_turma', $turma->id)->count();
 
                             $limiteAlunos = 5;
+                            // dd($count);
 
                             $vagasTurma = $limiteAlunos - $countAlunos;
                         @endphp

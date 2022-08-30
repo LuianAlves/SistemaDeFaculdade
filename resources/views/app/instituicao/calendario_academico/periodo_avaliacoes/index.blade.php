@@ -14,8 +14,8 @@
             <form class="mb-2" action="{{route('periodo-avaliacoes.store')}}" method="post">
                 @csrf
 
-                <div class="row">
-                    <div class="col-4">
+                <div class="row mb-3">
+                    <div class="col-5">
                         <label class="form-label" for="basic-icon-default-fullname">Ínicio Período Avaliações</label>
                         <div class="input-group input-group-merge">
                             <input type="date" class="form-control" name="inicio_periodo_avaliacoes" id="inicio_periodo_escolar">
@@ -24,7 +24,7 @@
                             <strong id="inicio_periodo_avaliacoes-error"></strong>
                         </span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-5">
                         <label class="form-label" for="basic-icon-default-fullname">Término Período Avaliações</label>
                         <div class="input-group input-group-merge">
                             <input type="date" class="form-control" name="termino_periodo_avaliacoes" id="termino_periodo_escolar">
@@ -35,8 +35,8 @@
                     </div>
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col-4">
+                <div class="row">
+                    <div class="col-5">
                         <label class="form-label" for="curso_id">Campus</label>
                         <select class="form-select" name="campus_id" id="campus_id">
                             @foreach ($campus as $campus)
@@ -47,19 +47,20 @@
                             <strong id="campus_id-error"></strong>
                         </span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-5">
                         <label class="form-label" for="ano_letivo">Tipo de Prova</label>
                         <select class="form-select" name="tipo_prova" id="tipo_prova">
                             <option id="np1" value="1">NP1</option>   
-                            <option id="np2" value="2">NP2</option>   
-                            <option id="substutiva" value="3">Substutiva</option>   
-                            <option id="exame" value="4">Exame</option>   
+                            <option id="np1_sub" value="2">NP1 - Substutiva</option>   
+                            <option id="np2" value="3">NP2</option>   
+                            <option id="np2_sub" value="4">NP2 - Substutiva</option>      
+                            <option id="exame" value="5">Exame</option>   
                         </select>
                         <span class="text-danger">
                             <strong id="tipo_prova-error"></strong>
                         </span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-2">
                         <label class="form-label" for="basic-icon-default-estate"></label>
                         <button type="submit" class="btn btn-primary">
                             Adicionar
@@ -93,11 +94,13 @@
                                 @if($avaliacao->tipo_prova == 1)
                                     <span class="badge bg-label-primary">NP1</span>
                                 @elseif($avaliacao->tipo_prova == 2)
-                                    <span class="badge bg-label-info">NP2</span>
+                                    <span class="badge bg-label-info">NP1 - Substutiva</span>
                                 @elseif($avaliacao->tipo_prova == 3)
-                                    <span class="badge bg-label-danger">Substutiva</span>
+                                    <span class="badge bg-label-danger">NP2</span>
                                 @elseif($avaliacao->tipo_prova == 4)
-                                    <span class="badge bg-label-warning">Exame</span>
+                                    <span class="badge bg-label-warning">NP2 - Substutiva</span>
+                                @else
+                                    <span class="badge bg-label-dark">Exame</span>
                                 @endif
                             </td>
 
@@ -130,19 +133,19 @@
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Editar Disciplina
                                         </button>
-
+--}}
                                         <!-- Excluir -->
-                                        <form id="{{'remove_'.$campus->id}}"
-                                            action="{{route('disciplinas.destroy', $campus->id)}}" method="post">
+                                        <form id="{{'remove_'.$avaliacao->id}}"
+                                            action="{{route('periodo-avaliacoes.destroy', $avaliacao->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
 
-                                            <a type="button" id="{{'remove_'.$campus->id}}" class="dropdown-item"
-                                                onclick="document.getElementById('remove_{{$campus->id}}').submit()">
+                                            <a type="button" id="{{'remove_'.$avaliacao->id}}" class="dropdown-item"
+                                                onclick="document.getElementById('remove_{{$avaliacao->id}}').submit()">
                                                 <i class="bx bx-trash me-1"></i>
-                                                Apagar Disciplina
+                                                Apagar período
                                             </a>
-                                        </form> --}}
+                                        </form> 
                                     </div>
                                 </div>
                             </td>

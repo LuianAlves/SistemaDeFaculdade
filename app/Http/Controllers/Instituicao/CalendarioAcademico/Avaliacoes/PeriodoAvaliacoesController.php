@@ -92,7 +92,14 @@ class PeriodoAvaliacoesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $periodoAvaliacao = PeriodoAvaliacoes::findOrFail($id)->delete();
+
+        $noti = [
+            'message' => 'Período de avaliação removido!',
+            'alert-type' => 'error'
+        ];
+
+        return redirect()->back()->with($noti);
     }
 
     public function getSemestre($curso_id) {

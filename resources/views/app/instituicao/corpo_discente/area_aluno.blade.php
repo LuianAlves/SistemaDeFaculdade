@@ -52,19 +52,19 @@
                 {{-- @if (App\Models\Contratos\DadosProfessorContrato::count() != 0) --}}
                 {{-- Treinos --}}
                 <div class="row">
-                    <!-- Montar Treino -->
-                    {{-- <div class="col-4">
+                    <!-- Lançamento de Notas -->
+                    <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
-                                <h6 class="text-center fw-bold m-3">Novo Treino</h6>
+                                <h6 class="text-center fw-bold m-3">Lançamento de Notas</h6>
                                 <div class="d-flex justify-content-center">
-                                    <a href="#">
-                                        <i class="bx bx-plus-circle"></i>
-                                    </a>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#lancamentoDeNota">
+                                        <i class="bx bx-minus-front"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                     {{-- Treinos Montados --}}
                     {{-- @if (!empty($treinos)) --}}
@@ -85,8 +85,8 @@
 
                 {{-- Contratos --}}
                 <div class="row">
-                    {{-- Montar Contratos --}}
-                    {{-- <div class="col-4">
+                    {{-- Gerar Relatório --}}
+                    <div class="col-4">
                         <div class="card mini-card">
                             <div class="card-body">
                                 <h6 class="text-center fw-bold m-3">Novo Contrato</h6>
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                     {{-- Contratos Montados --}}
                     {{-- @if (!empty($contratos)) --}}
@@ -173,12 +173,14 @@
 
 @endsection
 
-
-<!-- Include de modal Create -->
+<!-- Include de modal adicionar/editar -->
 @include('app.instituicao.corpo_discente.edit')
 
-<!-- Include de modal Show -->
+<!-- Include de modal visualizar -->
 @include('app.instituicao.corpo_discente.show')
+
+<!-- Include de modal lançamento de notas -->
+@include('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.notas.create')
 
 <!-- Include Scripts -->
 @include('app.instituicao.corpo_discente.alunos_scripts')

@@ -55,7 +55,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/periodo-escolar', PeriodoEscolarController::class);
         Route::resource('/periodo-avaliacoes', PeriodoAvaliacoesController::class)->except('create');
         
-        Route::get('/periodo-avaliacoes/avaliacoes-cursos/ajax/{curso_id}', [AvaliacoesCursosController::class, 'getGradeCurricular']);
+        Route::get('/periodo-avaliacoes/avaliacoes-cursos/disciplinas/ajax/{curso_id}', [AvaliacoesCursosController::class, 'getGradeCurricular']);
+        Route::get('/periodo-avaliacoes/avaliacoes-cursos/ajax/{curso_id}', [AvaliacoesCursosController::class, 'getTurma']);
         Route::get('/periodo-avaliacoes/avaliacoes-cursos/{avaliacao_id}', [AvaliacoesCursosController::class, 'index'])->name('avaliacoes-cursos.index');
         Route::resource('/periodo-avaliacoes/avaliacoes-cursos', AvaliacoesCursosController::class)->except('index');
     });

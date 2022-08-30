@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\CalendarioAcademico\PeriodoAvaliacoes;
+use App\Models\CalendarioAcademico\AvaliacoesCursos;
 use App\Models\GradeCurricular;
+use App\Models\Turmas;
 use App\Models\Cursos;
+
+use Carbon\Carbon;
 
 class AvaliacoesCursosController extends Controller
 {
@@ -25,16 +29,6 @@ class AvaliacoesCursosController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,7 +36,29 @@ class AvaliacoesCursosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        // die;
+        // $request->validate([
+
+        // ]);
+
+        $id = $request->periodo_avaliacoes_id;
+        
+        AvaliacoesCursos::insert([
+            'periodo_avaliacoes_id' => $id,
+            'curso_id' => $request->curso_id,
+            'turma_id' => $request->turma_id,
+            'disciplina_id' => $request->disciplina_id,
+            'data_da_prova' => $request->data_da_prova,
+            'created_at' => Carbon::now()
+        ]);
+
+        $noti = [
+            'message' => 'Data da prova criada com sucesso!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($noti);
     }
 
     /**
@@ -94,5 +110,11 @@ class AvaliacoesCursosController extends Controller
         $gradeCurricular = GradeCurricular::with('disciplina')->where('curso_id', $curso_id)->orderBy('semestre', 'ASC')->get();
 
         return json_encode($gradeCurricular);
+    }
+
+    public function getTurma($curso_id) {
+        $turma = Turmas::where('curso_id', $curso_id)->orderBy('created_at', 'ASC')->get();
+
+        return json_encode($turma);
     }
 }

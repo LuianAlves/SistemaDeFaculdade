@@ -1,83 +1,113 @@
-
 @extends('layouts.layout01')
 
 @section('content')
+    <div class="row">
+        <div class="card">
+            <!-- Header Lista -->
+            <div class="card-header">
+                <h5>
+                    @switch($avaliacao->tipo_prova)
+                        @case(1)
+                            NP1
+                        @break
 
-<div class="row">
-    <div class="card">
-        <!-- Header Lista -->
-        <div class="card-header">
-            <h5>{{$avaliacao->tipo_prova == 2 ? 'NP2' : ''}}</h5>
-        </div>
+                        @case(2)
+                            NP2
+                        @break
 
-        <div class="card-body">
-            <form class="mb-2" action="{{route('avaliacoes-cursos.store')}}" method="post">
-                @csrf
+                        @case(3)
+                            Substutiva
+                        @break
 
-                <div class="row">
-                    <div class="col-4">
-                        <label class="form-label" for="curso_id">Curso</label>
-                        <select class="form-select" name="curso_id" id="curso_id">
-                            <option selected disabled>Selecionar Curso</option>
-                            @foreach ($cursos as $curso)
-                                <option id="curso_{{$curso->id}}" value="{{$curso->id}}">{{$curso->curso}}</option>
-                            @endforeach
-                        </select>
-                        <span class="text-danger">
-                            <strong id="curso_id-error"></strong>
-                        </span>
-                    </div>
-                    <div class="col-3">
-                        <label class="form-label" for="disciplina_id">Disciplina</label>
-                        <select class="form-select" id="disciplina_id" name="disciplina_id">
-                            <option selected disabled>Selecionar Disciplina</option>
-                        </select>
-                        <span class="text-danger">
-                            <strong id="disciplina_id-error"></strong>
-                        </span>
-                    </div>
-                    <div class="col-4">
-                        <label class="form-label" for="basic-icon-default-fullname">Data Prova</label>
-                        <div class="input-group input-group-merge">
-                            <input type="date" class="form-control" name="inicio_periodo_avaliacoes" id="inicio_periodo_escolar">
+                        @case(2)
+                            Exame
+                        @break
+
+                        @default
+                    @endswitch
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <form class="mb-2" action="{{ route('avaliacoes-cursos.store') }}" method="post">
+                    @csrf
+
+                    <input type="hidden" name="periodo_avaliacoes_id" id="periodo_avaliacoes_id" value="{{ $avaliacao->id }}">
+
+                    <div class="row">
+                        <div class="col-5">
+                            <label class="form-label" for="curso_id">Curso</label>
+                            <select class="form-select" name="curso_id" id="curso_id">
+                                <option selected disabled>Selecionar Curso</option>
+                                @foreach ($cursos as $curso)
+                                    <option value="{{ $curso->id }}" data-value="{{ $curso->curso }}">{{ $curso->curso }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                        <span class="text-danger">
-                            <strong id="inicio_periodo_avaliacoes-error"></strong>
-                        </span>
+                        <div class="col-5">
+                            <label class="form-label" for="turma_id">Turma</label>
+                            <select class="form-select" id="turma_id" name="turma_id">
+                                <option selected disabled>Selecione a Turma</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-1">
-                        <label class="form-label" for="basic-icon-default-estate"></label>
-                        <button type="submit" class="btn btn-primary">
-                            +
-                        </button>
-                    </div>
-                </div>
+                    <div class="row mt-3">
+                        <div class="col-5">
+                            <label class="form-label" for="disciplina_id">Disciplina</label>
+                            <select class="form-select" id="disciplina_id" name="disciplina_id">
+                                <option selected disabled>Selecionar Disciplina</option>
+                            </select>
+                            <span class="text-danger">
+                                <strong id="disciplina_id-error"></strong>
+                            </span>
+                        </div>
+                        <div class="col-5">
+                            <label class="form-label" for="basic-icon-default-fullname">Data Prova</label>
+                            <div class="input-group input-group-merge">
+                                <input type="date" min="{{ $avaliacao->inicio_periodo_avaliacoes }}"
+                                    max="{{ $avaliacao->termino_periodo_avaliacoes }}" class="form-control"
+                                    name="data_da_prova" id="data_da_prova">
+                            </div>
+                            <span class="text-danger">
+                                <strong id="data_da_prova-error"></strong>
+                            </span>
+                        </div>
+                        <div class="col-2">
+                            <label class="form-label" for="basic-icon-default-estate"></label>
+                            <button type="submit" class="btn btn-primary">
+                                +
+                            </button>
+                        </div>
 
-            </form>
+
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row mt-3">
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th class="text-center" colspan="2">Período Avaliações</th>
-                        <th class="text-center">Campus</th>
-                        <th class="text-center">Prova</th>
-                        <th class="text-center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @foreach ($avaliacoes as $avaliacao)
+    <div class="row mt-3">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="2">Período Avaliações</th>
+                            <th class="text-center">Campus</th>
+                            <th class="text-center">Prova</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- @foreach ($avaliacoes as $avaliacao)
                         <tr class="fw-bold">
+                            <td class="text-center">{{$prova->}}</td>
                             <td class="text-center">{{Carbon\Carbon::parse($avaliacao->inicio_periodo_avaliacoes)->format('d m Y')}}</td>
                             <td class="text-center">{{Carbon\Carbon::parse($avaliacao->termino_periodo_avaliacoes)->format('d m Y')}}</td>
-                            <td class="text-center">{{$avaliacao->campus->nome_campus}}</td>
                             <td class="text-center">
-                                @if($avaliacao->tipo_prova == 1)
+                                @if ($avaliacao->tipo_prova == 1)
                                     <span class="badge bg-label-primary">NP1</span>
                                 @elseif($avaliacao->tipo_prova == 2)
                                     <span class="badge bg-label-info">NP2</span>
@@ -110,38 +140,11 @@
                             </td>
                         </tr>
                     @endforeach --}}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
 @endsection
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
-
-{{-- Select Disciplinas --}}
-<script>
-    $(document).ready(function() {
-        $('select[name="curso_id"]').on('change', function() {
-            var curso_id = $(this).val()
-            if (curso_id) {
-                $.ajax({
-                    url: "{{ url('/calendario-academico/periodo-avaliacoes/avaliacoes-cursos/ajax') }}/" + curso_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        
-                        var d = $('select[name="disciplina_id"]').empty()
-                        $.each(data, function(key, value) {
-                            // console.log(value.disciplina.disciplina)
-                            $('select[name="disciplina_id"]').append('<option value="' + value.id + '">' + value.disciplina.disciplina + '</option>')
-                        })
-                    },
-                })
-            } else {
-                alert('Error!')
-            }
-        })
-    })
-</script>
+@include('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.avaliacoes_cursos_scripts')
