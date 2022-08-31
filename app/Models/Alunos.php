@@ -14,4 +14,8 @@ class Alunos extends Model
     public function Estudante() {
         return $this->belongsTo(Usuarios::class, 'usuario_id', 'id');
     }
+
+    public function Turma() {
+        return $this->belongsTo(Turmas::class, 'serie_turma', 'id');
+    }
 }

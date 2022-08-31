@@ -11,6 +11,8 @@ use App\Models\Cursos;
 use App\Models\Turmas;
 use App\Models\Departamentos;
 
+use App\Models\Notas\LancamentoNotas;
+
 use Carbon\Carbon;
 use Validator;
 use Response;
@@ -29,8 +31,9 @@ class AlunosController extends Controller
         $cursos = Cursos::get();
         $turmas = Turmas::where('curso_id', $aluno->curso_id)->get();
         $departamentos = Departamentos::get();
+        $cursosMatriculado = Cursos::where('id', $aluno->curso_id)->get();
 
-        return view('app.instituicao.corpo_discente.area_aluno', compact('aluno', 'cursos', 'departamentos', 'turmas'));
+        return view('app.instituicao.corpo_discente.area_aluno', compact('aluno', 'cursos', 'departamentos', 'turmas', 'cursosMatriculado'));
     }
 
     public function getTurma($curso_id) {
@@ -39,24 +42,7 @@ class AlunosController extends Controller
         return json_encode($turma);
     }
 
-    public function store(Request $request) {
-        Alunos::insert([
-            'usuario_id' => $request->aluno_id,
-            'cpf' => $request->cpf,
-            'rg' => $request->rg,
-            'email_pessoal' => $request->email_pessoal,
-            'telefone_recado' => $request->telefone_recado,
-            'nome_mae' => $request->nome_mae,
-            'nome_pai' => $request->nome_pai,
-            'curso_id' => $request->curso_id,
-            'serie_turma' => $request->serie_turma,
-            'situacao' => $request->situacao,
-            'created_at' => Carbon::now()      
-        ]);
-        
-        return redirect()->back();
-    }
-
+    // Visualizar dados do Aluno
     public function show($aluno_id) {
         $alunoInfAdicional = Alunos::findOrFail($aluno_id);
         $aluno = Usuarios::where('id', $alunoInfAdicional->usuario_id)->first();
@@ -82,6 +68,7 @@ class AlunosController extends Controller
         ]); 
     }
 
+    // Atualizar dados do Aluno
     public function update(Request $request) {
         $validator = Validator::make($request->all(), [
             'departamento_id' => 'required',
@@ -143,6 +130,7 @@ class AlunosController extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    // Desmatricular Aluno
     public function destroy($aluno_id) {
         $aluno = Alunos::findOrFail($aluno_id);
         $usuario = Usuarios::where('id', $aluno->usuario_id);

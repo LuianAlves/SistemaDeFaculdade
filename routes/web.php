@@ -16,6 +16,7 @@ use App\Http\Controllers\Instituicao\Cursos\Turmas\TurmasController;
 use App\Http\Controllers\Instituicao\CalendarioAcademico\PeriodoEscolarController;
 use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\PeriodoAvaliacoesController;
 use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\AvaliacoesCursosController;
+use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\Notas\LancamentoNotasController;
 
 
 // Usuários  
@@ -60,7 +61,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/periodo-avaliacoes/avaliacoes-cursos/{avaliacao_id}', [AvaliacoesCursosController::class, 'index'])->name('avaliacoes-cursos.index');
         Route::resource('/periodo-avaliacoes/avaliacoes-cursos', AvaliacoesCursosController::class)->except('index');
     });
-    
+
+    // Notas
+    Route::prefix('/notas')->group(function(){
+        // Lançar Notas
+        Route::get('/lancar-notas/gerando-view/{aluno_id}', [LancamentoNotasController::class, 'gerandoView'])->name('lancar-notas.gerando-view');
+        Route::get('/lancar-notas/{aluno_id}', [LancamentoNotasController::class, 'index'])->name('lancar-notas.index');
+
+        // notas
+        Route::post('/notas/update', [LancamentoNotasController::class, 'update'])->name('notas.update');
+    });
+
     // Usuários
     Route::get('/usuario/alfabetica/desc', [UsuarioController::class, 'index'])->name('alfabetic.order.desc');
     Route::get('/usuario/alfabetica/asc', [UsuarioController::class, 'index'])->name('alfabetic.order.asc');
