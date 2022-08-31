@@ -58,15 +58,15 @@ class LancamentoNotasController extends Controller
         $aluno_id = $request->aluno_id;
         
         $lancamentoNota = LancamentoNotas::where('turma_id', $turma_id)->where('aluno_id', $aluno_id)->where('disciplina_id', $disciplina_id)->first();
-
-        LancamentoNotas::findOrFail($lancamentoNota->id)->update([
-            'nota_np1' => $request->nota_np1,
-            'nota_np1_sub' => $request->nota_np1_sub,
-            'nota_np2' => $request->nota_np2,
-            'nota_np2_sub' => $request->nota_np2_sub,
-            'nota_exame' => $request->nota_exame,
-            'nota_ava' => $request->nota_ava,
-            'nota_aps' => $request->nota_aps,
+        
+        LancamentoNotas::where('id', $lancamentoNota->id)->update([
+            'nota_np1' => str_replace(',','.',$request->nota_np1),
+            'nota_np1_sub' => str_replace(',','.',$request->nota_np1_sub),
+            'nota_np2' => str_replace(',','.',$request->nota_np2),
+            'nota_np2_sub' => str_replace(',','.',$request->nota_np2_sub),
+            'nota_exame' => str_replace(',','.',$request->nota_exame),
+            'nota_ava' => str_replace(',','.',$request->nota_ava),
+            'nota_aps' => str_replace(',','.',$request->nota_aps),
             'updated_at' => Carbon::now()
         ]);
 

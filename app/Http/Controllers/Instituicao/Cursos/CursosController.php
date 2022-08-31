@@ -11,6 +11,7 @@ use App\Models\GrauInstrucao;
 use App\Models\GradeCurricular;
 use App\Models\Disciplinas;
 
+use DB;
 use Carbon\Carbon;
 use Validator;
 use Response;
@@ -26,8 +27,21 @@ class CursosController extends Controller
     {
         $grau_instrucao = GrauInstrucao::get();
         $cursos = Cursos::orderBy('curso', 'ASC')->get();
+        $disciplinas = Disciplinas::get();
 
-        return view('app.instituicao.cursos.index', compact('grau_instrucao', 'cursos'));
+        foreach($disciplinas as $disciplina) {
+            $gradeCurricular = GradeCurricular::where('disciplina_id', $disciplina->id)->get();
+
+            foreach($gradeCurricular as $grade) {
+                $duracaoHoras = DB::table('disciplinas')->whereExists(function($query){
+                    $query->select(DB::raw('*'))
+                        ->from('grade_curriculars')
+                        ->whereRaw('grade_curriculars.disciplina_id = disciplinas.id');
+                })->sum('duracao_horas');
+            }
+        }
+        
+        return view('app.instituicao.cursos.index', compact('grau_instrucao', 'cursos', 'duracaoHoras'));
     }
 
     /**

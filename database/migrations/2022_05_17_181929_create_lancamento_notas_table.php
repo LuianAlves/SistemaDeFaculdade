@@ -25,6 +25,14 @@ return new class extends Migration
             $table->unsignedBigInteger('disciplina_id')->unsigned();
             $table->foreign('disciplina_id')->references('id')->on('disciplinas')->onDelete('cascade');
 
+            $table->string('nota_np1')->nullable();
+            $table->string('nota_np1_sub')->nullable();
+            $table->string('nota_np2')->nullable();
+            $table->string('nota_np2_sub')->nullable();
+            $table->string('nota_exame')->nullable();
+            $table->string('nota_ava')->nullable();
+            $table->string('nota_aps')->nullable();
+            
             $table->timestamps();
         });
     }

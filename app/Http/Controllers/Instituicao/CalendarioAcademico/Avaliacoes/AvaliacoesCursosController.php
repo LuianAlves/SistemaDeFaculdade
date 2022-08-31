@@ -9,6 +9,7 @@ use App\Models\CalendarioAcademico\PeriodoAvaliacoes;
 use App\Models\CalendarioAcademico\AvaliacoesCursos;
 use App\Models\GradeCurricular;
 use App\Models\Turmas;
+use App\Models\Disciplinas;
 use App\Models\Cursos;
 
 use Carbon\Carbon;
@@ -24,8 +25,10 @@ class AvaliacoesCursosController extends Controller
     {
         $avaliacao = PeriodoAvaliacoes::findOrFail($avaliacao_id);
         $cursos = Cursos::get();
+        $turmas = Turmas::get();
+        $disciplinas = Disciplinas::get();
 
-        return view('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.index', compact('avaliacao', 'cursos'));
+        return view('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.index', compact('avaliacao', 'cursos', 'disciplinas', 'turmas'));
     }
 
     /**

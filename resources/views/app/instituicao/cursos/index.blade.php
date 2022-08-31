@@ -29,7 +29,9 @@
                     <tr class="fw-bold">
                         <td>{{$curso->curso}}</td>
                         <td class="text-center">{{$curso->quantidade_semestres}} Semestres</td>
-                        <td class="text-center">{{$curso->duracao_total_horas}} Horas</td>
+
+                        <td class="text-center">ID: {{$curso->id}}  |  {{$duracaoHoras}} Horas</td>
+                       
                         
                         <td class="text-center col-2">
                             <div class="dropdown">

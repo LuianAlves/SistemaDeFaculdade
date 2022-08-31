@@ -23,10 +23,11 @@ use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\Notas\Lancam
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 
+// Dashboard
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
 /* Principal Dashboard */
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    // Dashboard
-    Route::get('/', [HomeController::class, 'home'])->name('home');
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     
     // Campus

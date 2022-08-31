@@ -50,26 +50,21 @@
                     </div>
 
                     <div class="row">
-                        @php
-                            $notas = App\Models\Notas\LancamentoNotas::where('aluno_id', $aluno->id)->first();
-                        @endphp
-
                         <!-- Lançamento de Notas -->
-
-                        {{-- @if (!empty($notas)) --}}
+                        @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
                             <div class="col-4">
                                 <div class="card mini-card">
                                     <div class="card-body">
                                         <h6 class="text-center fw-bold m-3">Lançamento de Notas</h6>
                                         <div class="d-flex justify-content-center">
                                             <a href="{{ route('lancar-notas.gerando-view', $aluno->id) }}">
-                                                <i class="bx bx-minus-front"></i>
+                                                <i class="bx bx-plus-circle"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        {{-- @endif --}}
+                        @endif
 
 
                     </div>
@@ -80,7 +75,7 @@
                         <div class="col-4">
                             <div class="card mini-card">
                                 <div class="card-body">
-                                    <h6 class="text-center fw-bold m-3">Novo Contrato</h6>
+                                    <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
                                     <div class="d-flex justify-content-center">
                                         <a href="#">
                                             <i class="bx bx-plus-circle"></i>
@@ -114,10 +109,10 @@
 @endsection
 
 <!-- Include de modal adicionar/editar -->
-@include('app.instituicao.corpo_discente.edit')
+{{-- @include('app.instituicao.corpo_discente.edit') --}}
 
 <!-- Include de modal visualizar -->
-@include('app.instituicao.corpo_discente.show')
+{{-- @include('app.instituicao.corpo_discente.show') --}}
 
 <!-- Include Scripts -->
 @include('app.instituicao.corpo_discente.alunos_scripts')

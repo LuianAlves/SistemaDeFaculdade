@@ -35,11 +35,11 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        
+                        // console.log(data)
                         var d = $('select[name="disciplina_id"]').empty()
                         $.each(data, function(key, value) {
-                            console.log(value.disciplina.disciplina)
-                            $('select[name="disciplina_id"]').append('<option value="' + value.id + '">' + value.disciplina.disciplina + '</option>')
+                            console.log(value.disciplina_id)
+                            $('select[name="disciplina_id"]').append('<option value="' + value.disciplina_id + '">' + value.disciplina.disciplina + '</option>')
                         })
                     },
                 })

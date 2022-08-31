@@ -40,8 +40,7 @@
                             <select class="form-select" name="curso_id" id="curso_id">
                                 <option selected disabled>Selecionar Curso</option>
                                 @foreach ($cursos as $curso)
-                                    <option value="{{ $curso->id }}" data-value="{{ $curso->curso }}">{{ $curso->curso }}
-                                    </option>
+                                    <option value="{{ $curso->id }}" data-value="{{ $curso->curso }}">{{ $curso->curso }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,6 +48,9 @@
                             <label class="form-label" for="turma_id">Turma</label>
                             <select class="form-select" id="turma_id" name="turma_id">
                                 <option selected disabled>Selecione a Turma</option>
+                                @foreach ($turmas as $turma)
+                                    <option value="{{$turma->id}}" data-value="{{$turma->codigo_turma}}">{{$turma->codigo_turma}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -57,6 +59,9 @@
                             <label class="form-label" for="disciplina_id">Disciplina</label>
                             <select class="form-select" id="disciplina_id" name="disciplina_id">
                                 <option selected disabled>Selecionar Disciplina</option>
+                                @foreach ($disciplinas as $disciplina)
+                                    <option value="{{$disciplina->id}}" data-value="{{$disciplina->disciplina}}">{{$disciplina->disciplina}}</option>
+                                @endforeach
                             </select>
                             <span class="text-danger">
                                 <strong id="disciplina_id-error"></strong>
@@ -73,7 +78,7 @@
                                 <strong id="data_da_prova-error"></strong>
                             </span>
                         </div>
-                        <div class="col-2">
+                        <div class="col-2 d-flex justify-content-end align-items-end">
                             <label class="form-label" for="basic-icon-default-estate"></label>
                             <button type="submit" class="btn btn-primary">
                                 +
