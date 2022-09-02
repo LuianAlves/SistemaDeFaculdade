@@ -67,6 +67,8 @@ class LancamentoNotasController extends Controller
             'nota_exame' => str_replace(',','.',$request->nota_exame),
             'nota_ava' => str_replace(',','.',$request->nota_ava),
             'nota_aps' => str_replace(',','.',$request->nota_aps),
+            'qnt_faltas' => $request->qnt_faltas,
+            'qnt_aulas' => $request->qnt_aulas,
             'updated_at' => Carbon::now()
         ]);
 

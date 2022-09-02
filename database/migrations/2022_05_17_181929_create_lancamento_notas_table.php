@@ -32,6 +32,9 @@ return new class extends Migration
             $table->string('nota_exame')->nullable();
             $table->string('nota_ava')->nullable();
             $table->string('nota_aps')->nullable();
+
+            $table->integer('qnt_faltas')->nullable();
+            $table->integer('qnt_aulas')->nullable();
             
             $table->timestamps();
         });
