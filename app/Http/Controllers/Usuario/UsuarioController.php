@@ -174,6 +174,7 @@ class UsuarioController extends Controller
 
             // Cadastrando Login e Senha
             User::create([
+                'usuario_id' => $usuario->id,
                 'name' => $request->nome,
                 'email' => $email,
                 'password' => $hash_senha,

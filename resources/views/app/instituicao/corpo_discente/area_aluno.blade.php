@@ -16,48 +16,67 @@
                         </div>
                     </div>
 
-                    {{-- Visualizar/Editar/Pagamentos --}}
-                    <div class="row">
-                        {{-- Informações Adicionais --}}
-                        <div class="col-4">
-                            <div class="card mini-card">
-                                <div class="card-body">
-                                    <h6 class="text-center fw-bold m-2">Informação do aluno</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <button type="button" class="editbtn"
-                                            style="background: transparent; border: none;" value="{{ $aluno->id }}">
-                                            <i class="bx bx-plus-circle"></i>
-                                        </button>
+                    @can('administracao')
+                        <div class="row">
+                            {{-- Informações Adicionais --}}
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-2">Informação do aluno</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button" class="editbtn"
+                                                style="background: transparent; border: none;" value="{{ $aluno->id }}">
+                                                <i class="bx bx-plus-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Visualizar Informações --}}
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-2">Visualizar Informações</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#visualizarDadosAluno"
+                                                id="{{ $aluno->id }}" onclick="visualizarAluno(this.id)">
+                                                <i class="bx bx-minus-front"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- Visualizar Informações --}}
-                        <div class="col-4">
-                            <div class="card mini-card">
-                                <div class="card-body">
-                                    <h6 class="text-center fw-bold m-2">Visualizar Informações</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#visualizarDadosAluno"
-                                            id="{{ $aluno->id }}" onclick="visualizarAluno(this.id)">
-                                            <i class="bx bx-minus-front"></i>
-                                        </a>
+                        @canany(['professor', 'administracao'])
+                            <!-- Lançamento de Notas -->
+                            @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="card mini-card">
+                                            <div class="card-body">
+                                                <h6 class="text-center fw-bold m-3">Lançamento de Notas</h6>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="{{ route('lancar-notas.gerando-view', $aluno->id) }}">
+                                                        <i class="bx bx-plus-circle"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            @endif
+                        @endcanany
 
-                    <!-- Lançamento de Notas -->
-                    @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
+                        <!-- Gerar Relatório -->
                         <div class="row">
                             <div class="col-4">
                                 <div class="card mini-card">
                                     <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Lançamento de Notas</h6>
+                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{ route('lancar-notas.gerando-view', $aluno->id) }}">
+                                            <a href="#">
                                                 <i class="bx bx-plus-circle"></i>
                                             </a>
                                         </div>
@@ -65,41 +84,23 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
 
-                    {{-- Contratos --}}
-                    <div class="row">
-                        {{-- Gerar Relatório --}}
-                        <div class="col-4">
-                            <div class="card mini-card">
-                                <div class="card-body">
-                                    <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="#">
-                                            <i class="bx bx-plus-circle"></i>
-                                        </a>
+                        {{-- Excluir Aluno --}}
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center text-danger fw-bold m-2">Desmatricular Aluno</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('alunos.destroy', $aluno->id) }}" id="delete">
+                                                <i class="bx bx-block text-danger"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {{-- Excluir Aluno --}}
-                    <div class="row mt-3">
-                        <div class="col-4">
-                            <div class="card mini-card">
-                                <div class="card-body">
-                                    <h6 class="text-center text-danger fw-bold m-2">Desmatricular Aluno</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{ route('alunos.destroy', $aluno->id) }}" id="delete">
-                                            <i class="bx bx-block text-danger"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endcan
                 </div>
             </div>
         </div>

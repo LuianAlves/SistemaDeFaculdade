@@ -44,16 +44,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Dashboard
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
+    // Área do Aluno
+    Route::get('/alunos/area_aluno/{aluno_id}', [AlunosController::class,'areaAluno'])->name('alunos.area-aluno');
+
     // Alunos
-    Route::prefix('/alunos')->group(function(){
-        Route::get('/', [AlunosController::class,'index'])->name('alunos.index');
-        Route::get('/area_aluno/{aluno_id}', [AlunosController::class,'areaAluno'])->name('alunos.area-aluno');
-        Route::get('/area_aluno/ajax/{aluno_id}', [AlunosController::class,'getTurma']);
-        Route::post('/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
-        Route::get('/area_aluno/show/{aluno_id}', [AlunosController::class,'show'])->name('alunos.show');
-        Route::get('/area_aluno/edit/{aluno_id}', [AlunosController::class,'edit'])->name('alunos.edit');
-        Route::post('/area_aluno/update', [AlunosController::class,'update'])->name('alunos.update');
-        Route::get('/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');
+    Route::middleware(['permission:dev|administracao|professor'])->group(function() {
+        Route::get('/alunos', [AlunosController::class,'index'])->name('alunos.index');
+        Route::get('/alunos/area_aluno/ajax/{aluno_id}', [AlunosController::class,'getTurma']);
+        Route::post('/alunos/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
+        Route::get('/alunos/area_aluno/show/{aluno_id}', [AlunosController::class,'show'])->name('alunos.show');
+        Route::get('/alunos/area_aluno/edit/{aluno_id}', [AlunosController::class,'edit'])->name('alunos.edit');
+        Route::post('/alunos/area_aluno/update', [AlunosController::class,'update'])->name('alunos.update');
+        Route::get('/alunos/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');
     });
 
     /* ========== Routes Dev ============= */
@@ -75,14 +77,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/grade-curricular/create/{curso_id}/{semestre}', [GradeCurricularController::class, 'create'])->name('grade-curricular.create');
         Route::post('/grade-curricular/store/{curso_id}/{semestre}', [GradeCurricularController::class, 'store'])->name('grade-curricular.store');
         Route::get('/grade-curricular/destroy/{id}/{curso_id}/{disciplina_id}', [GradeCurricularController::class, 'destroy'])->name('grade-curricular.destroy');
-
-        // Turmas
-        Route::get('/cursos/{curso_id}/turma', [TurmasController::class, 'store'])->name('turmas.store');
-        Route::get('/turmas', [TurmasController::class, 'index'])->name('turmas.index');
     });   
 
     /* ========== Routes Administração ============= */
-    Route::group(['middleware' => ['permission:administracao']], function () {
+    Route::group(['middleware' => ['permission:administracao|dev']], function () {
         // Calendario Academico
         Route::prefix('/calendario-academico')->group(function(){
             Route::resource('/periodo-escolar', PeriodoEscolarController::class);
@@ -93,6 +91,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             Route::get('/periodo-avaliacoes/avaliacoes-cursos/{avaliacao_id}', [AvaliacoesCursosController::class, 'index'])->name('avaliacoes-cursos.index');
             Route::resource('/periodo-avaliacoes/avaliacoes-cursos', AvaliacoesCursosController::class)->except('index');
         });
+
+        // Turmas
+        Route::get('/cursos/{curso_id}/turma', [TurmasController::class, 'store'])->name('turmas.store');
+        Route::get('/turmas', [TurmasController::class, 'index'])->name('turmas.index');
 
         // Usuários
         Route::get('/usuario/alfabetica/desc', [UsuarioController::class, 'index'])->name('alfabetic.order.desc');
