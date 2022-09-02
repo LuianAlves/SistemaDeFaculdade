@@ -73,6 +73,19 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('/notas/update', [LancamentoNotasController::class, 'update'])->name('notas.update');
     });
 
+    
+    // Faltas
+    Route::prefix('/faltas')->group(function(){
+        // Lançar Faltas
+        Route::get('/lancar-faltas/gerando-view/{aluno_id}', [LancamentoFaltasController::class, 'gerandoView'])->name('lancar-faltas.gerando-view');
+        // Route::get('/lancar-notas/{aluno_id}', [LancamentoNotasController::class, 'index'])->name('lancar-notas.index');
+
+        // faltas
+        // Route::post('/notas/update', [LancamentoNotasController::class, 'update'])->name('notas.update');
+    });
+
+
+
     // Usuários
     Route::get('/usuario/alfabetica/desc', [UsuarioController::class, 'index'])->name('alfabetic.order.desc');
     Route::get('/usuario/alfabetica/asc', [UsuarioController::class, 'index'])->name('alfabetic.order.asc');

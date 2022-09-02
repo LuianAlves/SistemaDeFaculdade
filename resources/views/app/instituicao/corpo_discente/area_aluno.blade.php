@@ -49,9 +49,9 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <!-- Lançamento de Notas -->
-                        @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
+                    <!-- Lançamento de Notas -->
+                    @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
+                        <div class="row">
                             <div class="col-4">
                                 <div class="card mini-card">
                                     <div class="card-body">
@@ -64,10 +64,26 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        </div>
+                    @endif
 
-
-                    </div>
+                    <!-- Lançamento de Faltas -->
+                    @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-3">Lançamento de Faltas</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('lancar-faltas.gerando-view', $aluno->id) }}">
+                                                <i class="bx bx-plus-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
 
                     {{-- Contratos --}}
                     <div class="row">
@@ -109,10 +125,10 @@
 @endsection
 
 <!-- Include de modal adicionar/editar -->
-{{-- @include('app.instituicao.corpo_discente.edit') --}}
+@include('app.instituicao.corpo_discente.edit')
 
 <!-- Include de modal visualizar -->
-{{-- @include('app.instituicao.corpo_discente.show') --}}
+@include('app.instituicao.corpo_discente.show')
 
 <!-- Include Scripts -->
 @include('app.instituicao.corpo_discente.alunos_scripts')
