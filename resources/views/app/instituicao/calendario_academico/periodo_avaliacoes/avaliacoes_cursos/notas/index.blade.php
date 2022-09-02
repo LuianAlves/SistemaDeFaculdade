@@ -48,9 +48,9 @@
                             <h5>{{$grade->disciplina->disciplina}}</h5>
                             <h6>
                                 <span class="badge bg-label-dark">
-                                    MÉDIA: {{$media == '' ? 'NC' : str_replace('.',',', $media)}}
+                                    MÉDIA: {{$media == '' ? 'NC' : str_replace('.',',', round($media, 2))}}
                                     <b class="mx-1">/</b>
-                                    PRESENÇA: {{$presenca == '' ? 'NC' : $presenca . '%'}}
+                                    PRESENÇA: {{$presenca == '' ? 'NC' : round($presenca, 1) . '%'}}
                                     <b class="mx-1">/</b>
                                     SITUAÇÃO: {{$situacao == 1 ? 'APROVADO' : 'REPROVADO'}}
                                 </span>

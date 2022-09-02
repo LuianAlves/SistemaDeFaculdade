@@ -14,6 +14,9 @@ use Response;
 
 class CampusController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['permission:dev']);
+    }
     /**
      * Display a listing of the resource.
      *

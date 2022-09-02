@@ -111,17 +111,18 @@ class UsuarioController extends Controller
             case 1:
                     $codigo = 'AD_'.$codigo_usuario;
                     $email = $nome.'.'.$sobrenome.'@administrativo.unitech.br';
-                    $nivel_acesso = 2;
+                    $permissao = 'administracao';
+                    
                 break;
             case 2:
                     $codigo = 'PR_'.$codigo_usuario;
                     $email = $nome.'.'.$sobrenome.'@docente.unitech.br';
-                    $nivel_acesso = 3;
+                    $permissao = 'professor';
                 break;
             case 3:
                     $codigo = 'ES_'.$codigo_usuario;
                     $email = $nome.'.'.$sobrenome.'@aluno.unitech.br';
-                    $nivel_acesso = 4;
+                    $permissao = 'aluno';
                 break;
             
             default:
@@ -172,12 +173,11 @@ class UsuarioController extends Controller
             }
 
             // Cadastrando Login e Senha
-            User::insert([
+            User::create([
                 'name' => $request->nome,
                 'email' => $email,
                 'password' => $hash_senha,
-                'nivel_acesso' => $nivel_acesso
-            ]);
+            ])->givePermissionTo($permissao);
             
 
             return Response::json(['success' => '1']);
