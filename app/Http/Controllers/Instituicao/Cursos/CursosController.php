@@ -29,19 +29,19 @@ class CursosController extends Controller
         $cursos = Cursos::orderBy('curso', 'ASC')->get();
         $disciplinas = Disciplinas::get();
 
-        foreach($disciplinas as $disciplina) {
-            $gradeCurricular = GradeCurricular::where('disciplina_id', $disciplina->id)->get();
+        // foreach($disciplinas as $disciplina) {
+        //     $gradeCurricular = GradeCurricular::where('disciplina_id', $disciplina->id)->get();
 
-            foreach($gradeCurricular as $grade) {
-                $duracaoHoras = DB::table('disciplinas')->whereExists(function($query){
-                    $query->select(DB::raw('*'))
-                        ->from('grade_curriculars')
-                        ->whereRaw('grade_curriculars.disciplina_id = disciplinas.id');
-                })->sum('duracao_horas');
-            }
-        }
+        //     foreach($gradeCurricular as $grade) {
+        //         $duracaoHoras = DB::table('disciplinas')->whereExists(function($query){
+        //             $query->select(DB::raw('*'))
+        //                 ->from('grade_curriculars')
+        //                 ->whereRaw('grade_curriculars.disciplina_id = disciplinas.id');
+        //         })->sum('duracao_horas');
+        //     }
+        // }
         
-        return view('app.instituicao.cursos.index', compact('grau_instrucao', 'cursos', 'duracaoHoras'));
+        return view('app.instituicao.cursos.index', compact('grau_instrucao', 'cursos'));
     }
 
     /**

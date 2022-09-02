@@ -20,7 +20,7 @@
                 <tr>
                     <th class="text-left">Curso</th>
                     <th class="text-center">Quantidade Semestres</th>
-                    <th class="text-center">Total de Horas</th>
+                    {{-- <th class="text-center">Total de Horas</th> --}}
                     <th class="text-center">Ações</th>
                 </tr>
             </thead>
@@ -30,7 +30,7 @@
                         <td>{{$curso->curso}}</td>
                         <td class="text-center">{{$curso->quantidade_semestres}} Semestres</td>
 
-                        <td class="text-center">ID: {{$curso->id}}  |  {{$duracaoHoras}} Horas</td>
+                        {{-- <td class="text-center">ID: {{$curso->id}}  |  {{$duracaoHoras}} Horas</td> --}}
                        
                         
                         <td class="text-center col-2">
