@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Alunos;
 use App\Models\Usuarios;
 use App\Models\Departamentos;
+use App\Models\Notas\LancamentoNotas;
 
 use Carbon\Carbon;
 
@@ -17,6 +18,7 @@ use Response;
 use Image;
 use File;
 use Hash;
+use Auth;
 
 use Illuminate\Support\Facades\Route;
 
@@ -146,8 +148,16 @@ class UsuarioController extends Controller
 
         if ($validator->passes()) {
 
+            // Cadastrando Login e Senha
+            $user = User::create([
+                'name' => $request->nome,
+                'email' => $email,
+                'password' => $hash_senha,
+            ])->givePermissionTo($permissao);
+
             // Usuários
             $usuario = Usuarios::create([
+                'user_id' => $user->id,
                 'departamento_id' => $request->departamento_id,
                 'codigo_usuario' => $codigo,
     
@@ -171,15 +181,6 @@ class UsuarioController extends Controller
                     'usuario_id' => $usuario->id,
                 ]);
             }
-
-            // Cadastrando Login e Senha
-            User::create([
-                'usuario_id' => $usuario->id,
-                'name' => $request->nome,
-                'email' => $email,
-                'password' => $hash_senha,
-            ])->givePermissionTo($permissao);
-            
 
             return Response::json(['success' => '1']);
         }
@@ -286,12 +287,16 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         $usuario = Usuarios::findOrFail($id);
-
+        
         $foto = $usuario->foto_usuario;
-
+        
         if($foto) {
             unlink($foto);
-        }
+        } 
+        
+        // Delete
+        $userLogin = User::where('id', $usuario->user_id)->delete(); 
+        $aluno = Alunos::where('usuario_id', $usuario->id)->delete();
 
         $usuario->delete();
 
