@@ -98,9 +98,30 @@
                     @endcanany
 
                     @can('aluno')
-                        <a href="{{route('alunos.area-aluno', Auth::id())}}" class="menu-link">
+                        @php
+                            $aluno_id = App\Models\Usuarios::where('user_id', Auth::id())->first(); 
+                        @endphp
+
+                        {{-- Em vez de acessar a parea do aluno, criar os links pelo sidebar: dados do curso, meu cadastro ... --}}
+                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
-                            <div data-i18n="Basic">Alunos</div>
+                            <div data-i18n="Basic">Meu cadastro</div>
+                        </a>
+                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Dados do curso</div>
+                        </a>
+                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Notas e faltas</div>
+                        </a>
+                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Integração curricular</div>
+                        </a>
+                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Solicitar documentos</div>
                         </a>
                     @endcan
                 </li>

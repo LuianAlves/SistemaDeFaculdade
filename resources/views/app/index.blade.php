@@ -1,3 +1,8 @@
+@php
+    $aluno = App\Models\Usuarios::where('user_id', Auth::id())->first(); 
+@endphp
+
+
 @extends('layouts.layout')
 
 @section('content')
@@ -7,7 +12,9 @@
                 <div class="d-flex align-items-end row">
                     <div class="col-sm-7">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                            @can('aluno')
+                                <h5 class="card-title text-primary">{{'Bem vindo '. ucwords($aluno->nome) . ' ' . ucwords($aluno->sobrenome) }}! 🎉</h5>
+                            @endcan
                             <p class="mb-4">
                                 You have done <span class="fw-bold">72%</span> more sales today.
                                 Check your new badge in

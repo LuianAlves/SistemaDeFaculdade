@@ -1,4 +1,4 @@
-@extends('layouts.layout01')
+@extends('layouts.layout')
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -7,12 +7,20 @@
 
                     <div class="row mb-5">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">
-                                {{ 'Área do aluno - ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
-                            </h4>
-                            <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
-                                <b>Listagem de Alunos</b>
-                            </a>
+                            @canany('dev|administracao|professor')
+                                <h4 class="card-title">
+                                    {{ 'Área do aluno - ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
+                                </h4>
+                                <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
+                                    <b>Listagem de Alunos</b>
+                                </a>
+                            @endcanany
+                            @can('aluno')
+                                <h4 class="card-title">
+                                    {{ 'Bem vindo ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
+                                </h4>
+                            @endcan
+                            
                         </div>
                     </div>
 
@@ -49,7 +57,7 @@
                             </div>
                         </div>
 
-                        @canany(['professor', 'administracao'])
+                        @can('professor')
                             <!-- Lançamento de Notas -->
                             @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
                                 <div class="row">
@@ -67,7 +75,7 @@
                                     </div>
                                 </div>
                             @endif
-                        @endcanany
+                        @endcan
 
                         <!-- Gerar Relatório -->
                         <div class="row">
@@ -94,6 +102,88 @@
                                         <div class="d-flex justify-content-center">
                                             <a href="{{ route('alunos.destroy', $aluno->id) }}" id="delete">
                                                 <i class="bx bx-block text-danger"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('aluno')
+                        <!-- Meu cadastro -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#">
+                                                <i class="bx bx-plus-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dados do curso -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#">
+                                                <i class="bx bx-plus-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grade semestral -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#">
+                                                <i class="bx bx-plus-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Disciplinas/Notas do semestre atual -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#">
+                                                <i class="bx bx-plus-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Solicitar documentos -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card mini-card">
+                                    <div class="card-body">
+                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#">
+                                                <i class="bx bx-plus-circle"></i>
                                             </a>
                                         </div>
                                     </div>
