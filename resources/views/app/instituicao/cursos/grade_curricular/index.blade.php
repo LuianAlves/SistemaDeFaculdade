@@ -3,7 +3,7 @@
     $semestres = $curso->quantidade_semestres;
 @endphp
 
-@extends('layouts.layout01')
+@extends('layouts.layout')
 
 @section('content')
 

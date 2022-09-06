@@ -19,10 +19,13 @@ use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\PeriodoAvali
 use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\AvaliacoesCursosController;
 use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\Notas\LancamentoNotasController;
 
-
 // Usuários  
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
+
+// Area de permissões
+use App\Http\Controllers\Instituicao\CorpoDocente\DisciplinasLecionadasController;
+
 
 /* ------------------------------------------------------------ */
 
@@ -110,6 +113,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     /* ========== Routes Professores ============= */
     Route::group(['middleware' => ['permission:professor']], function () {
+        // Disciplinas lecionadas
+        Route::get('/disciplinas-lecionadas', [DisciplinasLecionadasController::class, 'index'])->name('disciplinas-lecionadas.index');
+
         // Notas
         Route::prefix('/notas')->group(function(){
             // Lançar Notas

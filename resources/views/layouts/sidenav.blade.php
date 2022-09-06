@@ -71,6 +71,15 @@
                     @endcanany
                 @endif
                 
+                @can('professor')
+                    <li class="menu-item">
+                        <a href="{{route('disciplinas-lecionadas.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div data-i18n="Basic">Disciplinas lecionadas</div>
+                        </a>
+                    </li>
+                @endcan
+
                 @canany(['dev', 'administracao', 'professor'])
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Funcionalidades de Cadastramento</span>
@@ -88,7 +97,7 @@
                     @endcanany
                     
                     <!-- Área do Aluno -->
-                    @canany(['administracao', 'professor'])
+                    @canany(['administracao', 'professor', 'dev'])
                         @if(App\Models\Alunos::count() != 0)
                             <a href="{{route('alunos.index')}}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -104,23 +113,23 @@
 
                         {{-- Em vez de acessar a parea do aluno, criar os links pelo sidebar: dados do curso, meu cadastro ... --}}
                         <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bx-face"></i>
                             <div data-i18n="Basic">Meu cadastro</div>
                         </a>
                         <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bx-expand"></i>
                             <div data-i18n="Basic">Dados do curso</div>
                         </a>
                         <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bx-exclude"></i>
                             <div data-i18n="Basic">Notas e faltas</div>
                         </a>
                         <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bx-border-all"></i>
                             <div data-i18n="Basic">Integração curricular</div>
                         </a>
                         <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bx-file"></i>
                             <div data-i18n="Basic">Solicitar documentos</div>
                         </a>
                     @endcan
