@@ -108,27 +108,27 @@
 
                     @can('aluno')
                         @php
-                            $aluno_id = App\Models\Usuarios::where('user_id', Auth::id())->first(); 
+                            $usuario_id = App\Models\Usuarios::where('user_id', Auth::id())->first(); 
                         @endphp
 
                         {{-- Em vez de acessar a parea do aluno, criar os links pelo sidebar: dados do curso, meu cadastro ... --}}
-                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                        <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-face"></i>
                             <div data-i18n="Basic">Meu cadastro</div>
                         </a>
-                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                        <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-expand"></i>
                             <div data-i18n="Basic">Dados do curso</div>
                         </a>
-                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                        <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-exclude"></i>
                             <div data-i18n="Basic">Notas e faltas</div>
                         </a>
-                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                        <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-border-all"></i>
                             <div data-i18n="Basic">Integração curricular</div>
                         </a>
-                        <a href="{{route('alunos.area-aluno', $aluno_id)}}" class="menu-link">
+                        <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-file"></i>
                             <div data-i18n="Basic">Solicitar documentos</div>
                         </a>

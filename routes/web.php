@@ -24,6 +24,8 @@ use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 
 // Area de permissões
+use App\Http\Controllers\Usuario\Permissoes\AreaPermissaoAlunoController;
+
 use App\Http\Controllers\Instituicao\CorpoDocente\DisciplinasLecionadasController;
 
 
@@ -129,7 +131,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     /* ========== Routes Alunos ============= */
     Route::group(['middleware' => ['permission:aluno']], function () {
-        //
+        Route::get('/area-permissao/alunos/meu-cadastro/{usuario_id}', [AreaPermissaoAlunoController::class, 'meuCadastro'])->name('area-permissao-aluno.meu-cadastro');
+        Route::get('/area-permissao/alunos/dados-do-curso/{usuario_id}', [AreaPermissaoAlunoController::class, 'dadosCurso'])->name('area-permissao-aluno.dados-curso');
     });
 });
 

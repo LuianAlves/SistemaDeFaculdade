@@ -120,6 +120,7 @@ class AlunosController extends Controller
                 'nome_pai' => $request->nome_pai,
                 'curso_id' => $request->curso_id,
                 'serie_turma' => $request->serie_turma,
+                'data_matricula' => Carbon::now(),
                 'situacao' => $request->situacao,
                 'updated_at' => Carbon::now()
             ]);

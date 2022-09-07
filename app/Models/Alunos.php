@@ -18,4 +18,9 @@ class Alunos extends Model
     public function Turma() {
         return $this->belongsTo(Turmas::class, 'serie_turma', 'id');
     }
+    
+    public function Curso() {
+        return $this->belongsTo(Cursos::class, 'curso_id', 'id');
+    }
+    
 }

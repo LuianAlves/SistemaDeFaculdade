@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('nome_pai', 100)->nullable();
             $table->string('curso_id')->nullable();
             $table->string('serie_turma')->nullable();
+            $table->string('data_matricula')->nullable();
             $table->string('situacao')->default(1);
             $table->timestamps();
         });
