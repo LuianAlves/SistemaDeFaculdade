@@ -19,12 +19,10 @@
                     $media = '';
                     $situacao = '';
 
-                    if($np1 != '' && $np2) {
-                        $media = ($np1 + $np2) / 2;
-
-                        if($media <= 6.75 && $exame != '') {
-                            $media = $media + $exame;
-                        }
+                    if($exame == '') {
+                        $media = ($np1+$np2)/2;
+                    } elseif($media <= 6.75 && $exame != '') {
+                        $media = ($np1+$np2+$exame)/3;
                     }
 
                     if($aulas != '') {
@@ -34,10 +32,12 @@
 
                     if($media >= 6.75 && $presenca >= 75) {
                         $situacao = 1; // Aprovado por nota e presença
-                    } elseif($media <= 6.75) {
+                    } elseif($media <= 6.75 && $exame == '') {
                         $situacao = 2; // Reprovado por nota
                     } elseif($media >= 6.75 && $presenca <= 75) {
                         $situacao = 3; // Reprovado por presença
+                    } elseif($media >= 5 && $exame != '') {
+                        $situacao = 1; // Aprovado com nota do exame
                     }
                 @endphp
 
@@ -142,7 +142,7 @@
                                                 @if ($np1 != '' && $np2 != '') <label
                                                     class="form-label text-danger fw-bold" for="nota_exame">Nota Exame</label>
                                                     <div class="input-group input-group-merge">
-                                                        <input type="number" class="form-control" name="nota_exame" id="nota_exame" placeholder="Exame" step=".01" min="0" max="5" value="{{ $nota->nota_exame }}">
+                                                        <input type="number" class="form-control" name="nota_exame" id="nota_exame" placeholder="Exame" step=".01" min="0" max="10" value="{{ $nota->nota_exame }}">
                                                     </div>
                                                 @endif
                                             </div>
