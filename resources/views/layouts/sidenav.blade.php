@@ -98,12 +98,18 @@
 
             <!-- Área do Aluno -->
             @canany(['administracao', 'professor', 'dev'])
-            @if(App\Models\Alunos::count() != 0)
-            <a href="{{route('alunos.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Basic">Alunos</div>
-            </a>
-            @endif
+                @if(App\Models\Alunos::count() != 0)
+                <a href="{{route('alunos.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Basic">Alunos</div>
+                </a>
+                @endif
+                @if(App\Models\Professores::count() != 0)
+                <a href="{{route('professores.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Basic">Professores</div>
+                </a>
+                @endif
             @endcanany
 
             @can('aluno')
@@ -172,7 +178,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ui-accordion.html" class="menu-link">
+                    <a href="{{route('relatorio-alunos.index')}}" class="menu-link">
                         <div data-i18n="Accordion">Alunos</div>
                     </a>
                 </li>

@@ -5,7 +5,7 @@
     <!-- Header Lista -->
     <div class="d-flex align-items-center p-3">
         <div class="d-flex align-items-center">
-            <div class="span"><h5>Alunos matriculados</h5></div>
+            <div class="span"><h5>Professores cadastrados</h5></div>
         </div>
     </div>
 
@@ -18,31 +18,22 @@
                         <th class="text-left"><b>#</b></th>
                         <th class="text-left">Nome</th>
                         <th class="text-left">Telefone</th>
-                        <th class="text-center">Área do aluno</th>
-                        <th class="text-center">Relatórios</th>
+                        <th class="text-center">Área do professor</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($alunos as $aluno)
+                    @foreach ($professores as $professor)
                     <tr>
                         <td>
                             <i class="fab fa-angular fa-lg text-danger"></i>
-                            <strong>{{$aluno->Estudante->codigo_usuario}}</strong>
+                            <strong>{{$professor->Professor->codigo_usuario}}</strong>
                         </td>
-                        <td>{{$aluno->Estudante->nome.' '.$aluno->Estudante->sobrenome}}</td>
-                        <td>{{$aluno->Estudante->telefone}}</td>
+                        <td>{{$professor->Professor->nome.' '.$professor->Professor->sobrenome}}</td>
+                        <td>{{$professor->Professor->telefone}}</td>
 
                         <td class="text-center">
-                            <a href="{{route('alunos.area-aluno', $aluno->id)}}">
+                            <a href="{{route('professores.area-professor', $professor->id)}}">
                                 <i class="bx bx-right-arrow-alt fs-3"></i>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('relatorio-alunos.gerar-relatorio-aluno', $aluno->id)}}">
-                                <i class="bx bx-plus-circle text-info fs-3 mx-3"></i>
-                            </a>
-                            <a href="{{route('relatorio-alunos.view-relatorios', $aluno->id)}}">
-                                <i class="bx bx-file text-danger fs-3"></i>
                             </a>
                         </td>
                     </tr>

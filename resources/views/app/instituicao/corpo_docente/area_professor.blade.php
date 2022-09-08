@@ -7,17 +7,17 @@
 
                     <div class="row mb-5">
                         <div class="d-flex justify-content-between align-items-center">
-                            @canany(['dev', 'administracao', 'professor'])
+                            @canany(['dev', 'administracao'])
                                 <h4 class="card-title">
-                                    {{ 'Área do aluno - ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
+                                    {{ 'Área do professor - ' . ucwords($professor->Professor->nome) . ' ' . ucwords($professor->Professor->sobrenome) }}
                                 </h4>
-                                <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
-                                    <b>Listagem de alunos</b>
+                                <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('professores.index') }}">
+                                    <b>Listagem de professores</b>
                                 </a>
                             @endcanany
-                            @can('aluno')
+                            @can('professor')
                                 <h4 class="card-title">
-                                    {{ 'Bem vindo ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
+                                    {{ 'Bem vindo ' . ucwords($professor->Professor->nome) . ' ' . ucwords($professor->Professor->sobrenome) }}
                                 </h4>
                             @endcan
                             
@@ -30,10 +30,10 @@
                             <div class="col-4">
                                 <div class="card mini-card">
                                     <div class="card-body">
-                                        <h6 class="text-center fw-bold m-2">Informação do aluno</h6>
+                                        <h6 class="text-center fw-bold m-2">Informação do professor</h6>
                                         <div class="d-flex justify-content-center">
                                             <button type="button" class="editbtn"
-                                                style="background: transparent; border: none;" value="{{ $aluno->id }}">
+                                                style="background: transparent; border: none;" value="{{ $professor->id }}">
                                                 <i class="bx bx-plus-circle"></i>
                                             </button>
                                         </div>
@@ -45,10 +45,10 @@
                             <div class="col-4">
                                 <div class="card mini-card">
                                     <div class="card-body">
-                                        <h6 class="text-center fw-bold m-2">Visualizar Informações</h6>
+                                        <h6 class="text-center fw-bold m-2">Visualizar informações</h6>
                                         <div class="d-flex justify-content-center">
-                                            <a href="" data-bs-toggle="modal" data-bs-target="#visualizarDadosAluno"
-                                                id="{{ $aluno->id }}" onclick="visualizarAluno(this.id)">
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#visualizarDadosProfessor"
+                                                id="{{ $professor->id }}" onclick="visualizarProfessor(this.id)">
                                                 <i class="bx bx-minus-front"></i>
                                             </a>
                                         </div>
@@ -64,37 +64,23 @@
                                     <div class="card-body">
                                         <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{route('relatorio-alunos.gerar-relatorio-aluno',$aluno->id)}}">
+                                            <a href="#">
                                                 <i class="bx bx-plus-circle"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @if(App\Models\RelatorioAlunos::where('aluno_id', $aluno->id)->count() != 0)
-                                <div class="col-4">
-                                    <div class="card mini-card">
-                                        <div class="card-body">
-                                            <h6 class="text-center fw-bold m-3">Relatórios</h6>
-                                            <div class="d-flex justify-content-center">
-                                                <a href="{{route('relatorio-alunos.view-relatorios', $aluno->id)}}">
-                                                    <i class="bx bx-file"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
 
-                        {{-- Excluir Aluno --}}
+                        {{-- Excluir Professor --}}
                         <div class="row mt-3">
                             <div class="col-4">
                                 <div class="card mini-card">
                                     <div class="card-body">
-                                        <h6 class="text-center text-danger fw-bold m-2">Desmatricular Aluno</h6>
+                                        <h6 class="text-center text-danger fw-bold m-2">Desmatricular professor</h6>
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{ route('alunos.destroy', $aluno->id) }}" id="delete">
+                                            <a href="{{ route('alunos.destroy', $professor->id) }}" id="delete">
                                                 <i class="bx bx-block text-danger"></i>
                                             </a>
                                         </div>
@@ -104,7 +90,7 @@
                         </div>
                     @endcanany
 
-                    @can('professor')
+                    {{-- @can('professor')
                         <!-- Lançamento de Notas -->
                         @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
                             <div class="row">
@@ -122,21 +108,21 @@
                                 </div>
                             </div>
                         @endif
-                    @endcan
+                    @endcan --}}
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-<!-- Include de modal adicionar/editar -->
+{{-- <!-- Include de modal adicionar/editar -->
 @include('app.instituicao.corpo_discente.edit')
 
 <!-- Include de modal visualizar -->
 @include('app.instituicao.corpo_discente.show')
 
 <!-- Include Scripts -->
-@include('app.instituicao.corpo_discente.alunos_scripts')
+@include('app.instituicao.corpo_discente.alunos_scripts') --}}
 
 <style>
     * {

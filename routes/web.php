@@ -12,6 +12,8 @@ use App\Http\Controllers\Instituicao\Cursos\DisciplinasController;
 use App\Http\Controllers\Instituicao\Cursos\CursosController;
 use App\Http\Controllers\Instituicao\Cursos\GradeCurricular\GradeCurricularController;
 use App\Http\Controllers\Instituicao\Cursos\Turmas\TurmasController;
+use App\Http\Controllers\Instituicao\Relatorios\RelatorioTurmaController;
+use App\Http\Controllers\Instituicao\Relatorios\RelatorioAlunoController;
 
 // Calendario Academico
 use App\Http\Controllers\Instituicao\CalendarioAcademico\PeriodoEscolarController;
@@ -22,6 +24,7 @@ use App\Http\Controllers\Instituicao\CalendarioAcademico\Avaliacoes\Notas\Lancam
 // Usuários  
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
+use App\Http\Controllers\Instituicao\CorpoDocente\ProfessorController;
 
 // Area de permissões
 use App\Http\Controllers\Usuario\Permissoes\AreaPermissaoAlunoController;
@@ -52,6 +55,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Área do Aluno
     Route::get('/alunos/area_aluno/{aluno_id}', [AlunosController::class,'areaAluno'])->name('alunos.area-aluno');
 
+    // Área do professor
+    Route::get('/professores/area_professor/{professor_id}', [ProfessorController::class,'areaProfessor'])->name('professores.area-professor');
+
     // Alunos
     Route::middleware(['permission:dev|administracao|professor'])->group(function() {
         Route::get('/alunos', [AlunosController::class,'index'])->name('alunos.index');
@@ -61,6 +67,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/alunos/area_aluno/edit/{aluno_id}', [AlunosController::class,'edit'])->name('alunos.edit');
         Route::post('/alunos/area_aluno/update', [AlunosController::class,'update'])->name('alunos.update');
         Route::get('/alunos/destroy/{aluno_id}', [AlunosController::class,'destroy'])->name('alunos.destroy');
+    });
+
+    // Professores
+    Route::middleware(['permission:dev|administracao|professor'])->group(function () {
+        Route::get('/professores', [ProfessorController::class, 'index'])->name('professores.index');
+        Route::get('/professores/area_professor/edit/{professor_id}', [ProfessorController::class, 'edit'])->name('professores.edit');
+        Route::get('/professores/area_professor/update', [ProfessorController::class, 'update'])->name('professores.update');
     });
 
     /* ========== Routes Dev ============= */
@@ -100,6 +113,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         // Turmas
         Route::get('/cursos/{curso_id}/turma', [TurmasController::class, 'store'])->name('turmas.store');
         Route::get('/turmas', [TurmasController::class, 'index'])->name('turmas.index');
+
+        Route::prefix('/relatorios')->group(function() {
+            Route::get('/alunos', [RelatorioAlunoController::class, 'index'])->name('relatorio-alunos.index');
+            Route::get('/alunos/gerar/{aluno_id}', [RelatorioAlunoController::class, 'gerarRelatorioAluno'])->name('relatorio-alunos.gerar-relatorio-aluno');
+            Route::get('/alunos/relatorios/{aluno_id}', [RelatorioAlunoController::class, 'viewRelatorio'])->name('relatorio-alunos.view-relatorios');
+        });
 
         // Usuários
         Route::get('/usuario/alfabetica/desc', [UsuarioController::class, 'index'])->name('alfabetic.order.desc');
