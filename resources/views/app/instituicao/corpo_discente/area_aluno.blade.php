@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    @can('administracao')
+                    @canany(['administracao', 'dev'])
                         <div class="row">
                             {{-- Informações Adicionais --}}
                             <div class="col-4">
@@ -88,108 +88,26 @@
                                 </div>
                             </div>
                         </div>
-                    @endcan
+                    @endcanany
 
                     @can('professor')
-                            <!-- Lançamento de Notas -->
-                            @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="card mini-card">
-                                            <div class="card-body">
-                                                <h6 class="text-center fw-bold m-3">Lançamento de Notas</h6>
-                                                <div class="d-flex justify-content-center">
-                                                    <a href="{{ route('lancar-notas.gerando-view', $aluno->id) }}">
-                                                        <i class="bx bx-plus-circle"></i>
-                                                    </a>
-                                                </div>
+                        <!-- Lançamento de Notas -->
+                        @if ($aluno->serie_turma != '' && $aluno->curso_id != '')
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="card mini-card">
+                                        <div class="card-body">
+                                            <h6 class="text-center fw-bold m-3">Lançamento de Notas</h6>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{ route('lancar-notas.gerando-view', $aluno->id) }}">
+                                                    <i class="bx bx-plus-circle"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                        @endcan
-
-                    @can('aluno')
-                        <!-- Meu cadastro -->
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card mini-card">
-                                    <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#">
-                                                <i class="bx bx-plus-circle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-
-                        <!-- Dados do curso -->
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card mini-card">
-                                    <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#">
-                                                <i class="bx bx-plus-circle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Grade semestral -->
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card mini-card">
-                                    <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#">
-                                                <i class="bx bx-plus-circle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Disciplinas/Notas do semestre atual -->
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card mini-card">
-                                    <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#">
-                                                <i class="bx bx-plus-circle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Solicitar documentos -->
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card mini-card">
-                                    <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#">
-                                                <i class="bx bx-plus-circle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endif
                     @endcan
                 </div>
             </div>
