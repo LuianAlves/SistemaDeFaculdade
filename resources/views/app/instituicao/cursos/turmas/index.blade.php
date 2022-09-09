@@ -22,10 +22,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($turmas as $turma)
+                    @foreach ($turmas as $tr)
                         @php
-                            $turma = App\Models\Turmas::where('curso_id', $turma->curso_id)->where('periodo_escolar_id', $turma->periodo_escolar_id)->orderBy('id', 'DESC')->first();
-                            $countAlunos = App\Models\Alunos::where('serie_turma', $turma->id)->count();
+                            $turma = App\Models\Turmas::where('curso_id', $tr->curso_id)->where('periodo_escolar_id', $tr->periodo_escolar_id)->orderBy('id', 'DESC')->first();
+                            $countAlunos = App\Models\Alunos::where('serie_turma', $tr->id)->count();
 
                             $limiteAlunos = 5;
                             // dd($count);
@@ -34,9 +34,9 @@
                         @endphp
 
                         <tr class="text-center">
-                            <td>{{$turma->codigo_turma}}</td>
-                            <td>{{$turma->curso->curso}}</td>
-                            <td>{{$turma->periodoEscolar->ano_periodo_escolar}}</td>
+                            <td>{{$tr->codigo_turma}}</td>
+                            <td>{{$tr->curso->curso}}</td>
+                            <td>{{$tr->periodoEscolar->ano_periodo_escolar}}</td>
 
                             <td>
                                 @if($countAlunos >= $limiteAlunos)
@@ -53,9 +53,9 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <!-- Visualizar -->
-                                        <a type="button" class="dropdown-item">
+                                        <a href="{{route('semestre-atual.grade-curricular', $tr->id)}}" class="dropdown-item">
                                             <i class="bx bx-show-alt me-1"></i>
-                                            Administrar Grade Curricular
+                                            Administrar grade curricular
                                         </a>
 
                                         <!-- Visualizar -->

@@ -24,28 +24,36 @@
                 </thead>
                 <tbody>
                     @foreach ($alunos as $aluno)
-                    <tr>
-                        <td>
-                            <i class="fab fa-angular fa-lg text-danger"></i>
-                            <strong>{{$aluno->Estudante->codigo_usuario}}</strong>
-                        </td>
-                        <td>{{$aluno->Estudante->nome.' '.$aluno->Estudante->sobrenome}}</td>
-                        <td>{{$aluno->Estudante->telefone}}</td>
+                        @php
+                            $relatorios = App\Models\RelatorioAlunos::where('aluno_id', $aluno->id)->first();
+                        @endphp
 
-                        <td class="text-center">
-                            <a href="{{route('alunos.area-aluno', $aluno->id)}}">
-                                <i class="bx bx-right-arrow-alt fs-3"></i>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('relatorio-alunos.gerar-relatorio-aluno', $aluno->id)}}">
-                                <i class="bx bx-plus-circle text-info fs-3 mx-3"></i>
-                            </a>
-                            <a href="{{route('relatorio-alunos.view-relatorios', $aluno->id)}}">
-                                <i class="bx bx-file text-danger fs-3"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <i class="fab fa-angular fa-lg text-danger"></i>
+                                <strong>{{$aluno->Estudante->codigo_usuario}}</strong>
+                            </td>
+                            <td>{{$aluno->Estudante->nome.' '.$aluno->Estudante->sobrenome}}</td>
+                            <td>{{$aluno->Estudante->telefone}}</td>
+
+                            <td class="text-center">
+                                <a href="{{route('alunos.area-aluno', $aluno->id)}}">
+                                    <i class="bx bx-right-arrow-alt fs-3"></i>
+                                </a>
+                            </td>
+                            @if(!empty($relatorios))
+                                <td class="text-center">
+                                    <a href="{{route('relatorio-alunos.gerar-relatorio-aluno', $aluno->id)}}">
+                                        <i class="bx bx-plus-circle text-info fs-3 mx-3"></i>
+                                    </a>
+                                    <a href="{{route('relatorio-alunos.view-relatorios', $aluno->id)}}">
+                                        <i class="bx bx-file text-danger fs-3"></i>
+                                    </a>
+                                </td>
+                            @else
+                                <td></td>
+                            @endif
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

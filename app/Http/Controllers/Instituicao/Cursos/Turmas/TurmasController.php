@@ -18,6 +18,12 @@ use DB;
 
 class TurmasController extends Controller
 {
+    public function index() {
+        $turmas = Turmas::orderBy('created_at', 'DESC')->get();
+
+        return view('app.instituicao.cursos.turmas.index', compact('turmas'));
+    }
+
     // Gerando turmas através na view cursos
     public function store($curso_id) {
         
@@ -47,6 +53,7 @@ class TurmasController extends Controller
                 'grade_curricular_id' => $gradeCurricular->id,
                 'periodo_escolar_id' => $periodoEscolar->id,
                 'codigo_turma' => $codigoTurma,
+                'data_inicio_turma' => Carbon::now()->format('d-m-Y'),
                 'created_at' => Carbon::now()
             ]);
 
@@ -57,9 +64,9 @@ class TurmasController extends Controller
     
             return redirect()->back()->with($noti);
         } else {
-            $countAlunos = Alunos::where('serie_turma', $turma->codigo_turma)->count();
+            $countAlunos = Alunos::where('serie_turma', $turma->id)->count();
 
-            if($countAlunos <= 5) {
+            if(!$countAlunos >= 5) {
                 $noti = [
                     'message' => 'Error! Limite atual de alunos não atingido.',
                     'alert-type' => 'error'
@@ -84,12 +91,6 @@ class TurmasController extends Controller
                 return redirect()->back()->with($noti);
             }
         }
-    }
-
-    public function index() {
-        $turmas = Turmas::orderBy('periodo_escolar_id', 'DESC')->get();
-
-        return view('app.instituicao.cursos.turmas.index', compact('turmas'));
     }
 }
 

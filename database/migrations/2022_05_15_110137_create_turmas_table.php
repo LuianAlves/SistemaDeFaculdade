@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('periodo_escolar_id')->references('id')->on('periodo_escolars')->onDelete('cascade');
 
             $table->string('codigo_turma');
+            $table->string('data_inicio_turma');
             $table->timestamps();
         });
     }

@@ -99,45 +99,45 @@
             <!-- Área do Aluno -->
             @canany(['administracao', 'professor', 'dev'])
                 @if(App\Models\Alunos::count() != 0)
-                <a href="{{route('alunos.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div data-i18n="Basic">Alunos</div>
-                </a>
+                    <a href="{{route('alunos.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Basic">Alunos</div>
+                    </a>
                 @endif
                 @if(App\Models\Professores::count() != 0)
-                <a href="{{route('professores.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div data-i18n="Basic">Professores</div>
-                </a>
+                    <a href="{{route('professores.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                        <div data-i18n="Basic">Professores</div>
+                    </a>
                 @endif
             @endcanany
 
             @can('aluno')
-            @php
-            $usuario_id = App\Models\Usuarios::where('user_id', Auth::id())->first();
-            @endphp
+                @php
+                    $usuario_id = App\Models\Usuarios::where('user_id', Auth::id())->first();
+                @endphp
 
-            {{-- Em vez de acessar a parea do aluno, criar os links pelo sidebar: dados do curso, meu cadastro ... --}}
-            <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-face"></i>
-                <div data-i18n="Basic">Meu cadastro</div>
-            </a>
-            <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-expand"></i>
-                <div data-i18n="Basic">Dados do curso</div>
-            </a>
-            <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-exclude"></i>
-                <div data-i18n="Basic">Notas e faltas</div>
-            </a>
-            <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-border-all"></i>
-                <div data-i18n="Basic">Integração curricular</div>
-            </a>
-            <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Basic">Solicitar documentos</div>
-            </a>
+                {{-- Em vez de acessar a parea do aluno, criar os links pelo sidebar: dados do curso, meu cadastro ... --}}
+                <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-face"></i>
+                    <div data-i18n="Basic">Meu cadastro</div>
+                </a>
+                <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-expand"></i>
+                    <div data-i18n="Basic">Dados do curso</div>
+                </a>
+                <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-exclude"></i>
+                    <div data-i18n="Basic">Notas e faltas</div>
+                </a>
+                <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-border-all"></i>
+                    <div data-i18n="Basic">Integração curricular</div>
+                </a>
+                <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Basic">Solicitar documentos</div>
+                </a>
             @endcan
         </li>
 

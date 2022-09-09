@@ -21,7 +21,7 @@ class AlunosController extends Controller
 {
     public function index()
     {
-        $alunos = Alunos::with('Estudante')->paginate(5);
+        $alunos = Alunos::with('Estudante')->get();
 
         return view('app.instituicao.corpo_discente.index', compact('alunos'));
     }
@@ -94,7 +94,9 @@ class AlunosController extends Controller
 
         $aluno_id = $request->aluno_id;
         $usuario_id = $request->usuario_id;
-        
+
+        $turma = Alunos::where('serie_turma', $request->serie_turma)->count();
+
         if ($validator->passes()) {
             Usuarios::where('id', $usuario_id)->update([
                 'departamento_id' => $request->departamento_id,

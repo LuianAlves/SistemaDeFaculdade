@@ -3,29 +3,37 @@
 @section('content')
     <div class="row">
         <div class="card">
-            <!-- Header Lista -->
-            <div class="card-header">
-                <h5>
-                    @switch($avaliacao->tipo_prova)
-                        @case(1)
-                            NP1
-                        @break
+            <div class="row mt-3 mx-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">
+                        @switch($avaliacao->tipo_prova)
+                            @case(1)
+                                NP1
+                            @break
 
-                        @case(2)
-                            NP2
-                        @break
+                            @case(2)
+                                Substutiva NP1
+                            @break
 
-                        @case(3)
-                            Substutiva
-                        @break
+                            @case(3)
+                                NP2
+                            @break
 
-                        @case(2)
-                            Exame
-                        @break
+                            @case(4)
+                                Substutiva NP2
+                            @break
 
-                        @default
-                    @endswitch
-                </h5>
+                            @case(5)
+                                Exame
+                            @break
+
+                            @default
+                        @endswitch
+                    </h4>
+                    <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('periodo-avaliacoes.index') }}">
+                        <b>Agendamento de avaliações</b>
+                    </a>
+                </div>
             </div>
 
             <div class="card-body">
@@ -99,52 +107,30 @@
                 <table class="table table-responsive">
                     <thead>
                         <tr>
-                            <th class="text-center" colspan="2">Período Avaliações</th>
-                            <th class="text-center">Campus</th>
-                            <th class="text-center">Prova</th>
+                            <th class="text-center">Turma</th>
+                            <th class="text-center">Curso</th>
+                            <th class="text-center">Disciplina</th>
+                            <th class="text-center">Data da prova</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($avaliacoes as $avaliacao)
-                        <tr class="fw-bold">
-                            <td class="text-center">{{$prova->}}</td>
-                            <td class="text-center">{{Carbon\Carbon::parse($avaliacao->inicio_periodo_avaliacoes)->format('d m Y')}}</td>
-                            <td class="text-center">{{Carbon\Carbon::parse($avaliacao->termino_periodo_avaliacoes)->format('d m Y')}}</td>
-                            <td class="text-center">
-                                @if ($avaliacao->tipo_prova == 1)
-                                    <span class="badge bg-label-primary">NP1</span>
-                                @elseif($avaliacao->tipo_prova == 2)
-                                    <span class="badge bg-label-info">NP2</span>
-                                @elseif($avaliacao->tipo_prova == 3)
-                                    <span class="badge bg-label-danger">Substutiva</span>
-                                @elseif($avaliacao->tipo_prova == 4)
-                                    <span class="badge bg-label-warning">Exame</span>
-                                @endif
-                            </td>
+                        @foreach ($avaliacoesCursos as $avaliacao)
+                            <tr class="fw-bold">
+                                <td class="text-center fw-bold">{{$avaliacao->Turma->codigo_turma}}</td>
+                                <td class="text-center">{{$avaliacao->Curso->curso}}</td>
+                                <td class="text-center">{{$avaliacao->Disciplina->disciplina}}</td>
+                                <td class="text-center">{{Carbon\Carbon::parse($avaliacao->data_da_prova)->format('d/m/Y')}}</td>
 
-                            <td class="text-center col-2">
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <!-- Adicionar Curso -->
-                                        <a href="{{route('avaliacoes-cursos.index', $avaliacao->id)}}" class="dropdown-item text-muted">
-                                            <i class="bx bx-border-right me-1"></i>
-                                            Curso/Semestre
-                                        </a>
-
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach --}}
+                                <td class="text-center">
+                                    @if(Carbon\Carbon::now() > $avaliacao->data_da_prova) 
+                                        <span class="badge bg-label-primary">Realizada</span>
+                                    @else
+                                        <span class="badge bg-label-warning">Pendente</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

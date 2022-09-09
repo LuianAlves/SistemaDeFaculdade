@@ -5,8 +5,9 @@
         @foreach ($notas as $nota)
             @if ($grade->disciplina->id == $nota->disciplina_id)
                 @php
-                    $dataAvaliacao = App\Models\CalendarioAcademico\AvaliacoesCursos::where('curso_id',
-                    $grade->curso_id)->where('disciplina_id', $grade->disciplina_id)->first();
+                    $dataAtual = Carbon\Carbon::now();
+
+                    $dataAvaliacao = App\Models\CalendarioAcademico\AvaliacoesCursos::where('curso_id', $grade->curso_id)->where('disciplina_id', $grade->disciplina_id)->where('turma_id', $nota->turma_id)->where('data_da_prova', '<', $dataAtual)->first();
 
                     $np1 = $nota->nota_np1;
                     $np2 = $nota->nota_np2;

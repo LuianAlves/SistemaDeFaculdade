@@ -24,11 +24,12 @@ class AvaliacoesCursosController extends Controller
     public function index($avaliacao_id)
     {
         $avaliacao = PeriodoAvaliacoes::findOrFail($avaliacao_id);
+        $avaliacoesCursos = AvaliacoesCursos::where('periodo_avaliacoes_id', $avaliacao->id)->get();
         $cursos = Cursos::get();
         $turmas = Turmas::get();
         $disciplinas = Disciplinas::get();
 
-        return view('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.index', compact('avaliacao', 'cursos', 'disciplinas', 'turmas'));
+        return view('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.index', compact('avaliacoesCursos', 'avaliacao', 'cursos', 'disciplinas', 'turmas'));
     }
 
     /**

@@ -21,6 +21,15 @@ use Carbon\Carbon;
 
 class LancamentoNotasController extends Controller
 {
+    public function index($aluno_id) {
+        $aluno = Alunos::findOrFail($aluno_id);
+        $turma = Turmas::where('id', $aluno->serie_turma)->first();
+        $notas = LancamentoNotas::where('aluno_id', $aluno->id)->where('turma_id', $turma->id)->get();
+        $disciplinas = GradeCurricular::where('curso_id', $turma->curso_id)->get();
+        
+        return view('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.notas.index', compact('aluno', 'turma','disciplinas','notas'));
+    }
+
     public function gerandoView($aluno_id) {
         $aluno = Alunos::findOrFail($aluno_id);
         $curso = Cursos::where('id', $aluno->curso_id)->first();
@@ -41,15 +50,6 @@ class LancamentoNotasController extends Controller
         }
 
         return redirect()->route('lancar-notas.index', $aluno->id);
-    }
-
-    public function index($aluno_id) {
-        $aluno = Alunos::findOrFail($aluno_id);
-        $turma = Turmas::where('id', $aluno->serie_turma)->first();
-        $disciplinas = GradeCurricular::where('curso_id', $turma->curso_id)->get();
-        $notas = LancamentoNotas::where('aluno_id', $aluno->id)->where('turma_id', $turma->id)->get();
-        
-        return view('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.notas.index', compact('aluno', 'turma','disciplinas','notas'));
     }
 
     public function update(Request $request) {
