@@ -48,6 +48,75 @@
                     </div>
                 </form>
             </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Disciplina</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($disciplinas as $dp)
+                        @php
+                            switch ($dp->semestre) {
+                                case 'semestre_1':
+                                    $semestreAtual = $semestres['semestre_1'];
+                                    break;
+
+                                case 'semestre_2':
+                                    $semestreAtual = $semestres['semestre_2'];
+                                    break;
+
+                                case 'semestre_3':
+                                    $semestreAtual = $semestres['semestre_3'];
+                                    break;
+
+                                case 'semestre_4':
+                                    $semestreAtual = $semestres['semestre_4'];
+                                    break;
+
+                                case 'semestre_5':
+                                    $semestreAtual = $semestres['semestre_5'];
+                                    break;
+
+                                case 'semestre_6':
+                                    $semestreAtual = $semestres['semestre_6'];
+                                    break;
+
+                                case 'semestre_7':
+                                    $semestreAtual = $semestres['semestre_7'];
+                                    break;
+
+                                case 'semestre_8':
+                                    $semestreAtual = $semestres['semestre_8'];
+                                    break;
+
+                                case 'semestre_9':
+                                    $semestreAtual = $semestres['semestre_9'];
+                                    break;
+
+                                case 'semestre_10':
+                                    $semestreAtual = $semestres['semestre_10'];
+                                    break;
+                            } 
+                            
+                            $data1 = substr($dataAtual, 0, 7);
+                            $data2 = substr($semestreAtual, 0, 7);
+                        @endphp
+                    
+                        <tr>
+                            <td>{{$dp->Disciplina->disciplina}}</td>
+                            <td>{{$semestreAtual}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -24,6 +24,8 @@ class SemestreAtualController extends Controller
         $disciplinas = GradeCurricular::where('curso_id', $turma->curso_id)->get();
         $curso = Cursos::findOrFail($turma->curso_id);
         
+        $dataAtual = date('Y-m-d');
+
         $numSemestre = $curso->quantidade_semestres;
         $numAno = $numSemestre/2;
 
@@ -54,11 +56,9 @@ class SemestreAtualController extends Controller
                 $r[] = $q;
             }
         }
-
         // $convertendoData = json_decode(json_encode($r[4][1]), true);
         // $data = substr($convertendoData['date'], 0, 10);
-
-        $semestre = [
+        $semestres = [
             'semestre_1' => substr(json_decode(json_encode($r[0][0]), true)['date'], 0, 10),
             'semestre_2' => substr(json_decode(json_encode($r[0][1]), true)['date'], 0, 10),
             'semestre_3' => substr(json_decode(json_encode($r[1][0]), true)['date'], 0, 10),
@@ -71,8 +71,6 @@ class SemestreAtualController extends Controller
             'semestre_10' => substr(json_decode(json_encode($r[4][1]), true)['date'], 0, 10),
         ];
 
-        dd($semestre);
-
-        return view('app.instituicao.cursos.turmas.grade_curricular_turma.index', compact('turma', 'professores', 'disciplinas'));
+        return view('app.instituicao.cursos.turmas.grade_curricular_turma.index', compact('turma', 'professores', 'disciplinas', 'dataAtual', 'semestres'));
     }
 }
