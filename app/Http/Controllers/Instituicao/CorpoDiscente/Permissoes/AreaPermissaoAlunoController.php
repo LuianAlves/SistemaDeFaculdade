@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Usuario\Permissoes;
+namespace App\Http\Controllers\Instituicao\CorpoDiscente\Permissoes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

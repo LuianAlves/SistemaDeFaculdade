@@ -118,6 +118,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         // Semestre Atual
         // Administrar grade curricular
         Route::get('/semestre-atual/grade-curricular/{turma_id}', [SemestreAtualController::class, 'gradeCurricular'])->name('semestre-atual.grade-curricular');
+        Route::post('/semestre-atual/grade-curricular/store', [SemestreAtualController::class, 'store'])->name('semestre-atual.store');
 
         // Relatorios
         Route::prefix('/relatorios')->group(function() {

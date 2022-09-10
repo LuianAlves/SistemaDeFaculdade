@@ -72,9 +72,12 @@
         @endif
 
         @can('professor')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Lecionamento de disciplinas</span>
+        </li>
         <li class="menu-item">
             <a href="{{route('disciplinas-lecionadas.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                <i class="menu-icon tf-icons bx bx-book-reader"></i>
                 <div data-i18n="Basic">Disciplinas lecionadas</div>
             </a>
         </li>
