@@ -1,3 +1,7 @@
+@php
+    $usuario_id = App\Models\Usuarios::where('user_id', Auth::id())->first();
+@endphp
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="{{ route('dashboard') }}" class="app-brand-link">
@@ -72,35 +76,47 @@
         @endif
 
         @can('professor')
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Lecionamento de disciplinas</span>
-        </li>
-        <li class="menu-item">
-            <a href="{{route('disciplinas-lecionadas.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book-reader"></i>
-                <div data-i18n="Basic">Disciplinas lecionadas</div>
-            </a>
-        </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text"></span>
+            </li>
+            <li class="menu-item">
+                <a href="{{route('area-permissao-professor.meu-cadastro', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-face"></i>
+                    <div data-i18n="Basic">Meu cadastro</div>
+                </a>
+            
+            @if(App\Models\Alunos::count() != 0)
+                <a href="{{route('alunos.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Basic">Meus alunos</div>
+                </a>
+            @endif
+            
+                <a href="{{route('area-permissao-professor.disciplinas-lecionadas', $usuario_id)}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-book-reader"></i>
+                    <div data-i18n="Basic">Disciplinas lecionadas</div>
+                </a>
+            </li>
         @endcan
 
-        @canany(['dev', 'administracao', 'professor'])
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Funcionalidades de Cadastramento</span>
-        </li>
+        @canany(['dev', 'administracao'])
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Funcionalidades de Cadastramento</span>
+            </li>
         @endcanany
 
         <!-- Usuários -->
         <li class="menu-item">
             <!-- Novo Usuário -->
             @canany(['dev', 'administracao'])
-            <a href="{{route('usuario.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                <div data-i18n="Basic">Usuários</div>
-            </a>
+                <a href="{{route('usuario.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                    <div data-i18n="Basic">Usuários</div>
+                </a>
             @endcanany
 
             <!-- Área do Aluno -->
-            @canany(['administracao', 'professor', 'dev'])
+            @canany(['administracao', 'dev'])
                 @if(App\Models\Alunos::count() != 0)
                     <a href="{{route('alunos.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
@@ -116,11 +132,6 @@
             @endcanany
 
             @can('aluno')
-                @php
-                    $usuario_id = App\Models\Usuarios::where('user_id', Auth::id())->first();
-                @endphp
-
-                {{-- Em vez de acessar a parea do aluno, criar os links pelo sidebar: dados do curso, meu cadastro ... --}}
                 <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-face"></i>
                     <div data-i18n="Basic">Meu cadastro</div>
@@ -129,11 +140,11 @@
                     <i class="menu-icon tf-icons bx bx-expand"></i>
                     <div data-i18n="Basic">Dados do curso</div>
                 </a>
-                <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
+                <a href="{{route('area-permissao-aluno.notas-faltas', $usuario_id)}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-exclude"></i>
                     <div data-i18n="Basic">Notas e faltas</div>
                 </a>
-                <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
+                <a href="{{route('area-permissao-aluno.integracao-curricular', $usuario_id)}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-border-all"></i>
                     <div data-i18n="Basic">Integração curricular</div>
                 </a>

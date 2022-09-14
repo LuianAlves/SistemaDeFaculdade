@@ -184,9 +184,21 @@
                         </div>
                     </div>
                 @endif
+
             @endif
         @endforeach
     @endforeach
+
+    {{-- @if(empty($dataAvaliacao))
+        <div class="card my-2">
+            <div class="card-header">
+                <h4 class="card-title">Lançamento de notas</h4>
+            </div>
+            <div class="card-body">
+                <span class="text-danger fw-bold">Não há nenhuma prova realizada no momento.</span>
+            </div>
+        </div>
+    @endif --}}
 @endsection
 
 @include('app.instituicao.calendario_academico.periodo_avaliacoes.avaliacoes_cursos.avaliacoes_cursos_scripts')

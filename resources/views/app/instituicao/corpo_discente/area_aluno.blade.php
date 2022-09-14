@@ -121,6 +121,8 @@
                                     </div>
                                 </div>
                             </div>
+                        @else
+                            <span class="text-danger fw-bold">Aluno não está matriculado em nenhum de nossos cursos.</span>
                         @endif
                     @endcan
                 </div>

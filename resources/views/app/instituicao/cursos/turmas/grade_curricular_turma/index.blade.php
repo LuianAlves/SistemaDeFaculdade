@@ -42,10 +42,11 @@
                             <select class="form-select" id="disciplina_id" name="disciplina_id">
                                 <option selected disabled>Selecione a disciplina</option>
                                 @foreach ($disciplinas as $disciplina)
-                                @if($disciplina->semestre == $semestre)
-                                <option id="{{$disciplina->Disciplina->id}}" value="{{$disciplina->Disciplina->id}}">
-                                    {{$disciplina->Disciplina->disciplina}}</option>
-                                @endif
+                                    @if($disciplina->semestre == $semestre)
+                                    <option id="{{$disciplina->Disciplina->id}}" value="{{$disciplina->Disciplina->id}}">
+                                        {{$disciplina->Disciplina->disciplina}}
+                                    </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -76,8 +77,13 @@
                         </thead>
                         <tbody>
                             @foreach ($gradeSemestre as $grade)
+                            @php
+                                $professor = App\Models\Professores::where('id', $grade->professor_id)->first();
+                                $usuario = App\Models\Usuarios::where('id', $professor->usuario_id)->first();
+                            @endphp
+
                                 <tr class="text-center">
-                                    <td>{{$grade->professor_id}}</td>
+                                    <td>{{"$usuario->nome $usuario->sobrenome"}}</td>
                                     <td>{{$grade->Disciplina->disciplina}}</td>
                                 </tr>
                             @endforeach

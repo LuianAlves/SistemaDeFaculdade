@@ -28,9 +28,8 @@ use App\Http\Controllers\Instituicao\CorpoDiscente\AlunosController;
 use App\Http\Controllers\Instituicao\CorpoDocente\ProfessorController;
 
 // Area de permissões
-use App\Http\Controllers\Usuario\Permissoes\AreaPermissaoAlunoController;
-
-use App\Http\Controllers\Instituicao\CorpoDocente\DisciplinasLecionadasController;
+use App\Http\Controllers\Instituicao\CorpoDiscente\Permissoes\AreaPermissaoAlunoController;
+use App\Http\Controllers\Instituicao\CorpoDocente\Permissoes\AreaPermissaoProfessorController;
 
 
 /* ------------------------------------------------------------ */
@@ -141,8 +140,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     /* ========== Routes Professores ============= */
     Route::group(['middleware' => ['permission:professor']], function () {
-        // Disciplinas lecionadas
-        Route::get('/disciplinas-lecionadas', [DisciplinasLecionadasController::class, 'index'])->name('disciplinas-lecionadas.index');
+        // Permissão Professores
+        Route::get('/area-permissao/professores/meu-cadastro/{usuario_id}', [AreaPermissaoProfessorController::class, 'meuCadastro'])->name('area-permissao-professor.meu-cadastro');
+        Route::get('/area-permissao/professores/disciplinas-lecionadas/{usuario_id}', [AreaPermissaoProfessorController::class, 'disciplinasLecionadas'])->name('area-permissao-professor.disciplinas-lecionadas');
 
         // Notas
         Route::prefix('/notas')->group(function(){
@@ -159,6 +159,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::group(['middleware' => ['permission:aluno']], function () {
         Route::get('/area-permissao/alunos/meu-cadastro/{usuario_id}', [AreaPermissaoAlunoController::class, 'meuCadastro'])->name('area-permissao-aluno.meu-cadastro');
         Route::get('/area-permissao/alunos/dados-do-curso/{usuario_id}', [AreaPermissaoAlunoController::class, 'dadosCurso'])->name('area-permissao-aluno.dados-curso');
+        Route::get('/area-permissao/alunos/notas-faltas/{usuario_id}', [AreaPermissaoAlunoController::class, 'notasFaltas'])->name('area-permissao-aluno.notas-faltas');
+        Route::get('/area-permissao/alunos/integracao-curricular/{usuario_id}', [AreaPermissaoAlunoController::class, 'integracaoCurricular'])->name('area-permissao-aluno.integracao-curricular');
     });
 });
 

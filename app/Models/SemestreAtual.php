@@ -26,4 +26,8 @@ class SemestreAtual extends Model
     public function Disciplina() {
         return $this->belongsTo(Disciplinas::class, 'disciplina_id', 'id');
     }
+
+    public function Turma() {
+        return $this->belongsTo(Turmas::class, 'turma_id', 'id');
+    }
 }

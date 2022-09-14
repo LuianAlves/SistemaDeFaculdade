@@ -51,10 +51,10 @@
                 </div>
                 <div class="row mt-5 mb-3">
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-fullname">Duração em Horas</label>
+                        <label class="form-label" for="basic-icon-default-fullname">Carga horária</label>
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-webcam"></i></span>
-                            <input type="number" class="form-control" name="duracao_horas" id="duracao_horas" placeholder="Horas de disciplina" />
+                            <input type="number" class="form-control" name="duracao_horas" id="duracao_horas" placeholder="Carga horária" />
                         </div>
                         <span class="text-danger">
                             <strong id="duracao_horas-error"></strong>

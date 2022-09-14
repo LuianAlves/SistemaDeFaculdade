@@ -23,7 +23,9 @@ class SemestreAtualController extends Controller
         $gradeSemestre = SemestreAtual::where('turma_id', $turma_id)->get();
 
         $turma = Turmas::findOrFail($turma_id);
+
         $professores = Professores::get();
+
         $disciplinas = GradeCurricular::where('curso_id', $turma->curso_id)->get();
         $curso = Cursos::findOrFail($turma->curso_id);
         

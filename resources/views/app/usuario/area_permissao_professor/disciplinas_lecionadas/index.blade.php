@@ -15,7 +15,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($disciplinasLecionadas as $dp)
+                            @foreach ($semestreAtual as $dp)
                                 <tr class="text-center">
                                     <td>{{$dp->Turma->codigo_turma}}</td>
                                     <td>{{$dp->Disciplina->disciplina}}</td>
