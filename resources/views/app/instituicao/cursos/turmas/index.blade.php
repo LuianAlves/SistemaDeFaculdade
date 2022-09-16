@@ -59,7 +59,7 @@
                                         </a>
 
                                         <!-- Visualizar -->
-                                        <a type="button" class="dropdown-item">
+                                        <a href="{{route('relatorio-turmas.gerar-relatorio-turma', $tr->id)}}" class="dropdown-item">
                                             <i class="bx bx-show-alt me-1"></i>
                                             Gerar Relatório da Turma
                                         </a>

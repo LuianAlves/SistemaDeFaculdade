@@ -125,9 +125,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
         // Relatorios
         Route::prefix('/relatorios')->group(function() {
+            // Alunos
             Route::get('/alunos', [RelatorioAlunoController::class, 'index'])->name('relatorio-alunos.index');
             Route::get('/alunos/gerar/{aluno_id}', [RelatorioAlunoController::class, 'gerarRelatorioAluno'])->name('relatorio-alunos.gerar-relatorio-aluno');
             Route::get('/alunos/relatorios/{aluno_id}', [RelatorioAlunoController::class, 'viewRelatorio'])->name('relatorio-alunos.view-relatorios');
+
+            // Turmas
+            Route::get('/turmas/gerar/{turma_id}', [RelatorioTurmaController::class, 'gerarRelatorioTurma'])->name('relatorio-turmas.gerar-relatorio-turma');
         });
 
         // Usuários
