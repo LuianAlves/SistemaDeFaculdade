@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Alunos;
 use App\Models\Professores;
+use App\Models\Administracao;
 use App\Models\Usuarios;
 use App\Models\Departamentos;
 use App\Models\Notas\LancamentoNotas;
@@ -185,6 +186,12 @@ class UsuarioController extends Controller
             
             if($request->departamento_id == 2) {
                 Professores::insert([
+                    'usuario_id' => $usuario->id,
+                ]);
+            }
+
+            if($request->departamento_id == 1) {
+                Administracao::insert([
                     'usuario_id' => $usuario->id,
                 ]);
             }

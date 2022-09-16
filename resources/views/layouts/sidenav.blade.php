@@ -25,181 +25,179 @@
             </a>
         </li>
 
-
-
         @can('dev')
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Cadastro da Instituição</span>
-        </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Cadastro da Instituição</span>
+            </li>
 
-        <!-- Novo Campus -->
-        <li class="menu-item">
-            <a href="{{ route('campus.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building-house"></i>
-                <div data-i18n="Basic">Campus</div>
-            </a>
-        </li>
+            <!-- Novo Campus -->
+            <li class="menu-item">
+                <a href="{{ route('campus.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-building-house"></i>
+                    <div data-i18n="Basic">Campus</div>
+                </a>
+            </li>
         @endcan
 
         @if(App\Models\Campus::count() != 0)
-        <!-- Cursos -->
-        @can('dev')
-        <li class="menu-item">
-            <a href="{{route('cursos.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book-add"></i>
-                <div data-i18n="Basic">Cursos</div>
-            </a>
-        </li>
-        @endcan
-
-        @if(App\Models\Cursos::count() != 0)
-        <!-- Disciplinas -->
-        @can('dev')
-        <li class="menu-item">
-            <a href="{{route('disciplinas.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book-reader"></i>
-                <div data-i18n="Basic">Disciplinas</div>
-            </a>
-        </li>
-        @endcan
-
-        @if(App\Models\Turmas::count() != 0)
-        <!-- Turmas -->
-        @canany(['administracao', 'dev'])
-        <li class="menu-item">
-            <a href="{{route('turmas.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                <div data-i18n="Basic">Turmas</div>
-            </a>
-        </li>
-        @endcanany
-        @endif
-
-        @can('professor')
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text"></span>
-            </li>
-            <li class="menu-item">
-                <a href="{{route('area-permissao-professor.meu-cadastro', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-face"></i>
-                    <div data-i18n="Basic">Meu cadastro</div>
-                </a>
-            
-            @if(App\Models\Alunos::count() != 0)
-                <a href="{{route('alunos.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div data-i18n="Basic">Meus alunos</div>
-                </a>
-            @endif
-            
-                <a href="{{route('area-permissao-professor.disciplinas-lecionadas', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-book-reader"></i>
-                    <div data-i18n="Basic">Disciplinas lecionadas</div>
-                </a>
-            </li>
-        @endcan
-
-        @canany(['dev', 'administracao'])
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Funcionalidades de Cadastramento</span>
-            </li>
-        @endcanany
-
-        <!-- Usuários -->
-        <li class="menu-item">
-            <!-- Novo Usuário -->
-            @canany(['dev', 'administracao'])
-                <a href="{{route('usuario.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                    <div data-i18n="Basic">Usuários</div>
-                </a>
-            @endcanany
-
-            <!-- Área do Aluno -->
-            @canany(['administracao', 'dev'])
-                @if(App\Models\Alunos::count() != 0)
-                    <a href="{{route('alunos.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Basic">Alunos</div>
+            <!-- Cursos -->
+            @can('dev')
+                <li class="menu-item">
+                    <a href="{{route('cursos.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-book-add"></i>
+                        <div data-i18n="Basic">Cursos</div>
                     </a>
-                @endif
-                @if(App\Models\Professores::count() != 0)
-                    <a href="{{route('professores.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                        <div data-i18n="Basic">Professores</div>
-                    </a>
-                @endif
-            @endcanany
-
-            @can('aluno')
-                <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-face"></i>
-                    <div data-i18n="Basic">Meu cadastro</div>
-                </a>
-                <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-expand"></i>
-                    <div data-i18n="Basic">Dados do curso</div>
-                </a>
-                <a href="{{route('area-permissao-aluno.notas-faltas', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-exclude"></i>
-                    <div data-i18n="Basic">Notas e faltas</div>
-                </a>
-                <a href="{{route('area-permissao-aluno.integracao-curricular', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-border-all"></i>
-                    <div data-i18n="Basic">Integração curricular</div>
-                </a>
-                <a href="{{route('alunos.area-aluno', $usuario_id)}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-file"></i>
-                    <div data-i18n="Basic">Solicitar documentos</div>
-                </a>
+                </li>
             @endcan
-        </li>
 
-        @canany(['dev', 'administracao'])
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Calendário Acadêmico</span>
-        </li>
+            @if(App\Models\Cursos::count() != 0)
+                <!-- Disciplinas -->
+                @can('dev')
+                    <li class="menu-item">
+                        <a href="{{route('disciplinas.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-book-reader"></i>
+                            <div data-i18n="Basic">Disciplinas</div>
+                        </a>
+                    </li>
+                @endcan
 
-        <!-- Cadastrar Período Escolar -->
-        <li class="menu-item">
-            <a href="{{ route('periodo-escolar.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building-house"></i>
-                <div data-i18n="Basic">Período Escolar</div>
-            </a>
-        </li>
+                <!-- Turmas -->
+                @if(App\Models\Turmas::count() != 0)
+                    @canany(['administracao', 'dev'])
+                        <li class="menu-item">
+                            <a href="{{route('turmas.index')}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                                <div data-i18n="Basic">Turmas</div>
+                            </a>
+                        </li>
+                    @endcanany
+                @endif
 
-        <!-- Cadastrar Período de Avaliações -->
-        <li class="menu-item">
-            <a href="{{ route('periodo-avaliacoes.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                <div data-i18n="Basic">Período de Avaliações</div>
-            </a>
-        </li>
+                @can('professor')
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text"></span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{route('area-permissao-professor.meu-cadastro', $usuario_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-face"></i>
+                            <div data-i18n="Basic">Meu cadastro</div>
+                        </a>
+                    
+                    @if(App\Models\Alunos::count() != 0)
+                        <a href="{{route('alunos.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Meus alunos</div>
+                        </a>
+                    @endif
+                    
+                        <a href="{{route('area-permissao-professor.disciplinas-lecionadas', $usuario_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-book-reader"></i>
+                            <div data-i18n="Basic">Disciplinas lecionadas</div>
+                        </a>
+                    </li>
+                @endcan
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Acompanhamento pedagógico</span>
-        </li>
+                @canany(['dev', 'administracao'])
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Funcionalidades de Cadastramento</span>
+                    </li>
+                @endcanany
 
-        <li class="menu-item" style="">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="User interface">Relatórios</div>
-            </a>
-            <ul class="menu-sub">
+                <!-- Usuários -->
                 <li class="menu-item">
-                    <a href="ui-accordion.html" class="menu-link">
-                        <div data-i18n="Accordion">Turmas</div>
-                    </a>
+                    <!-- Novo Usuário -->
+                    @canany(['dev', 'administracao'])
+                        <a href="{{route('usuario.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div data-i18n="Basic">Usuários</div>
+                        </a>
+                    @endcanany
+
+                    <!-- Área do Aluno -->
+                    @canany(['administracao', 'dev'])
+                        @if(App\Models\Alunos::count() != 0)
+                            <a href="{{route('alunos.index')}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Basic">Alunos</div>
+                            </a>
+                        @endif
+                        @if(App\Models\Professores::count() != 0)
+                            <a href="{{route('professores.index')}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Basic">Professores</div>
+                            </a>
+                        @endif
+                    @endcanany
+
+                    @can('aluno')
+                        <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-face"></i>
+                            <div data-i18n="Basic">Meu cadastro</div>
+                        </a>
+                        <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-expand"></i>
+                            <div data-i18n="Basic">Dados do curso</div>
+                        </a>
+                        <a href="{{route('area-permissao-aluno.notas-faltas', $usuario_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-exclude"></i>
+                            <div data-i18n="Basic">Notas e faltas</div>
+                        </a>
+                        <a href="{{route('area-permissao-aluno.integracao-curricular', $usuario_id)}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-border-all"></i>
+                            <div data-i18n="Basic">Integração curricular</div>
+                        </a>
+                        <a href="{{route('documentos.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-file"></i>
+                            <div data-i18n="Basic">Solicitar documentos</div>
+                        </a>
+                    @endcan
                 </li>
-                <li class="menu-item">
-                    <a href="{{route('relatorio-alunos.index')}}" class="menu-link">
-                        <div data-i18n="Accordion">Alunos</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        @endcanany
-        @endif
+
+                @canany(['dev', 'administracao'])
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Calendário Acadêmico</span>
+                    </li>
+
+                    <!-- Cadastrar Período Escolar -->
+                    <li class="menu-item">
+                        <a href="{{ route('periodo-escolar.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-building-house"></i>
+                            <div data-i18n="Basic">Período Escolar</div>
+                        </a>
+                    </li>
+
+                    <!-- Cadastrar Período de Avaliações -->
+                    <li class="menu-item">
+                        <a href="{{ route('periodo-avaliacoes.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-calendar"></i>
+                            <div data-i18n="Basic">Período de Avaliações</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Acompanhamento pedagógico</span>
+                    </li>
+
+                    <li class="menu-item" style="">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="User interface">Relatórios</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="ui-accordion.html" class="menu-link">
+                                    <div data-i18n="Accordion">Turmas</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{route('relatorio-alunos.index')}}" class="menu-link">
+                                    <div data-i18n="Accordion">Alunos</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcanany
+            @endif
         @endif
 
     </ul>

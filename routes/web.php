@@ -15,6 +15,7 @@ use App\Http\Controllers\Instituicao\Cursos\Turmas\TurmasController;
 use App\Http\Controllers\Instituicao\Cursos\Turmas\SemestreAtualController;
 use App\Http\Controllers\Instituicao\Relatorios\RelatorioTurmaController;
 use App\Http\Controllers\Instituicao\Relatorios\RelatorioAlunoController;
+use App\Http\Controllers\Instituicao\Documentos\DocumentosController;
 
 // Calendario Academico
 use App\Http\Controllers\Instituicao\CalendarioAcademico\PeriodoEscolarController;
@@ -75,6 +76,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/professores/area_professor/edit/{professor_id}', [ProfessorController::class, 'edit'])->name('professores.edit');
         Route::get('/professores/area_professor/update', [ProfessorController::class, 'update'])->name('professores.update');
     });
+    
+    // Documentos
+    Route::get('solicitar/documentos/', [DocumentosController::class, 'index'])->name('documentos.index');
 
     /* ========== Routes Dev ============= */
     Route::group(['middleware' => ['permission:dev']], function () {
@@ -139,7 +143,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 
     /* ========== Routes Professores ============= */
-    Route::group(['middleware' => ['permission:professor']], function () {
+    Route::group(['middleware' => ['permission:professor|dev']], function () {
         // Permissão Professores
         Route::get('/area-permissao/professores/meu-cadastro/{usuario_id}', [AreaPermissaoProfessorController::class, 'meuCadastro'])->name('area-permissao-professor.meu-cadastro');
         Route::get('/area-permissao/professores/disciplinas-lecionadas/{usuario_id}', [AreaPermissaoProfessorController::class, 'disciplinasLecionadas'])->name('area-permissao-professor.disciplinas-lecionadas');
@@ -156,7 +160,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 
     /* ========== Routes Alunos ============= */
-    Route::group(['middleware' => ['permission:aluno']], function () {
+    Route::group(['middleware' => ['permission:aluno|dev']], function () {
         Route::get('/area-permissao/alunos/meu-cadastro/{usuario_id}', [AreaPermissaoAlunoController::class, 'meuCadastro'])->name('area-permissao-aluno.meu-cadastro');
         Route::get('/area-permissao/alunos/dados-do-curso/{usuario_id}', [AreaPermissaoAlunoController::class, 'dadosCurso'])->name('area-permissao-aluno.dados-curso');
         Route::get('/area-permissao/alunos/notas-faltas/{usuario_id}', [AreaPermissaoAlunoController::class, 'notasFaltas'])->name('area-permissao-aluno.notas-faltas');
