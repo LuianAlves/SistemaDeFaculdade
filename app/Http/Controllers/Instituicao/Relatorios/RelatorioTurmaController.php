@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class RelatorioTurmaController extends Controller
 {
-    public function gerarRelatorioTurma(Request $request, $turma_id) {
+    public function gerarRelatorioTurma($turma_id) {
         $id = $turma_id;
 
         $count = LancamentoNotas::where('turma_id', $id)->count();

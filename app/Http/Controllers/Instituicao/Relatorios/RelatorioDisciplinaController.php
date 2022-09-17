@@ -5,49 +5,40 @@ namespace App\Http\Controllers\Instituicao\Relatorios;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Alunos;
 use App\Models\Notas\LancamentoNotas;
-use App\Models\RelatorioAlunos;
+use App\Models\RelatorioDisciplinas;
 
 use Carbon\Carbon;
 
-class RelatorioAlunoController extends Controller
+class RelatorioDisciplinaController extends Controller
 {
-    public function index() {
-        $alunos = Alunos::get();
+    public function gerarRelatorioDisciplina($disciplina_id) {
+        $id = $disciplina_id;
 
-        return view('app.instituicao.relatorios.relatorio_alunos.index', compact('alunos'));
-    } 
-
-    public function gerarRelatorioAluno(Request $request, $aluno_id) {
-
-        $id = $aluno_id;
-
-        $count = LancamentoNotas::where('aluno_id', $id)->count();
-        $aluno = LancamentoNotas::where('aluno_id', $id)->get();
+        $count = LancamentoNotas::where('disciplina_id', $id)->count();
+        $disciplina = LancamentoNotas::where('disciplina_id', $id)->get();
 
         // ---------------------- Notas ----------------------
         $somaNotas = [];
         $mediaNota = '';
 
-        foreach($aluno as $nota){
+        foreach($disciplina as $nota){
             $mediaNota = ($nota->nota_np1+$nota->nota_np2)/2;
             $somaNotas[] = $mediaNota;
         }
-
+        
         if(!empty($somaNotas)) {
-        $mediaN = array_sum($somaNotas)/$count;
+           $mediaN = array_sum($somaNotas)/$count;
         }
-
         // ---------------------- Faltas ----------------------
         $somaFaltas = [];
         $mediaFalta = '';
-
-        foreach($aluno as $falta){
+        
+        foreach($disciplina as $falta){
             $mediaFalta = $falta->qnt_faltas;
             $somaFaltas[] = $mediaFalta;
         }
-
+        
         if(!empty($somaFaltas)){
             $mediaF = array_sum($somaFaltas)/$count;
         }
@@ -56,7 +47,7 @@ class RelatorioAlunoController extends Controller
         $somaAulas = [];
         $mediaAula = '';
 
-        foreach($aluno as $aula){
+        foreach($disciplina as $aula){
             $mediaAula = $aula->qnt_aulas;
             $somaAulas[] = $mediaAula;
         }
@@ -66,8 +57,8 @@ class RelatorioAlunoController extends Controller
         }
 
         if(!empty($somaNotas) && !empty($somaFaltas) && !empty($somaAulas)) {
-            RelatorioAlunos::insert([
-                'aluno_id' => $id,
+            RelatorioDisciplinas::insert([
+                'disciplina_id' => $id,
                 'media_notas' => $mediaN,
                 'media_faltas' => $mediaF,
                 'media_aulas' => $mediaA,
@@ -75,7 +66,7 @@ class RelatorioAlunoController extends Controller
             ]);
 
             $noti = [
-                'message' => 'Relatório do aluno gerado com sucesso!',
+                'message' => 'Relatório da disciplina gerado com sucesso!',
                 'alert-type' => 'success'
             ];
         } else {
@@ -85,13 +76,6 @@ class RelatorioAlunoController extends Controller
             ];
         }
 
-        return redirect()->route('relatorio-alunos.view-relatorios', $id)->with($noti);
-    }
-
-    public function viewRelatorio($aluno_id) {
-        $aluno = Alunos::where('id', $aluno_id)->first();
-        $relatorios = RelatorioAlunos::where('aluno_id', $aluno_id)->orderBy('id', 'DESC')->get();
-
-        return view('app.instituicao.relatorios.relatorio_alunos.view_relatorios', compact('aluno', 'relatorios'));
+        return redirect()->back()->with($noti);
     }
 }

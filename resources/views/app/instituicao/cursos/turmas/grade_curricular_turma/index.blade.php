@@ -73,6 +73,7 @@
                             <tr class="text-center">
                                 <th><b>Professor</b></th>
                                 <th>Disciplina</th>
+                                <th>Relatórios</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,6 +86,11 @@
                                 <tr class="text-center">
                                     <td>{{"$usuario->nome $usuario->sobrenome"}}</td>
                                     <td>{{$grade->Disciplina->disciplina}}</td>
+                                    <td class="text-center">
+                                        <a href="{{route('relatorio-disciplinas.gerar-relatorio-disciplina', $grade->disciplina_id)}}">
+                                            <i class="bx bx-plus-circle text-info fs-3 mx-3"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

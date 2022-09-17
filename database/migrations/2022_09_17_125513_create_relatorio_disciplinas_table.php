@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('relatorio_alunos', function (Blueprint $table) {
+        Schema::create('relatorio_disciplinas', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('aluno_id')->unsigned();
-            $table->foreign('aluno_id')->references('id')->on('alunos')->onDelete('cascade');
+            $table->unsignedBigInteger('disciplina_id')->unsigned();
+            $table->foreign('disciplina_id')->references('id')->on('disciplinas')->onDelete('cascade');
 
             $table->string('media_notas');
             $table->string('media_faltas');
             $table->string('media_aulas');
-
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relatorio_alunos');
+        Schema::dropIfExists('relatorio_disciplinas');
     }
 };

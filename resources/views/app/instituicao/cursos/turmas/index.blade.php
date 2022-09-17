@@ -65,10 +65,10 @@
                                         </a>
 
                                         <!-- Editar -->
-                                        <button type="button" class="dropdown-item">
+                                        <a href="{{route('semestre-atual.alunos-matriculados', $tr->id)}}" class="dropdown-item">
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Alunos Matriculados
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </td>

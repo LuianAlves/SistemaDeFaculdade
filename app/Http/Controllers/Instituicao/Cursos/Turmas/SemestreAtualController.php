@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Turmas;
+use App\Models\Alunos;
 use App\Models\Professores;
 use App\Models\Disciplinas;
 use App\Models\GradeCurricular;
@@ -139,5 +140,11 @@ class SemestreAtualController extends Controller
         ];
 
         return redirect()->back()->with($noti);
+    }
+
+    public function alunosMatriculados($turma_id) {
+        $alunos = Alunos::where('serie_turma', $turma_id)->get();
+
+        return view('app.instituicao.cursos.turmas.alunos_matriculados.index', compact('alunos'));
     }
 }

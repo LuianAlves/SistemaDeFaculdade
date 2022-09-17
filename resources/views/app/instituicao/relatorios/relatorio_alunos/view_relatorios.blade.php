@@ -27,9 +27,23 @@
                 </thead>
                 <tbody>
                     @foreach ($relatorios as $relatorio)
+                    @php
+                        $mediaPresenca = '';
+                        $faltas = $relatorio->media_faltas;
+                        $aulas = $relatorio->media_aulas;
+
+                        if(!empty($faltas) && !empty($aulas)){
+                            $porFalta = ($faltas/$aulas) * 100;
+                            $media = 100 - $porFalta;
+                            $mediaPresenca = str_replace('.', ',', round($media, 2)).'%';
+                        } else {
+                            $mediaPresenca = 'NC';
+                        }
+
+                    @endphp
                     <tr class="text-center">
-                        <td>{{str_replace('.', ',', round($relatorio->media_nota, 2))}}</td>
-                        <td>{{str_replace('.', ',', round($relatorio->media_presenca, 2))}}</td>
+                        <td>{{str_replace('.', ',', round($relatorio->media_notas, 2))}}</td>
+                        <td>{{$mediaPresenca}}</td>
                         <td>{{\Carbon\Carbon::parse($relatorio->created_at)->format('d/m/Y')}}</td>
                     </tr>
                     @endforeach

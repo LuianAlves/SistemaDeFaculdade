@@ -59,18 +59,20 @@
 
                         <!-- Gerar Relatório -->
                         <div class="row">
-                            <div class="col-4">
-                                <div class="card mini-card">
-                                    <div class="card-body">
-                                        <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="{{route('relatorio-alunos.gerar-relatorio-aluno',$aluno->id)}}">
-                                                <i class="bx bx-plus-circle"></i>
-                                            </a>
+                            @if(App\Models\Notas\LancamentoNotas::where('aluno_id', $aluno->id)->count() != 0)
+                                <div class="col-4">
+                                    <div class="card mini-card">
+                                        <div class="card-body">
+                                            <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{route('relatorio-alunos.gerar-relatorio-aluno',$aluno->id)}}">
+                                                    <i class="bx bx-plus-circle"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                             @if(App\Models\RelatorioAlunos::where('aluno_id', $aluno->id)->count() != 0)
                                 <div class="col-4">
                                     <div class="card mini-card">

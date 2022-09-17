@@ -15,6 +15,7 @@ use App\Http\Controllers\Instituicao\Cursos\Turmas\TurmasController;
 use App\Http\Controllers\Instituicao\Cursos\Turmas\SemestreAtualController;
 use App\Http\Controllers\Instituicao\Relatorios\RelatorioTurmaController;
 use App\Http\Controllers\Instituicao\Relatorios\RelatorioAlunoController;
+use App\Http\Controllers\Instituicao\Relatorios\RelatorioDisciplinaController;
 use App\Http\Controllers\Instituicao\Documentos\DocumentosController;
 
 // Calendario Academico
@@ -122,6 +123,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         // Administrar grade curricular
         Route::get('/semestre-atual/grade-curricular/{turma_id}', [SemestreAtualController::class, 'gradeCurricular'])->name('semestre-atual.grade-curricular');
         Route::post('/semestre-atual/grade-curricular/store', [SemestreAtualController::class, 'store'])->name('semestre-atual.store');
+        Route::get('/semestre-atual/alunos-matriculados/{turma_id}', [SemestreAtualController::class, 'alunosMatriculados'])->name('semestre-atual.alunos-matriculados');
 
         // Relatorios
         Route::prefix('/relatorios')->group(function() {
@@ -132,6 +134,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
             // Turmas
             Route::get('/turmas/gerar/{turma_id}', [RelatorioTurmaController::class, 'gerarRelatorioTurma'])->name('relatorio-turmas.gerar-relatorio-turma');
+            
+            // Disciplinas
+            Route::get('/disciplinas/gerar/{disciplina_id}', [RelatorioDisciplinaController::class, 'gerarRelatorioDisciplina'])->name('relatorio-disciplinas.gerar-relatorio-disciplina');
         });
 
         // Usuários

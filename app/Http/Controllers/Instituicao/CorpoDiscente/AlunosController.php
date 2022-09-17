@@ -113,7 +113,7 @@ class AlunosController extends Controller
             ]); 
             
             Alunos::where('id', $aluno_id)->update([
-                'usuario_id' => $request->aluno_id,
+                'usuario_id' => $usuario_id,
                 'cpf' => $request->cpf,
                 'rg' => $request->rg,
                 'email_pessoal' => $request->email_pessoal,

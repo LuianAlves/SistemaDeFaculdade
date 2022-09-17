@@ -66,7 +66,7 @@ class TurmasController extends Controller
         } else {
             $countAlunos = Alunos::where('serie_turma', $turma->id)->count();
 
-            if(!$countAlunos >= 5) {
+            if(!$countAlunos > 5) {
                 $noti = [
                     'message' => 'Error! Limite atual de alunos não atingido.',
                     'alert-type' => 'error'
@@ -80,6 +80,7 @@ class TurmasController extends Controller
                     'grade_curricular_id' => $gradeCurricular->id,
                     'periodo_escolar_id' => $periodoEscolar->id,
                     'codigo_turma' => $codigoTurma,
+                    'data_inicio_turma' => Carbon::now()->format('d-m-Y'),
                     'created_at' => Carbon::now()
                 ]);
 
