@@ -1,12 +1,13 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <div class="card mt-3">
-            <h4 class="card-header">Disciplinas lecionadas no semestre</h4>
-            <div class="card-body">
-                <div class="text-nowrap">
+    <div class="card">
+        <div class="row p-4">
+            <div class="col-12">
+                <h3 class="card-header p-0 my-4 mx-2" style="color: #14a881; border-bottom: 3px solid #14a881;">Disciplinas
+                    lecionadas
+                </h3>
+                <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr class="text-center">
@@ -17,8 +18,8 @@
                         <tbody>
                             @foreach ($semestreAtual as $dp)
                                 <tr class="text-center">
-                                    <td>{{$dp->Turma->codigo_turma}}</td>
-                                    <td>{{$dp->Disciplina->disciplina}}</td>
+                                    <td>{{ $dp->Turma->codigo_turma }}</td>
+                                    <td>{{ $dp->Disciplina->disciplina }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -27,5 +28,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

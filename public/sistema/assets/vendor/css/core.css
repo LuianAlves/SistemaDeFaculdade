@@ -37,7 +37,7 @@
     --bs-black-rgb: 67, 89, 113;
     --bs-body-color-rgb: 105, 122, 141;
     --bs-body-bg-rgb: 245, 245, 249;
-    --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --bs-font-sans-serif: "Poppins", sans-serif;
     --bs-font-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-root-font-size: 16px;
@@ -348,9 +348,7 @@ tfoot,
 tr,
 td,
 th {
-    border-color: inherit;
-    border-style: solid;
-    border-width: 0;
+    border: none;
 }
 
 label {
@@ -1826,10 +1824,11 @@ progress {
 
 .table>thead {
     vertical-align: bottom;
+    background-color: #14a881;
 }
 
 .table> :not(:first-child) {
-    border-top: 2px solid #d9dee3;
+    /* border-top: 2px solid #d9dee3; */
 }
 
 .caption-top {
@@ -6551,7 +6550,7 @@ a.invert-bg-dark:focus {
 }
 
 .table:not(.table-dark) th {
-    color: #566a7f;
+    color: #fff;
 }
 
 .table-border-bottom-0 tr:last-child td,

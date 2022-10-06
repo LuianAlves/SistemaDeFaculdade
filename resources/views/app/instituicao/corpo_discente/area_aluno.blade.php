@@ -1,28 +1,28 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card mt-3" id="card-main">
+    <div class="card" id="card-main">
+        <div class="row p-4">
+            <div class="col-12">
+                <div class="row mb-5">
+                    <div class="d-flex justify-content-between align-items-center">
+                        @canany(['dev', 'administracao', 'professor'])
+                            <h3 class="card-header p-0 my-4 mx-2" style="color: #14a881; border-bottom: 3px solid #14a881;">
+                                {{ 'Área do aluno - ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
+                            </h3>
+                            <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
+                                <b>Listagem de alunos</b>
+                            </a>
+                        @endcanany
+                        @can('aluno')
+                            <h4 class="card-title">
+                                {{ 'Bem vindo ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
+                            </h4>
+                        @endcan
+
+                    </div>
+                </div>
                 <div class="card-body">
 
-                    <div class="row mb-5">
-                        <div class="d-flex justify-content-between align-items-center">
-                            @canany(['dev', 'administracao', 'professor'])
-                                <h4 class="card-title">
-                                    {{ 'Área do aluno - ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
-                                </h4>
-                                <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
-                                    <b>Listagem de alunos</b>
-                                </a>
-                            @endcanany
-                            @can('aluno')
-                                <h4 class="card-title">
-                                    {{ 'Bem vindo ' . ucwords($aluno->Estudante->nome) . ' ' . ucwords($aluno->Estudante->sobrenome) }}
-                                </h4>
-                            @endcan
-                            
-                        </div>
-                    </div>
 
                     @canany(['administracao', 'dev'])
                         <div class="row">
@@ -59,13 +59,13 @@
 
                         <!-- Gerar Relatório -->
                         <div class="row">
-                            @if(App\Models\Notas\LancamentoNotas::where('aluno_id', $aluno->id)->count() != 0)
+                            @if (App\Models\Notas\LancamentoNotas::where('aluno_id', $aluno->id)->count() != 0)
                                 <div class="col-4">
                                     <div class="card mini-card">
                                         <div class="card-body">
                                             <h6 class="text-center fw-bold m-3">Gerar relatório</h6>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{route('relatorio-alunos.gerar-relatorio-aluno',$aluno->id)}}">
+                                                <a href="{{ route('relatorio-alunos.gerar-relatorio-aluno', $aluno->id) }}">
                                                     <i class="bx bx-plus-circle"></i>
                                                 </a>
                                             </div>
@@ -73,13 +73,13 @@
                                     </div>
                                 </div>
                             @endif
-                            @if(App\Models\RelatorioAlunos::where('aluno_id', $aluno->id)->count() != 0)
+                            @if (App\Models\RelatorioAlunos::where('aluno_id', $aluno->id)->count() != 0)
                                 <div class="col-4">
                                     <div class="card mini-card">
                                         <div class="card-body">
                                             <h6 class="text-center fw-bold m-3">Relatórios</h6>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{route('relatorio-alunos.view-relatorios', $aluno->id)}}">
+                                                <a href="{{ route('relatorio-alunos.view-relatorios', $aluno->id) }}">
                                                     <i class="bx bx-file"></i>
                                                 </a>
                                             </div>

@@ -4,17 +4,18 @@
 <div class="card">
     <div class="row p-4">
         <div class="col-12">
-            <h5 class="card-header p-0 my-4 mx-3">Notas e faltas</h5>
+            <h3 class="card-header p-0 my-4 mx-2" style="color: #14a881; border-bottom: 3px solid #14a881;">Notas e faltas</h3>
             <div class="card-body p-0 mx-2">
                 <table class="table table-striped">
-                    <thead class="table-border-bottom-0 text-center">
+                    <thead class="table-border-bottom-0 text-center" style="">
                         <tr>
-                            <th>Disciplinas</th>
-                            <th>Nota NP1</th>
-                            <th>Nota NP1 Sub</th>
-                            <th>Nota NP2</th>
-                            <th>Nota NP2 Sub</th>
-                            <th>Nota Exame</th>
+                            <th>Disciplina</th>
+                            <th>Professor</th>
+                            <th>NP1</th>
+                            <th>NP1 Sub</th>
+                            <th>NP2</th>
+                            <th>NP2 Sub</th>
+                            <th>Exame</th>
                             <th>Faltas</th>
                         </tr>
                     </thead>

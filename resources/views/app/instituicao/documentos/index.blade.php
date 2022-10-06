@@ -1,21 +1,11 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card mt-3" id="card-main">
+<div class="card" id="card-main">
+    <div class="row p-4">
+            <div class="col-12">
+                <h3 class="card-header p-0 my-4 mx-2" style="color: #14a881; border-bottom: 3px solid #14a881;">Solicitar
+                    documentos</h3>
                 <div class="card-body">
-
-                    <div class="row mb-5">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">
-                                Solicitação de documentos
-                            </h4>
-                            <a type="button" class="btn btn-sm btn-primary fw-bold" href="{{ route('alunos.index') }}">
-                                <b>Listagem de alunos</b>
-                            </a>
-
-                        </div>
-                    </div>
 
                     {{-- Boletim --}}
                     <div class="row">
@@ -24,8 +14,8 @@
                                 <div class="card-body">
                                     <h6 class="text-center fw-bold m-2">Boletim</h6>
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" class="editbtn" style="background: transparent; border: none;"
-                                            value="">
+                                        <button type="button" class="editbtn"
+                                            style="background: transparent; border: none;" value="">
                                             <i class="bx bx-plus-circle"></i>
                                         </button>
                                     </div>
@@ -41,8 +31,8 @@
                                 <div class="card-body">
                                     <h6 class="text-center fw-bold m-2">Boletim escolar</h6>
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" class="editbtn" style="background: transparent; border: none;"
-                                            value="">
+                                        <button type="button" class="editbtn"
+                                            style="background: transparent; border: none;" value="">
                                             <i class="bx bx-plus-circle"></i>
                                         </button>
                                     </div>
@@ -58,7 +48,8 @@
                                 <div class="card-body">
                                     <h6 class="text-center fw-bold m-2">Disciplinas em dependência</h6>
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" class="editbtn" style="background: transparent; border: none;" value="">
+                                        <button type="button" class="editbtn"
+                                            style="background: transparent; border: none;" value="">
                                             <i class="bx bx-plus-circle"></i>
                                         </button>
                                     </div>

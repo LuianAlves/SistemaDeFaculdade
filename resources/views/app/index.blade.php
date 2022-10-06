@@ -41,7 +41,15 @@ if(empty($usuario->departamento_id)){
                             {{"Turma $turma->codigo_turma"}}
                         </h5>
                         
-                        <h5 class="text-success fw-semibold">{{str_replace('_', ' ', ucfirst($semestreAtual->semestre_lecionado))}}</h5>
+                        @if(!empty($semestreAtual))
+                            <h5 class="text-success fw-semibold">{{str_replace('_', ' ', ucfirst($semestreAtual->semestre_lecionado))}}</h5>
+                        @else    
+                            <div class="d-flex align-items-center">
+
+                                <span class="text-muted fw-semibold">Semestre atual: </span>
+                                <span class="text-light mx-3">Informação ainda indisponível.</span>
+                            </div>
+                        @endif
                     @endcan
                 </div>
             </div>
