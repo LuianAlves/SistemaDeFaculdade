@@ -327,6 +327,7 @@ svg {
 table {
     caption-side: bottom;
     border-collapse: collapse;
+    border: 1px solid #0a8363;
 }
 
 caption {
@@ -1808,7 +1809,7 @@ progress {
     margin-bottom: 1rem;
     color: #697a8d;
     vertical-align: middle;
-    border-color: #d9dee3;
+    border-color: #14a881;
 }
 
 .table> :not(caption)>*>* {
