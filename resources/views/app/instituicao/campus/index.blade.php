@@ -4,11 +4,11 @@
     <div class="card">
         <div class="row p-4">
             <div class="col-12">
-                <!-- Header Lista -->
+                <!-- Header Título -->
                 <h3 class="card-header p-0 my-4 mx-4" style="color: #14a881; border-bottom: 3px solid #14a881;">Campus
                 </h3>
 
-                <!-- abela de Usuarios -->
+                <!-- Tabela de Usuarios -->
                 <div class="card-body">
                     <div class="text-nowrap">
                         <table class="table">
@@ -66,12 +66,12 @@
 
                 <div class="card-footer">
                     <div class="d-flex justify-content-end">
-
                         <button type="button" class="btn btn-sm btn-primary fw-bold"
-                            data-bs-toggle="modal"data-bs-target="#adicionarNovoCampus" style="background: #14a881; border-color: #14a881;">
-                        <b>Campus +</b>
-                    </button>
-                </div>
+                            data-bs-toggle="modal"data-bs-target="#adicionarNovoCampus"
+                            style="background: #14a881; border-color: #14a881;">
+                            <b>Campus +</b>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
