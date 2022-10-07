@@ -24,7 +24,7 @@ class CampusController extends Controller
      */
     public function index()
     {
-        $campus = Campus::get();
+        $campus = Campus::paginate(5);
         $estados = Estados::get();
 
         return view('app.instituicao.campus.index', compact('campus', 'estados'));

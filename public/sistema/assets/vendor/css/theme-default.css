@@ -147,10 +147,10 @@ a.bg-primary:focus {
 .pagination li.active>a:not(.page-link),
 .pagination li.active>a:not(.page-link):hover,
 .pagination li.active>a:not(.page-link):focus {
-    border-color: #34ebba;
-    background-color: #34ebba;
-    color: #fff;
-    box-shadow: 0 0.125rem 0.25rem rgba(211, 250, 240, 0.4);
+    border-color: var(--page-item-borda-cor-padrao);
+    background-color: var(--page-item-fundo-cor-padrao);
+    color: var(--page-item-fonte-cor-padrao);
+    /* box-shadow: 0 0.125rem 0.25rem rgba(211, 250, 240, 0.4); */
 }
 
 .progress-bar {
@@ -909,12 +909,12 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
 }
 
 .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
-    color: #34ebba;
-    background-color: rgba(211, 250, 240, 0.16) !important;
+    color: var(--navbar-item-cor-padrao);
+    background-color: var(--navbar-item-fundo-padrao);
 }
 
 .bg-menu-theme .menu-inner>.menu-item.active:before {
-    background: #34ebba;
+    background: var(--navbar-item-barra-lateral-cor-padrao);
 }
 
 .bg-menu-theme .menu-sub>.menu-item>.menu-link:before {
@@ -927,8 +927,8 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
 }
 
 .app-brand .layout-menu-toggle {
-    background-color: #34ebba;
-    border: 7px solid #f5f5f9;
+    background-color: var(--icone-navbar-toggle-fundo-padrao);
+    border: var(--icone-navbar-toggle-borda-padrao);
 }
 
 .app-brand .layout-menu-toggle i {

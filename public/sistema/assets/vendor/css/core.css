@@ -1,49 +1,58 @@
 @charset "UTF-8";
 :root {
     /* ----------------------------------------- */
+    /* BACKGROUND PADRAO */
+    --bg-padrao: #5dbad6;
+    /* PAGINAÇÃO */
+    --page-item-fonte-cor-padrao: #fff;
+    --page-item-fundo-cor-padrao: #2950b9;
+    --page-item-borda-cor-padrao: #2950b9;
+    /* NAVBAR ITENS */
+    --navbar-item-cor-padrao: #2950b9;
+    --navbar-item-fundo-padrao: rgba(211, 250, 240, 0.16);
+    --navbar-item-barra-lateral-cor-padrao: #2950b9;
+    /* ICONE NAVBAR TOGLLE - MENU MOBILE */
+    --icone-navbar-toggle-fundo-padrao: #2950b9;
+    --icone-navbar-toggle-borda-padrao: 7px solid #2950b9;
     /* Botão */
     --btn-fonte-cor-padrao: #fff;
     --btn-fonte-tamanho-padrao: 12px;
     --btn-fonte-padrao: "Poppins", sans-serif;
     --btn-fonte-grossura-padrao: 500;
-    --btn-fundo-cor-padrao: #fd7e14;
+    --btn-fundo-cor-padrao: #2950b9;
     --btn-padding-padrao: 5px 15px;
-    --btn-borda-cor-padrao: #d46000;
+    --btn-borda-cor-padrao: #2950b9;
     --btn-borda-radius-padrao: 3px;
     --btn-borda-grossura-padrao: 1px solid;
-    /* -- Botão HOVER */
     --btn-fonte-cor-padrao-hover: #fff;
     --btn-fonte-grossura-padrao-hover: 500;
-    --btn-fundo-cor-padrao-hover: #d46000;
+    --btn-fundo-cor-padrao-hover: #2950b9;
+    /* Botão Outline */
+    --btn-outline-fundo-cor-padrao: transparent;
+    --btn-outline-fonte-cor-padrao: #8592a3;
+    --btn-outline-padding-padrao: 5px 20px;
+    --btn-outline-borda-cor-padrao: #8592a3;
+    --btn-outline-borda-radius-padrao: 3px;
+    --btn-outline-borda-grossura-padrao: 1px solid;
+    --btn-outline-fonte-cor-padrao-hover: #fff;
+    --btn-outline-fonte-grossura-padrao-hover: 500;
+    --btn-outline-fundo-cor-padrao-hover: #788393;
     /* tabela */
-    --tabela-cor-padrao: #6610f2;
-    --tabela-borda-cor-padrao: #6610f2;
+    --tabela-cor-padrao: #5dbad6;
+    --tabela-borda-cor-padrao: #5dbad6;
     --tabela-borda-grossura-padrao: 1px solid;
     /* titulo */
-    --titulo-cor-padrao: #6610f2;
+    --titulo-cor-padrao: #5dbad6;
     --titulo-tamanho-padrao: 26px;
     --titulo-fonte-padrao: "Poppins", sans-serif;
     --titulo-fonte-grossura-padrao: 500;
-    --titulo-borda-cor-padrao: #6610f2;
+    --titulo-borda-cor-padrao: #5dbad6;
     --titulo-borda-grossura-padrao: 2px solid;
     /* texto */
     --texto-cor-padrao: #45505b;
     --texto-tamanho-padrao: #6610f2;
     --texto-fonte-padrao: "Poppins", sans-serif;
-    /* 
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-            ------
-    */
+    /* ------ ------------------------------------------------------------- ----------------*/
     --bs-blue: #007bff;
     --bs-indigo: #6610f2;
     --bs-purple: #34ebba;
@@ -384,8 +393,8 @@ svg {
     font-family: var(--btn-fonte-padrao);
     font-weight: var(--btn-fonte-grossura-padrao);
     background-color: var(--btn-fundo-cor-padrao);
-    border: var(--btn-borda-cor-padrao);
-    border-color: var(--btn-borda-grossura-padrao);
+    border: var(--btn-borda-grossura-padrao);
+    border-color: var(--btn-borda-cor-padrao);
     border-radius: var(--btn-borda-radius-padrao);
     padding: var(--btn-padding-padrao);
 }
@@ -394,6 +403,24 @@ svg {
     color: var(--btn-fonte-cor-padrao-hover);
     font-weight: var(--btn-fonte-grossura-padrao-hover);
     background-color: var(--btn-fundo-cor-padrao-hover);
+    transform: translateY(-1px);
+}
+
+.btn-outline-padrao {
+    color: var(--btn-outline-fonte-cor-padrao);
+    font-size: var(--btn-fonte-tamanho-padrao);
+    font-family: var(--btn-fonte-padrao);
+    font-weight: var(--btn-fonte-grossura-padrao);
+    background-color: var(--btn-outline-fundo-cor-padrao);
+    border: var(--btn-outline-borda-grossura-padrao);
+    border-color: var(--btn-outline-borda-cor-padrao);
+    border-radius: var(--btn-outline-borda-radius-padrao);
+    padding: var(--btn-outline-padding-padrao);
+}
+
+.btn-outline-padrao:hover {
+    color: var(--btn-outline-fonte-cor-padrao-hover);
+    background-color: var(--btn-outline-fundo-cor-padrao-hover);
     transform: translateY(-1px);
 }
 
@@ -10975,6 +11002,11 @@ button.list-group-item-gray.active {
 .text-reset {
     --bs-text-opacity: 1;
     color: inherit !important;
+}
+
+.bg-padrao {
+    --bs-bg-opacity: 1;
+    background-color: var(--bg-padrao) !important;
 }
 
 .bg-primary {
