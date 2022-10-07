@@ -5,7 +5,7 @@
         <div class="row p-4">
             <div class="col-12">
                 <!-- Header Título -->
-                <h3 class="card-header p-0 my-4 mx-4" style="color: #14a881; border-bottom: 3px solid #14a881;">Campus
+                <h3 class="title-padrao p-0 my-4 mx-4">Campus
                 </h3>
 
                 <!-- Tabela de Usuarios -->
@@ -66,9 +66,8 @@
 
                 <div class="card-footer">
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-sm btn-primary fw-bold"
-                            data-bs-toggle="modal"data-bs-target="#adicionarNovoCampus"
-                            style="background: #14a881; border-color: #14a881;">
+                        <button type="button" class="btn-padrao"
+                            data-bs-toggle="modal"data-bs-target="#adicionarNovoCampus">
                             <b>Campus +</b>
                         </button>
                     </div>
