@@ -25,6 +25,11 @@
                     </thead>
                     <tbody>
                         @foreach ($usuarios as $usuario)
+                        @php
+                            $id = $usuario->user_id;
+                            $imagem = App\Models\User::where('id', $id)->first();
+                        @endphp
+
                         <tr>
                             <td>
                                 <i class="fab fa-angular fa-lg text-danger"></i>
@@ -36,8 +41,7 @@
                                     class="list-unstyled users-list m-0 avatar-group d-flex justify-content-center align-items-center">
                                     <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                                         class="avatar avatar-xs pull-up" title="{{$usuario->nome}}">
-                                        <img src="{{ $usuario->foto_usuario != '' ? asset($usuario->foto_usuario) : asset('sistema/assets/adicionar_foto.png') }}" alt="Avatar"
-                                            class="rounded-circle" />
+                                        <img src="{{ $imagem->profile_photo_path != '' ? url('sistema/usuarios/foto/'.$imagem->profile_photo_path) : url('sistema/assets/adicionar_foto.png')}}" alt="Avatar" class="rounded-circle" />
                                     </li>
                                 </ul>
                             </td>
