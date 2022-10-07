@@ -22,7 +22,7 @@ class DisciplinasController extends Controller
     public function index()
     {
         $classificacaoCursos = ClassificacaoCursos::get();
-        $disciplinas = Disciplinas::orderBy('disciplina', 'ASC')->get();
+        $disciplinas = Disciplinas::orderBy('disciplina', 'ASC')->paginate(5);
 
         return view('app.instituicao.cursos.disciplinas.index', compact('classificacaoCursos', 'disciplinas'));
     }

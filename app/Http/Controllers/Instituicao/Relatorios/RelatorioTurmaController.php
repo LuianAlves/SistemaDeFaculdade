@@ -27,7 +27,12 @@ class RelatorioTurmaController extends Controller
             $somaNotas[] = $mediaNota;
         }
         
-        $mediaN = array_sum($somaNotas)/$count;
+        if($count != 0) {
+            $mediaN = array_sum($somaNotas)/$count;
+        } else {
+            $mediaN = "NC";
+        }
+
 
         // ---------------------- Faltas ----------------------
         $somaFaltas = [];
@@ -38,7 +43,11 @@ class RelatorioTurmaController extends Controller
             $somaFaltas[] = $mediaFalta;
         }
         
-        $mediaF = array_sum($somaFaltas)/$count;
+        if($count != 0) {
+            $mediaF = array_sum($somaFaltas)/$count;
+        } else {
+            $mediaF = "NC";
+        }
 
         // ---------------------- Aulas ----------------------
         $somaAulas = [];
@@ -49,7 +58,11 @@ class RelatorioTurmaController extends Controller
             $somaAulas[] = $mediaAula;
         }
 
-        $mediaA = array_sum($somaAulas)/$count;
+        if($count != 0) {
+            $mediaA = array_sum($somaAulas)/$count;
+        } else {
+            $mediaA = "NC";
+        }
 
         RelatorioTurmas::insert([
             'turma_id' => $id,
@@ -64,6 +77,6 @@ class RelatorioTurmaController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('relatorio-alunos.view-relatorios', $id)->with($noti);
+        return redirect()->back()->with($noti);
     }
 }

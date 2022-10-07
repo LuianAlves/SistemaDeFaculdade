@@ -115,7 +115,7 @@ class UsuarioController extends Controller
             case 1:
                     $codigo = 'AD_'.$codigo_usuario;
                     $email = $nome.'.'.$sobrenome.'@administrativo.unitech.br';
-                    $permissao = 'administracao';
+                    $permissao = 'adm';
                     
                 break;
             case 2:

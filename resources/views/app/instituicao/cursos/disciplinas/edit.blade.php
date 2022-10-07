@@ -1,13 +1,13 @@
 <!-- Modal Editar Disciplina -->
 <div class="modal fade" id="editarDadosDisciplina" data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <form class="modal-content" id="editarDisciplina" action="{{ route('disciplinas.update') }}" method="post">
             @csrf
 
             <input type="hidden" name="disciplina_id" id="disciplina_id">
 
             {{-- Header --}}
-            <div class="modal-header bg-primary">
+            <div class="modal-header bg-padrao">
                 <div class="nav-align-top">
                     <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
                         <li class="nav-item text-white">
@@ -78,10 +78,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn-outline-padrao" data-bs-dismiss="modal">
                     Fechar
                 </button>
-                <button type="button" class="btn btn-primary" id="updateForm">Atualizar</button>
+                <button type="button" class="btn-padrao" id="updateForm">Atualizar</button>
             </div>
 
         </form>

@@ -42,7 +42,7 @@
     --tabela-borda-cor-padrao: #5dbad6;
     --tabela-borda-grossura-padrao: 1px solid;
     /* titulo */
-    --titulo-cor-padrao: #5dbad6;
+    --titulo-cor-padrao: #10596f;
     --titulo-tamanho-padrao: 26px;
     --titulo-fonte-padrao: "Poppins", sans-serif;
     --titulo-fonte-grossura-padrao: 500;
@@ -2813,7 +2813,7 @@ textarea.form-control-lg {
     border: 1px solid #45505b;
     border-radius: 0.25rem;
     font-weight: 700;
-    padding: 8px;
+    padding: 6px 2%;
     text-transform: uppercase;
 }
 

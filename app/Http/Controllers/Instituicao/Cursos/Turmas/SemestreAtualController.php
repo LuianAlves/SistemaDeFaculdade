@@ -21,7 +21,7 @@ use DateInterval;
 class SemestreAtualController extends Controller
 {
     public function gradeCurricular($turma_id) {
-        $gradeSemestre = SemestreAtual::where('turma_id', $turma_id)->get();
+        $gradeSemestre = SemestreAtual::where('turma_id', $turma_id)->paginate(5);
 
         $turma = Turmas::findOrFail($turma_id);
 
@@ -71,10 +71,13 @@ class SemestreAtualController extends Controller
         $semestre4 = substr(json_decode(json_encode($r[1][1]), true)['date'], 0, 10);
         $semestre5 = substr(json_decode(json_encode($r[2][0]), true)['date'], 0, 10);
         $semestre6 = substr(json_decode(json_encode($r[2][1]), true)['date'], 0, 10);
-        $semestre7 = substr(json_decode(json_encode($r[3][0]), true)['date'], 0, 10);
-        $semestre8 = substr(json_decode(json_encode($r[3][1]), true)['date'], 0, 10);
-        $semestre9 = substr(json_decode(json_encode($r[4][0]), true)['date'], 0, 10);
-        $semestre10 = substr(json_decode(json_encode($r[4][1]), true)['date'], 0, 10);
+        
+        if($curso->quantidade_semestres > 6) {
+            $semestre7 = substr(json_decode(json_encode($r[3][0]), true)['date'], 0, 10);
+            $semestre8 = substr(json_decode(json_encode($r[3][1]), true)['date'], 0, 10);
+            $semestre9 = substr(json_decode(json_encode($r[4][0]), true)['date'], 0, 10);
+            $semestre10 = substr(json_decode(json_encode($r[4][1]), true)['date'], 0, 10);
+        }
 
         // Calculando qual semestre estou
         if($dataAtual >= $semestre1 && $dataAtual < $semestre2) {              // semestre 1
@@ -143,7 +146,7 @@ class SemestreAtualController extends Controller
     }
 
     public function alunosMatriculados($turma_id) {
-        $alunos = Alunos::where('serie_turma', $turma_id)->get();
+        $alunos = Alunos::where('serie_turma', $turma_id)->paginate(5);
 
         return view('app.instituicao.cursos.turmas.alunos_matriculados.index', compact('alunos'));
     }

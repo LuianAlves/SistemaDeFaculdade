@@ -1,5 +1,7 @@
 @php
     $usuario_id = App\Models\Usuarios::where('user_id', Auth::id())->first();
+    
+    $route = Route::current()->getName();
 @endphp
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -18,7 +20,7 @@
     <ul class="menu-inner py-1">
 
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item {{$route == 'dashboard' ? 'active' : ''}}">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -31,7 +33,7 @@
             </li>
 
             <!-- Novo Campus -->
-            <li class="menu-item">
+            <li class="menu-item {{$route == 'campus.index' ? 'active' : ''}}">
                 <a href="{{ route('campus.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-building-house"></i>
                     <div data-i18n="Basic">Campus</div>
@@ -42,7 +44,7 @@
         @if(App\Models\Campus::count() != 0)
             <!-- Cursos -->
             @can('dev')
-                <li class="menu-item">
+                <li class="menu-item {{$route == 'cursos.index' ? 'active' : ''}}">
                     <a href="{{route('cursos.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-book-add"></i>
                         <div data-i18n="Basic">Cursos</div>
@@ -53,7 +55,7 @@
             @if(App\Models\Cursos::count() != 0)
                 <!-- Disciplinas -->
                 @can('dev')
-                    <li class="menu-item">
+                    <li class="menu-item {{$route == 'disciplinas.index' ? 'active' : ''}}">
                         <a href="{{route('disciplinas.index')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-book-reader"></i>
                             <div data-i18n="Basic">Disciplinas</div>
@@ -64,7 +66,7 @@
                 <!-- Turmas -->
                 @if(App\Models\Turmas::count() != 0)
                     @canany(['administracao', 'dev'])
-                        <li class="menu-item">
+                        <li class="menu-item {{$route == 'turmas.index' ? 'active' : ''}}">
                             <a href="{{route('turmas.index')}}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-user-plus"></i>
                                 <div data-i18n="Basic">Turmas</div>
@@ -77,19 +79,21 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text"></span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{$route == 'area-permissao-professor.meu-cadastro' ? 'active' : ''}}">
                         <a href="{{route('area-permissao-professor.meu-cadastro', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-face"></i>
                             <div data-i18n="Basic">Meu cadastro</div>
                         </a>
-                    
+                    </li>
                     @if(App\Models\Alunos::count() != 0)
+                    <li class="menu-item {{$route == 'alunos.index' ? 'active' : ''}}">
                         <a href="{{route('alunos.index')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Basic">Meus alunos</div>
                         </a>
+                    </li>
                     @endif
-                    
+                    <li class="menu-item {{$route == 'area-permissao-professor.disciplinas-lecionadas' ? 'active' : ''}}">
                         <a href="{{route('area-permissao-professor.disciplinas-lecionadas', $usuario_id)}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-book-reader"></i>
                             <div data-i18n="Basic">Disciplinas lecionadas</div>
@@ -103,55 +107,69 @@
                     </li>
                 @endcanany
 
-                <!-- Usuários -->
-                <li class="menu-item">
-                    <!-- Novo Usuário -->
-                    @canany(['dev', 'administracao'])
+                <!-- Novo Usuário -->
+                @canany(['dev', 'administracao'])
+                    <li class="menu-item {{$route == 'usuario.index' ? 'active' : ''}}">
                         <a href="{{route('usuario.index')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-plus"></i>
                             <div data-i18n="Basic">Usuários</div>
                         </a>
-                    @endcanany
+                    </li>
+                @endcanany
 
-                    <!-- Área do Aluno -->
-                    @canany(['administracao', 'dev'])
-                        @if(App\Models\Alunos::count() != 0)
+                <!-- Área do Aluno -->
+                @canany(['administracao', 'dev'])
+                    @if(App\Models\Alunos::count() != 0)
+                        <li class="menu-item {{$route == 'alunos.index' ? 'active' : ''}}">
                             <a href="{{route('alunos.index')}}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-user"></i>
                                 <div data-i18n="Basic">Alunos</div>
                             </a>
-                        @endif
-                        @if(App\Models\Professores::count() != 0)
+                        </li>
+                    @endif
+                    @if(App\Models\Professores::count() != 0)
+                        <li class="menu-item {{$route == 'professores.index' ? 'active' : ''}}">
                             <a href="{{route('professores.index')}}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-user"></i>
                                 <div data-i18n="Basic">Professores</div>
                             </a>
-                        @endif
-                    @endcanany
+                        </li>
+                    @endif
+                @endcanany
 
                     @can('aluno')
-                        <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-face"></i>
-                            <div data-i18n="Basic">Meu cadastro</div>
-                        </a>
-                        <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-expand"></i>
-                            <div data-i18n="Basic">Dados do curso</div>
-                        </a>
-                        <a href="{{route('area-permissao-aluno.notas-faltas', $usuario_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-exclude"></i>
-                            <div data-i18n="Basic">Notas e faltas</div>
-                        </a>
-                        <a href="{{route('area-permissao-aluno.integracao-curricular', $usuario_id)}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-border-all"></i>
-                            <div data-i18n="Basic">Integração curricular</div>
-                        </a>
-                        <a href="{{route('documentos.index')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-file"></i>
-                            <div data-i18n="Basic">Solicitar documentos</div>
-                        </a>
+                        <li class="menu-item {{$route == 'area-permissao-aluno.meu-cadastro' ? 'active' : ''}}">
+                            <a href="{{route('area-permissao-aluno.meu-cadastro', $usuario_id)}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-face"></i>
+                                <div data-i18n="Basic">Meu cadastro</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{$route == 'area-permissao-aluno.dados-curso' ? 'active' : ''}}">
+                            <a href="{{route('area-permissao-aluno.dados-curso', $usuario_id)}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-expand"></i>
+                                <div data-i18n="Basic">Dados do curso</div>
+                            </a>
+                        </li>
+                            <li class="menu-item {{$route == 'area-permissao-aluno.notas-faltas' ? 'active' : ''}}">
+                            <a href="{{route('area-permissao-aluno.notas-faltas', $usuario_id)}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-exclude"></i>
+                                <div data-i18n="Basic">Notas e faltas</div>
+                            </a>
+                        </li>
+                            <li class="menu-item {{$route == 'area-permissao-aluno.integracao-curricular' ? 'active' : ''}}">
+                            <a href="{{route('area-permissao-aluno.integracao-curricular', $usuario_id)}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-border-all"></i>
+                                <div data-i18n="Basic">Integração curricular</div>
+                            </a>
+                        </li>
+                            <li class="menu-item {{$route == 'area-permissao-aluno.documentos' ? 'active' : ''}}">
+                            <a href="{{route('documentos.index')}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-file"></i>
+                                <div data-i18n="Basic">Solicitar documentos</div>
+                            </a>
+                        </li>
                     @endcan
-                </li>
+                
 
                 @canany(['dev', 'administracao'])
                     <li class="menu-header small text-uppercase">
@@ -159,7 +177,7 @@
                     </li>
 
                     <!-- Cadastrar Período Escolar -->
-                    <li class="menu-item">
+                    <li class="menu-item  {{$route == 'periodo-escolar.index' ? 'active' : ''}}">
                         <a href="{{ route('periodo-escolar.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Basic">Período Escolar</div>
@@ -167,34 +185,11 @@
                     </li>
 
                     <!-- Cadastrar Período de Avaliações -->
-                    <li class="menu-item">
+                    <li class="menu-item {{$route == 'periodo-avaliacoes.index' ? 'active' : ''}}">
                         <a href="{{ route('periodo-avaliacoes.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calendar"></i>
                             <div data-i18n="Basic">Período de Avaliações</div>
                         </a>
-                    </li>
-
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Acompanhamento pedagógico</span>
-                    </li>
-
-                    <li class="menu-item" style="">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="User interface">Relatórios</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="ui-accordion.html" class="menu-link">
-                                    <div data-i18n="Accordion">Turmas</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{route('relatorio-alunos.index')}}" class="menu-link">
-                                    <div data-i18n="Accordion">Alunos</div>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 @endcanany
             @endif

@@ -19,7 +19,7 @@ use DB;
 class TurmasController extends Controller
 {
     public function index() {
-        $turmas = Turmas::orderBy('created_at', 'DESC')->get();
+        $turmas = Turmas::orderBy('created_at', 'DESC')->paginate(5);
 
         return view('app.instituicao.cursos.turmas.index', compact('turmas'));
     }

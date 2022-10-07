@@ -1,11 +1,11 @@
 <!-- Modal Adicionar Curso -->
 <div class="modal fade" id="adicionarNovoCurso" data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog">
         <form class="modal-content" id="adicionarCurso" action="{{ route('cursos.store') }}" method="post">
             @csrf
 
             {{-- Header --}}
-            <div class="modal-header bg-primary">
+            <div class="modal-header bg-padrao">
                 <div class="nav-align-top">
                     <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
                         <li class="nav-item text-white">
@@ -25,8 +25,8 @@
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-fullname">Nome do Curso</label>
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-book-add"></i></span>
-                            <input type="text" class="form-control" name="curso" id="curso"
+                            <span class="input-group-text"><i class="bx bx-book-add" style="font-size: 12px;"></i></span>
+                            <input type="text" class="form-control form-control-sm" name="curso" id="curso"
                                 placeholder="Curso" />
                         </div>
                         <span class="text-danger">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-estate">Grau de Instrução</label>
-                        <select class="form-select" name="grau_instrucao_id">
+                        <select class="form-select form-select-sm" name="grau_instrucao_id">
 
                             @foreach ($grau_instrucao as $grau)
                                 <option id="grau_instrucao_{{$grau->id}}" value="{{$grau->id}}">{{$grau->grau_instrucao}}</option>
@@ -53,8 +53,8 @@
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-fullname">Quantidade de Semestres</label>
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-slider"></i></span>
-                            <input type="number" class="form-control" name="quantidade_semestres" id="quantidade_semestres" placeholder="Semestres do curso" />
+                            <span class="input-group-text"><i class="bx bx-slider" style="font-size: 12px;"></i></span>
+                            <input type="number" class="form-control form-control-sm" name="quantidade_semestres" id="quantidade_semestres" placeholder="Semestres do curso" />
                         </div>
                         <span class="text-danger">
                             <strong id="quantidade_semestres-error"></strong>
@@ -63,7 +63,7 @@
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-fullname">Descrição</label>
                         <div class="input-group input-group-merge">
-                            <textarea class="form-control" name="descricao" id="descricao" rows="5" placeholder="Descreva um pouco sobre o curso .."></textarea>
+                            <textarea class="form-control form-control-sm" name="descricao" id="descricao" rows="5" placeholder="Descreva um pouco sobre o curso .."></textarea>
                         </div>
                         <span class="text-danger">
                             <strong id="descricao-error"></strong>
@@ -73,10 +73,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn-outline-padrao" data-bs-dismiss="modal">
                     Fechar
                 </button>
-                <button type="button" class="btn btn-primary" id="createForm">Adicionar</button>
+                <button type="button" class="btn-padrao" id="createForm">Salvar</button>
             </div>
 
         </form>

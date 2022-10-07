@@ -1,6 +1,6 @@
 <!-- Modal Adicionar Usuario -->
 <div class="modal fade" id="visualizarDadosCurso" data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
 
             <div class="modal-body">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn-outline-padrao" data-bs-dismiss="modal">
                     Fechar
                 </button>
             </div>

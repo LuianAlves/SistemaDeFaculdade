@@ -45,7 +45,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn-outline-padrao" data-bs-dismiss="modal">
                     Fechar
                 </button>
             </div>

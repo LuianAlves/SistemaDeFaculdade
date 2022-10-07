@@ -1,13 +1,13 @@
 <!-- Modal Adicionar Curso -->
 <div class="modal fade" id="editarDadosCurso" data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <form class="modal-content" id="editarCurso" action="{{ route('cursos.update') }}" method="post">
             @csrf
 
             <input type="hidden" name="curso_id" id="curso_id">
 
             {{-- Header --}}
-            <div class="modal-header bg-primary">
+            <div class="modal-header bg-padrao">
                 <div class="nav-align-top">
                     <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
                         <li class="nav-item text-white">
@@ -27,8 +27,8 @@
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-fullname">Nome do Curso</label>
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-book-add"></i></span>
-                            <input type="text" class="form-control" name="curso" id="curso_edit" placeholder="Curso" />
+                            <span class="input-group-text"><i class="bx bx-book-add" style="font-size: 12px;"></i></span>
+                            <input type="text" class="form-control form-control-sm" name="curso" id="curso_edit" placeholder="Curso" />
                         </div>
                         <span class="text-danger">
                             <strong id="curso-error-edit"></strong>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-estate">Grau de Instrução</label>
-                        <select class="form-select" name="grau_instrucao_id" id="grau_instrucao_id_edit">
+                        <select class="form-select form-select-sm" name="grau_instrucao_id" id="grau_instrucao_id_edit">
 
                             @foreach ($grau_instrucao as $grau)
                                 <option value="{{$grau->id}}" data-value="{{$grau->grau_instrucao}}">{{$grau->grau_instrucao}}</option>
@@ -54,8 +54,8 @@
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-fullname">Quantidade de Semestres</label>
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-slider"></i></span>
-                            <input type="number" class="form-control" name="quantidade_semestres" id="quantidade_semestres_edit" placeholder="Curso" />
+                            <span class="input-group-text"><i class="bx bx-slider" style="font-size: 12px;"></i></span>
+                            <input type="number" class="form-control form-control-sm" name="quantidade_semestres" id="quantidade_semestres_edit" placeholder="Curso" />
                         </div>
                         <span class="text-danger">
                             <strong id="quantidade_semestres-error-edit"></strong>
@@ -64,7 +64,7 @@
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-fullname">Descrição</label>
                         <div class="input-group input-group-merge">
-                            <textarea class="form-control" name="descricao" id="descricao_edit" rows="5" placeholder="Descreva um pouco sobre o curso .."></textarea>
+                            <textarea class="form-control form-control-sm" name="descricao" id="descricao_edit" rows="5" placeholder="Descreva um pouco sobre o curso .."></textarea>
                         </div>
                         <span class="text-danger">
                             <strong id="descricao-error-edit"></strong>
@@ -74,10 +74,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn-outline-padrao" data-bs-dismiss="modal">
                     Fechar
                 </button>
-                <button type="button" class="btn btn-primary" id="updateForm">Atualizar</button>
+                <button type="button" class="btn-padrao" id="updateForm">Atualizar</button>
             </div>
 
         </form>
