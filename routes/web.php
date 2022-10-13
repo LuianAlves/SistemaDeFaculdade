@@ -61,7 +61,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/professores/area_professor/{professor_id}', [ProfessorController::class,'areaProfessor'])->name('professores.area-professor');
 
     // Alunos
-    Route::middleware(['permission:dev|administracao|professor'])->group(function() {
+    // Route::middleware(['permission:dev|administracao|professor'])->group(function() {
+    Route::group(function() {
         Route::get('/alunos', [AlunosController::class,'index'])->name('alunos.index');
         Route::get('/alunos/area_aluno/ajax/{aluno_id}', [AlunosController::class,'getTurma']);
         Route::post('/alunos/area_aluno/store', [AlunosController::class,'store'])->name('alunos.store');
@@ -72,7 +73,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 
     // Professores
-    Route::middleware(['permission:dev|administracao|professor'])->group(function () {
+    // Route::middleware(['permission:dev|administracao|professor'])->group(function () {
+    Route::group(function () {
         Route::get('/professores', [ProfessorController::class, 'index'])->name('professores.index');
         Route::get('/professores/area_professor/edit/{professor_id}', [ProfessorController::class, 'edit'])->name('professores.edit');
         Route::get('/professores/area_professor/update', [ProfessorController::class, 'update'])->name('professores.update');
@@ -82,7 +84,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('solicitar/documentos/', [DocumentosController::class, 'index'])->name('documentos.index');
 
     /* ========== Routes Dev ============= */
-    Route::group(['middleware' => ['permission:dev']], function () {
+    // Route::group(['middleware' => ['permission:dev']], function () {
+    Route::group(function () {
         // Campus
         Route::post('/campus/update', [CampusController::class, 'update'])->name('campus.update');
         Route::resource('/campus', CampusController::class)->except('create', 'show', 'update');
@@ -103,7 +106,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });   
 
     /* ========== Routes Administração ============= */
-    Route::group(['middleware' => ['permission:administracao|dev']], function () {
+    // Route::group(['middleware' => ['permission:administracao|dev']], function () {
+    Route::group(function () {
         // Calendario Academico
         Route::prefix('/calendario-academico')->group(function(){
             Route::resource('/periodo-escolar', PeriodoEscolarController::class);
@@ -152,7 +156,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 
     /* ========== Routes Professores ============= */
-    Route::group(['middleware' => ['permission:professor|dev']], function () {
+    // Route::group(['middleware' => ['permission:professor|dev']], function () {
+    Route::group(function () {
         // Permissão Professores
         Route::get('/area-permissao/professores/meu-cadastro/{usuario_id}', [AreaPermissaoProfessorController::class, 'meuCadastro'])->name('area-permissao-professor.meu-cadastro');
         Route::get('/area-permissao/professores/disciplinas-lecionadas/{usuario_id}', [AreaPermissaoProfessorController::class, 'disciplinasLecionadas'])->name('area-permissao-professor.disciplinas-lecionadas');
@@ -169,7 +174,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 
     /* ========== Routes Alunos ============= */
-    Route::group(['middleware' => ['permission:aluno|dev']], function () {
+    // Route::group(['middleware' => ['permission:aluno|dev']], function () {
+    Route::group(function () {
         Route::get('/area-permissao/alunos/meu-cadastro/{usuario_id}', [AreaPermissaoAlunoController::class, 'meuCadastro'])->name('area-permissao-aluno.meu-cadastro');
         Route::get('/area-permissao/alunos/dados-do-curso/{usuario_id}', [AreaPermissaoAlunoController::class, 'dadosCurso'])->name('area-permissao-aluno.dados-curso');
         Route::get('/area-permissao/alunos/notas-faltas/{usuario_id}', [AreaPermissaoAlunoController::class, 'notasFaltas'])->name('area-permissao-aluno.notas-faltas');
